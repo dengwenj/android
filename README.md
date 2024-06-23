@@ -24,3 +24,25 @@
 * 一般电脑会把手机当做 USB 存储设备一样安装驱动，大多数情况会自动安装成功，如果遇到少数情况安装失败，需要先安装手机助手，由助手软件下载安装对应的手机驱动
 * 3、打开手机的开发者选项并启用 USB 调试
 * 4、将连接的手机设为文件传输模式，并允许计算机进行 USB 调试
+
+## App 工程目录结构
+* App 工程分为两个层次，第一个层次是项目，另外一个层次是模块
+* 模块依附于项目，每个项目至少有一个模块，也能拥有多个模块
+* 一般所言的“编译运行 App”，指的是运行某个模块，而非运行某个项目，因为模块才对应实际的 App
+
+## App 项目的目录说明
+* App 项目下面有两个分类：app(代表 app 模块)、Gradle Scripts
+* app 下面有 3 个子目录，Gradle Scrips 下面主要是工程的编译配置文件
+* manifests 子目录：下面只有一个 xml 文件，即 AndroidManifest.xml，它是 App 的运行配置文件
+* java 子目录：下面有3个com.example.myapp包，其中第一个包存放当前模块的 java 源代码，后面两个包存放测试用的 java 代码
+* res 子目录：存放当前模块的资源文件，res下面又有4个子项目：
+* drawable目录：存放图形描述文件与图片文件
+* layout目录：存放 App 页面的布局文件
+* mipmap目录：存放 App 的启动图标
+* values目录：存放一些常量定义文件，例如字符串常量 strings.xml、像素常量 dimens.xml、颜色常量 colors.xml、样式风格定义 style.xml 等
+* Gradle Scripts 下面主要是工程的编译配置文件，主要有：
+* 1、build.gradle，该文件分为项目级与模块级两种，用于描述 App 工程的编译规则
+* 2、proguard-rules.pro，该文件用于描述 java 代码的混淆规则
+* 3、grade.properties，该文件用于配置编译工程的命令行参数，一般无需改动
+* 4、settings.gradle，该文件配置了需要编译哪些模块，初始内容为 include ':app'，表示只编译 app 模块
+* 5、local.properties，项目的本地配置文件，它在工程编译时自动生成，用于描述开发者电脑的环境配置，包括 SDK 的本地路径、NDK 的本地路径等
