@@ -28,6 +28,7 @@ android {
     }
 }
 
+// 指定 App 编译的依赖信息
 dependencies {
 
     implementation(libs.appcompat)

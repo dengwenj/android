@@ -46,3 +46,23 @@
 * 3、grade.properties，该文件用于配置编译工程的命令行参数，一般无需改动
 * 4、settings.gradle，该文件配置了需要编译哪些模块，初始内容为 include ':app'，表示只编译 app 模块
 * 5、local.properties，项目的本地配置文件，它在工程编译时自动生成，用于描述开发者电脑的环境配置，包括 SDK 的本地路径、NDK 的本地路径等
+
+## Gradle
+* Gradle 是一个项目自动化构建工具，帮我们做了依赖、打包、部署、发布、各种渠道的差异管理等工作
+
+## 编译配置文件 build.gradle
+* 项目级别的 build.gradle 指定了当前项目的总体编译规则
+* 模块级别的 build.gradle 对应了具体模块，每个模块都有自己的 build.gradle，它指定了当前模块的详细编译规则
+
+## 清单文件
+* 每个应用的根目录中都必须包含一个 AndroidManifest.xml，并且文件名必须一模一样。
+* 这个文件中包含了 App 的配置信息，系统需要根据里面的内容运行 App 的代码，显示界面
+* application 节点，它的各属性说明如下:
+* 1、android:allowBackup，是否允许应用备份。允许用户备份系统应用和第三方应用的 apk 安装包和应用数据，以便在刷机或者数据丢失后恢复应用
+* 2、android:icon，指定 App 在手机屏幕上显示的图标
+* 3、android:label，指定 App 在手机屏幕上显示的名称
+* 4、android:roundIcon，指定 App 的圆角图标
+* 5、android:supportsRtl，是否支持阿拉伯语/波斯语这种从右往左
+* 6、android:theme，指定 App 的显示风格
+* application 下面还有个 activity 节点，它是活动页面的注册声明，只有在 AndroidManifest.xml 中正确配置了 activity 节点，才能在运行时访问对应的活动页面。
+* 初始配置的 MainActivity 正是 App 的默认主页，之所以说该页面是 App 主页，是因为它的 activity 节点内部还配置了一些过滤信息
