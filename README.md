@@ -66,3 +66,14 @@
 * 6、android:theme，指定 App 的显示风格
 * application 下面还有个 activity 节点，它是活动页面的注册声明，只有在 AndroidManifest.xml 中正确配置了 activity 节点，才能在运行时访问对应的活动页面。
 * 初始配置的 MainActivity 正是 App 的默认主页，之所以说该页面是 App 主页，是因为它的 activity 节点内部还配置了一些过滤信息
+
+## 什么是 Activity
+* Activity 是一个应用程序组件，提供一个屏幕，用户可以用来交互为了完成某项任务
+
+## 界面显示与逻辑处理
+* 利用 xml 标记描绘应用界面，使用 java 代码书写程序逻辑
+
+## 利用 xml 标记描绘应用界面
+* 把 App 的界面设计与代码逻辑分开的好处：
+* 使用 XML 文件描述 App 界面，可以很方便的在 Android Studio 上预览界面效果
+* 一个界面布局可以被多处代码复用，反过来，一个 java 代码也可以适配多个界面布局
