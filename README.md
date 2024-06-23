@@ -77,3 +77,12 @@
 * 把 App 的界面设计与代码逻辑分开的好处：
 * 使用 XML 文件描述 App 界面，可以很方便的在 Android Studio 上预览界面效果
 * 一个界面布局可以被多处代码复用，反过来，一个 java 代码也可以适配多个界面布局
+
+## 创建新的 App 页面
+* 完整的页面创建过程包括三个步骤：
+* 1、在 layout 目录下创建 XML 文件
+* 2、创建与 XML 文件对应的 Java 代码
+* 3、在 AndroidManifest.xml 中注册页面配置
+
+## 快速生成页面源码
+* 依次选择右键菜单 New -> Activity -> Empty Activity，弹出图示的页面创建窗口

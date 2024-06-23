@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
+        <!-- 类似微信小程的 pages，那个配置页面，可以有多个 -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -22,6 +23,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity2" />
+        <activity
+            android:name=".MainActivity3"
+            android:exported="false" />
     </application>
 
 </manifest>

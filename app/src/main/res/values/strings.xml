@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">安卓知识</string>
+    <string name="activity_main_btn">点击跳转</string>
+    <string name="activity_main2_text">activity_main2_text</string>
 </resources>
