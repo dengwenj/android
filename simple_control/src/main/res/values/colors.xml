@@ -2,4 +2,6 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="pm_color">#ad8832</color>
+    <color name="pm_bgc">#6a9c64</color>
 </resources>

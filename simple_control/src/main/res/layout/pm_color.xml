@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/java_set"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="设置颜色"/>
+
+    <TextView
+        android:id="@+id/java_set2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="第二行"
+        android:textColor="#bb5753"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="第三行"
+        android:textColor="@color/pm_color"
+        android:textSize="30sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="第四行"
+        android:background="#bb5753"
+        android:textSize="30sp"/>
+
+    <TextView
+        android:id="@+id/bgc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="第五行" />
+
+    <TextView
+        android:id="@+id/bgc2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:text="第六行"/>
+
+</LinearLayout>
