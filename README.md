@@ -184,3 +184,13 @@
 * 滚动视图有两种：
 * 1、ScrollView，它是垂直方向的滚动视图，垂直方向滚动时，layout_width 属性值设置为 match_parent，layout_height 属性值设置为 wrap_content
 * 2、HorizontalScrollView，它是水平方向的滚动视图，水平方向滚动时，layout_width 属性值设置为 wrap_content，layout_height 属性值设置为 match_parent
+
+## 按钮控件
+* 按钮控件 Button 由 TextView 派生而来，它们之间的区别有：
+* 1、Button 拥有默认的按钮背景，而 TextView 默认无背景
+* 2、Button 的内部文本默认居中对齐，而 TextView 的内部文本默认靠左对齐
+
+## 按钮控件的新增属性
+* 与 TextView 相比，Button 增加了两个新属性：
+* 1、textAllCaps 属性，它指定了是否将英文字母转为大写
+* 2、onClick 属性，它用来接管用户的点击动作，指定了点击按钮时要触发哪个方法
