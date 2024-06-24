@@ -179,3 +179,8 @@
 * 网格布局默认从左往右、从上到下排列、它新增了两个属性：
 * 1、columnCount 属性：它指定了网格的列数，即每行能放多少个视图
 * 2、rowCount 属性：它指定了网格的行数，即每列能放多少个视图
+
+## 滚动视图 ScrollView
+* 滚动视图有两种：
+* 1、ScrollView，它是垂直方向的滚动视图，垂直方向滚动时，layout_width 属性值设置为 match_parent，layout_height 属性值设置为 wrap_content
+* 2、HorizontalScrollView，它是水平方向的滚动视图，水平方向滚动时，layout_width 属性值设置为 wrap_content，layout_height 属性值设置为 match_parent
