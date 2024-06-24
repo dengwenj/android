@@ -28,6 +28,7 @@ public class PMColorActivity extends AppCompatActivity {
         bgc.setBackgroundColor(Color.BLUE);
 
         TextView bgc2 = findViewById(R.id.bgc2);
+        // 颜色来源于资源文件
         bgc2.setBackgroundResource(R.color.pm_bgc);
     }
 }

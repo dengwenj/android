@@ -118,3 +118,15 @@
 * 在 XML 文件中则通过属性 android:textColor 指定文本颜色，色值由透明度 alpha 和 RGB 三原色（红色red，绿色green，蓝色blue）联合定义
 * 色值有八位十六进制数与六位十六进制数两种表达方式
 * 透明度为 FF 表示完全不透明，为 00 表示完全透明。RGB 三色的数值越大，表示颜色越浓，也就越亮，数值越小，表示颜色越淡，也就越暗
+
+## 设置视图的宽高
+* 视图宽度通过属性 android:layout_width 表达，视图高度通过属性 android:layout_height 表达，宽高的取值主要有下列三种：
+* 1、match_parent：表示与上级视图保持一致
+* 2、wrap_content：表示与内容自适应
+* 3、以 dp 为单位的具体尺寸
+
+## 在代码中设置视图宽高
+* 首先确保 XML 中的宽高属性值为 wrap_content，接着打开该页面对应的 java 代码，依序执行以下三个步骤：
+* 1、调用控件对象的 getLayoutParams 方法，获取该控件的布局参数
+* 2、布局参数的 width 属性表示宽度，height 属性表示高度，修改这两个属性值
+* 3、调用控件对象的 setLayoutParams 方法，填入修改后的布局参数使之生效
