@@ -231,3 +231,13 @@
 * ImageButton 与 ImageView 之间的区别：
 * 1、ImageButton 有默认的按钮背景，ImageView 默认无背景
 * 2、ImageButton 默认的缩放类型为 center，而 ImageView 默认的缩放类型为 fitCenter
+
+## 同时展示文本与图像
+* 同时展示文本与图像的可能途径包括：
+* 1、利用 LinearLayout 对 ImageView 和 TextView 组合布局
+* 2、通过按钮控件 Button 的 drawable*** 属性设置文本周围的图标
+* drawableTop：指定文字上方的图片
+* drawableBottom：指定文字下方的图片
+* drawableLeft：指定文字左边的图片
+* drawableRight：指定文字右边的图片
+* drawablePadding：指定图片与文字的间距
