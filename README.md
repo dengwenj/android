@@ -153,3 +153,23 @@
 * 权重属性名叫 layout_weight，但该属性不在 LinearLayout 节点设置，而在线性布局的直接下级视图设置，表示该下级视图占据的宽高比例
 * layout_width 填 0dp 时，layout_weight 表示水平方向的宽高比例
 * layout_height 填 0dp 时，layout_weight 表示垂直方向的高度比例
+
+## 相对布局 RelativeLayout
+* 相对布局的下级视图位置由其他视图决定。用于确定下级视图位置的参照物分两种：
+* 与该视图自身平级的视图
+* 该视图的上级视图
+* 如果不设定下级视图的参照物，那么下级视图默认显示在 RelativeLayout 内部的左上角
+
+## 相对位置的取值
+* layout_toLeftOf：当前视图在指定视图的左边
+* layout_toRightOf：当前视图在指定视图的右边
+* layout_above：当前视图在指定视图的上方
+* layout_below：当前视图在指定视图的下方
+* layout_alignLeft：当前视图与指定视图的左侧对齐
+* layout_alignRight：当前视图与指定视图的右侧对齐
+* layout_alignTop：当前视图与指定视图的顶部对齐
+* layout_alignBottom：当前视图与指定视图的底部对齐
+* layout_centerInParent：当前视图在上级视图中间
+* layout_centerHorizontal：当前视图在上级视图的水平方向居中
+* layout_centerVertical：当前视图在上级视图的垂直方向居中
+* ...等等
