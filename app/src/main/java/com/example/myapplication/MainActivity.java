@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, MainActivity2.class);
+                // 跳转到新页面
                 startActivity(intent);
             }
         });

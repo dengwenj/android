@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "MyApplication"
 include(":app")
+include(":simple_control")
