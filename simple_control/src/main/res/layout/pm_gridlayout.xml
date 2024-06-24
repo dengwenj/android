@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnCount="2"
+    android:rowCount="2"
+    android:padding="10dp">
+    <TextView
+        android:layout_width="0dp"
+        android:layout_columnWeight="1"
+        android:layout_height="60dp"
+        android:text="第一个"
+        android:gravity="center"
+        android:background="#ff0000"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_columnWeight="1"
+        android:layout_height="60dp"
+        android:text="第二个"
+        android:gravity="center"
+        android:background="#ff00ff"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_columnWeight="1"
+        android:layout_height="60dp"
+        android:text="第三个"
+        android:gravity="center"
+        android:background="#00ffff"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_columnWeight="1"
+        android:layout_height="60dp"
+        android:text="第四个"
+        android:gravity="center"
+        android:background="#000000"/>
+</GridLayout>
