@@ -218,3 +218,16 @@
 * 5、center：保持图片原尺寸，并使其位于视图中间
 * 6、centerCrop：拉伸图片使其充满视图，并位于视图中间
 * 7、centerInside：保持宽高比例，缩小图片使之位于视图中间（只缩小不放大）
+
+## 图像按钮 ImageButton
+* ImageButton 是显示图片的图像按钮，但它继承自 ImageView，而非 继承 Button
+* ImageButton 和 Button 之间的区别：
+* 1、Button 既可以显示文本也可以显示图片，ImageButton 只能显示图片不能显示文本
+* 2、ImageButton 上的图像可按比例缩放，而 Button 通过背景设置的图像会拉伸变形
+* Button 只能考背景显示一张图片，而 ImageButton 可分别在前景和背景显示图片，从而实现两张图片叠加的效果
+
+## ImageButton 的使用场合
+* 在某些场合，有的字符无法有输入法打出来，或者某些文字以特殊字体展示，就适合先切图再放到 ImageButton，例如：开平方符合
+* ImageButton 与 ImageView 之间的区别：
+* 1、ImageButton 有默认的按钮背景，ImageView 默认无背景
+* 2、ImageButton 默认的缩放类型为 center，而 ImageView 默认的缩放类型为 fitCenter
