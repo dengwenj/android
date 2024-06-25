@@ -8,5 +8,5 @@
         android:layout_height="50dp"
         android:drawableLeft="@drawable/pmimage"
         android:drawablePadding="5dp"
-        android:text="按钮"/>
+        android:text="按钮" />
 </LinearLayout>
