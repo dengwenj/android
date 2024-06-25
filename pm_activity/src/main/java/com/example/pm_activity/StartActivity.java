@@ -24,6 +24,9 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         startActivity(new Intent(this, FinishActivity.class));
+
+       // Intent intent = new Intent(this, FinishActivity.class);
+       // intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
     }
 
     @Override

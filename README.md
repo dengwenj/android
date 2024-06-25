@@ -263,3 +263,33 @@
 * onCreate -> onStart -> onResume
 * 关闭旧页面的方法调用顺序为：
 * onPause -> onStop -> onDestroy
+
+## Activity 的启动模式
+* 在配置文件中指定启动模式：
+* 打开 AndroidManifest.xml，给 activity 节点添加属性 android:launchMode，属性值填入 standard 表示采取标准模式，当然不添加属性的话默认就是标准模式
+* <activity android:name=".PMaa" android:launchMode="standard"
+* 也可以在代码里写
+
+## 默认启动模式 standard
+* 该模式可以被设定，不在 manifest 设定时候，Activity 的默认模式就是 standard。在该模式下，启动的 Activity 会依次启动顺序被依次压入 Task 栈中
+
+## 栈顶复用模式 singleTop
+* 在该模式下，如果栈顶 Activity 为我们要新建的 Activity，那么就不会重复创建新的 Activity，栈顶不会新创建
+* 应用场景：适合开启渠道多、多应用开启调用的 Activity，通过这种设置可以避免已经创建国的 Activity 被重复创建，多数通过动态设置使用
+
+## 栈内复用模式 singleTask
+* 与 singleTop 模式相似，只不过 singleTop 模式只是针对栈顶的元素，而 singleTask 模式下，如果 task 栈内存在目标 Activity 实例，
+* 则将 task 内的对应 Activity 实例之上的所有 Activity 弹出栈，并将对应 Activity 置于栈顶，获得焦点
+* 应用场景：程序主界面，耗费系统资源的Activity
+
+## 全局唯一模式 singleInstance
+* 在该模式下，我们会为目标 Activity 创建一个新的 Task 栈，将目标 Activity 放入新的 Task，并让目标 Activity 获得焦点，
+* 新的 Task 有且只有这一个 Activity 实例，如果已经创建过目标 Activity 实例，则不会创建新的 Task，而是将以前创建过的 Activity 唤醒
+
+## 在代码里面设置启动标志
+* 启动标志的取值说明如下：
+* 1、Intent.FLAG_ACTIVITY_NEW_TASK：开辟一个新的任务栈
+* 2、Intent.FLAG_ACTIVITY_SINGLE_TOP：当栈顶为待跳转的活动实例之时，则重用栈顶的实例
+* 3、Intent.FLAG_ACTIVITY_CLEAR_TOP：当栈中存在待跳转的活动实例时，则重新创建一个新实例并清除原实例上方的所有实例
+* 4、Intent.FLAG_ACTIVITY_NO_HISTORY：栈中不保存新启动的活动实例
+* 5、Intent.FLAG_ACTIVITY_CLEAR_TASK：跳转到新页面时，栈中的原有实例都被清空
