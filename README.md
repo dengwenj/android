@@ -293,3 +293,35 @@
 * 3、Intent.FLAG_ACTIVITY_CLEAR_TOP：当栈中存在待跳转的活动实例时，则重新创建一个新实例并清除原实例上方的所有实例
 * 4、Intent.FLAG_ACTIVITY_NO_HISTORY：栈中不保存新启动的活动实例
 * 5、Intent.FLAG_ACTIVITY_CLEAR_TASK：跳转到新页面时，栈中的原有实例都被清空
+
+## 显示 Intent 和隐式 Intent
+* Intent 是各个组件之间信息沟通的桥梁，它用于 Android 各组件之间的通信，主要完成下列工作：
+* 1、标明本次通信请求从哪里来、到哪里去、要怎么走
+* 2、发起携带本次通信需要的数据内容，接收方从收到的意图中解析数据
+* 3、发起方若想判断接收方的处理结果，意图就要负责让接收方传回应答的数据内容
+
+## Intent 的组成部分
+* Component：组件，它指定意图的来源与目标
+* Action：动作，它指定意图的动作行为
+* Data：即 uri，它指定动作要操作的数据路径
+* Category：类别，它指定意图的操作类型
+* Type：数据类型，它指定消息的数据类型
+* Extras：扩展信息，它指定装载的包裹信息
+* Flags：标志位，它指定活动的启动标志
+
+## 显示 Intent
+* 显示 Intent，直接指定来源活动与目标活动，属于精准匹配，它有三种构建方式：
+* 1、在 Intent 的构造函数中指定
+* 2、调用意图对象的 setClass 方法指定
+* 3、调用意图对象的 setComponent 方法指定
+
+## 隐式 Intent
+* 隐式 Intent，没有明确指定要跳转的目标活动，只给出一个动作字符串让系统自动匹配，属于模糊匹配。
+* 动作名称既可以通过 setAction 方法指定，也可以通过构造函数 Intent(String action) 直接生产意图对象，常见如下：
+* 1、ACTION_MAIN：App 启动时的入口
+* 2、ACTION_VIEW：向用户显示数据
+* 3、ACTION_SEND：分享内容
+* 4、ACTION_CALL：直接拨号
+* 5、ACTION_DIAL：准备拨号
+* 6、ACTION_SENDTO：发送短信
+* 6、ACTION_ANSWER：接听电话
