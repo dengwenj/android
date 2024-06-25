@@ -247,3 +247,19 @@
 * startActivity(new Intent(源页面.this, 目标页面.class));
 * 从当前页面回到上一个页面，相当于关闭当前页面，返回代码如下：
 * finish(); 结束当前页面活动
+
+## Activity 的生命周期
+* onCreate：创建活动，把页面布局加载进内存，进入了初始化状态
+* onStart：开始活动，把活动页面显示在屏幕上，进入了就绪状态
+* onResume：恢复活动，活动页面进入活跃状态，能够与用户正常交互，例如允许响应用户的点击动作、允许用户输入文字等等
+* onPause：暂停活动，页面进入暂停状态，无法与用户正常交互
+* onStop：停止活动，页面将不在屏幕上显示
+* onDestroy：销毁活动，回收活动占用的系统资源，把页面从内存中清除
+* onRestart：重启活动，重新加载内存中的页面数据
+* onNewIntent：重用已有的活动实例
+
+## 个状态之间的切换过程
+* 打开新页面的方法调用顺序为：
+* onCreate -> onStart -> onResume
+* 关闭旧页面的方法调用顺序为：
+* onPause -> onStop -> onDestroy
