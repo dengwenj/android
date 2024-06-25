@@ -241,3 +241,9 @@
 * drawableLeft：指定文字左边的图片
 * drawableRight：指定文字右边的图片
 * drawablePadding：指定图片与文字的间距
+
+## Activity 的启动和结束
+* 从当前页面跳转到新页面，跳转代码如下：
+* startActivity(new Intent(源页面.this, 目标页面.class));
+* 从当前页面回到上一个页面，相当于关闭当前页面，返回代码如下：
+* finish(); 结束当前页面活动
