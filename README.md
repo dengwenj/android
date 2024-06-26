@@ -242,6 +242,9 @@
 * drawableRight：指定文字右边的图片
 * drawablePadding：指定图片与文字的间距
 
+## 四大组件
+* Activity ...
+
 ## Activity 的启动和结束
 * 从当前页面跳转到新页面，跳转代码如下：
 * startActivity(new Intent(源页面.this, 目标页面.class));
@@ -383,3 +386,13 @@ public void onClick(View v) {
 * 1、在 res/values/strings.xml 添加各个菜单项名称的字符串配置
 * 2、创建 res/xml/shortcuts/xml 在该文件中填入各组菜单项的快捷方式定义（每个菜单对应哪个活动页面）
 * 3、给 activity 节点注册元数据的快捷菜单配置
+
+## Intent 意图的作用
+* 1、从哪里来，到哪里去
+* 2、带数据过去
+* 3、传回数据
+
+## 图形 Drawable
+* Drawable 类型表达了各种各样的图形，包括图片，色块，画板，背景等
+* 包含图片在内的图形文件放在 res 目录的各个 drawable 目录下，其中 drawable 目录一般保存描述性的 XML 文件，而图片文件一般放在具体分辨率的 drawable 目录下
+* 各视图的 background 属性，imageView 和 ImageButton 的 src 属性，TextView 和 Button 四个方向的 drawable*** 系列属性都可以引用图形文件
