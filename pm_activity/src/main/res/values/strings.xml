@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">pm_activity</string>
     <string name="pumu">朴睦</string>
+    <string name="first">第一个</string>
+    <string name="one">one</string>
 </resources>

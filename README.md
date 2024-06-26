@@ -372,3 +372,14 @@ public void onClick(View v) {
 * 1、调用 getPackageManager 方法获得当前应用的包管理器
 * 2、调用包管理器的 getActivityInfo 方法获得当前活动的信息对象
 * 3、活动信息对象的 metaData 是 Bundle 包裹类型，调用包裹对象的 getString 即可获得指定名称的参数值
+
+## 给应用页面注册快捷方式
+* 元数据不仅能传递简单的字符串参数，还能传送更复杂的资源数据，比如支付宝的快捷方式菜单
+
+## 利用元数据配置快捷菜单
+* 元数据的 meta-data 标签除了前面说到的 name 属性和 value 属性，还拥有 resource 属性，
+* 该属性可指定一个 XML 文件，表示元数据想要的复杂信息保存于 XML 数据之中
+* 利用元数据配置快捷菜单的步骤如下：
+* 1、在 res/values/strings.xml 添加各个菜单项名称的字符串配置
+* 2、创建 res/xml/shortcuts/xml 在该文件中填入各组菜单项的快捷方式定义（每个菜单对应哪个活动页面）
+* 3、给 activity 节点注册元数据的快捷菜单配置
