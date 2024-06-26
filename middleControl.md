@@ -47,3 +47,11 @@
 * setButtonDrawable：设置左侧勾选图标的图形资源
 * setOnCheckedChangeListener：设置勾选状态变化的监听器
 * isChecked：判断按钮是否勾选
+
+## 开关按钮 Switch
+* Switch 是开关按钮，它在选中与取消选中时可展现的界面元素比复选框丰富
+* Switch 控件新添加的 XML 属性说明如下：
+* 1、textOn：设置右侧开启时的文本
+* 2、textOff：设置左侧关闭时的文本
+* 3、track：设置开关轨道的背景
+* 4、thumb：设置开关标识的图标
