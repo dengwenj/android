@@ -11,3 +11,25 @@
 ## 九宫格图片
 * 将某张图片设置成视图背景时，如果图片尺寸大小，则系统会自动拉伸图片使之填满背景
 * 一旦图片拉得过大，其画面容易变得模糊
+
+## 状态列表图形
+* Button 按钮的背景在正常情况下是凸起的，在按下时是凹陷的，从按下到弹起的过程，用户便能知道点击了这个按钮
+
+## 状态类型的取值说明
+* 状态列表图形不仅用于按钮控件，还可用于其他拥有多种状态的控件
+* state_pressed：是否按下
+* state_checked：是否勾选
+* state_focused：是否获取焦点
+* state_selected：是否选中
+```xml
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="30dp"
+    android:background="@drawable/btn_selector"
+    android:text="状态"/>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true" android:drawable="@drawable/btn_click" />
+    <item android:drawable="@drawable/shape_rectangle" />
+</selector>
+```
