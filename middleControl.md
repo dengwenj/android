@@ -1,3 +1,4 @@
+## 图形定制
 ## 形状图形
 * Shape 图形又称形状图形，它用来描述常见的几何形状，包括矩形、圆角矩形、圆形、椭圆等等
 * 形状图形的定义文件是以 shape 标签为根节点的 XML 描述文件，它支持四种类型的形状”
@@ -33,3 +34,16 @@
     <item android:drawable="@drawable/shape_rectangle" />
 </selector>
 ```
+
+## 复选框 CheckBox
+* CompoundButton 类是抽象的复合按钮，由它派生而来的子类包括：复选框CheckBox、单选按钮RadioButton以及开关按钮Switch
+
+## CompoundButton 在 XML 文件中主要使用下面两个属性
+* 1、checked：指定按钮的勾选状态，true 表示勾选，false 则表示未勾选。默认未勾选
+* 2、button：指定左侧勾选图标的图形资源，如果不指定就使用系统的默认图标
+
+## CompoundButton 在 java 代码中主要使用下列 4 种方法
+* setChecked：设置按钮的勾选状态
+* setButtonDrawable：设置左侧勾选图标的图形资源
+* setOnCheckedChangeListener：设置勾选状态变化的监听器
+* isChecked：判断按钮是否勾选
