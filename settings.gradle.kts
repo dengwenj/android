@@ -23,3 +23,4 @@ rootProject.name = "MyApplication"
 include(":app")
 include(":simple_control")
 include(":pm_activity")
+include(":middle_control")
