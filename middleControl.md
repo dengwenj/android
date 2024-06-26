@@ -55,3 +55,13 @@
 * 2、textOff：设置左侧关闭时的文本
 * 3、track：设置开关轨道的背景
 * 4、thumb：设置开关标识的图标
+
+## 单选按钮 RadioButton
+* 单选按钮要在一组按钮中选择其中一项，并且不能多选，这要求有个容器确定这组按钮的范围，这个容器便是单选组 RadioGroup
+* RadioButton 放在 RadioGroup 节点下
+
+## 单选组的用法
+* RadioGroup 常用的3方法
+* 1、check：选中指定资源编号的单选按钮
+* 2、getCheckedRadioButtonId：获取选中状态单选按钮的资源编号
+* 3、setOnCheckedChangeListener：设置单选按钮勾选变化的监听器
