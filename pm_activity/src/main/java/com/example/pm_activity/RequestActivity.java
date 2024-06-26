@@ -3,6 +3,7 @@ package com.example.pm_activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -35,6 +36,10 @@ public class RequestActivity extends AppCompatActivity implements View.OnClickLi
                 // 下一个 activity 返回结果了会回调这个方法
                 this::onActivityResult
         );
+
+        // 利用资源文件配置字符串
+        String pm = getString(R.string.pumu);
+        Log.i("pm", pm);
     }
 
     @Override

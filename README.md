@@ -357,3 +357,8 @@ public void onClick(View v) {
 //                 this::onActivityResult
 //         );
 ```
+
+## 利用资源文件配置字符串
+* 从 strings.xml 获取名叫 pumu 的字符串值
+* String val = getString(R.string.pumu)
+* 好处是：配置文件不需要重新编译
