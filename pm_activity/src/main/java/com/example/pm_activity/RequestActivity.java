@@ -2,6 +2,8 @@ package com.example.pm_activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -40,6 +42,20 @@ public class RequestActivity extends AppCompatActivity implements View.OnClickLi
         // 利用资源文件配置字符串
         String pm = getString(R.string.pumu);
         Log.i("pm", pm);
+
+        // 利用元数据传递配置信息
+        PackageManager packageManager = getPackageManager();
+        try {
+            ActivityInfo activityInfo = packageManager.getActivityInfo(
+                    getComponentName(),
+                    PackageManager.GET_META_DATA
+            );
+            Bundle metaData = activityInfo.metaData;
+            String string = metaData.getString("ww");
+            Log.i("pumuww", String.format(string, string));
+        } catch (PackageManager.NameNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

@@ -362,3 +362,13 @@ public void onClick(View v) {
 * 从 strings.xml 获取名叫 pumu 的字符串值
 * String val = getString(R.string.pumu)
 * 好处是：配置文件不需要重新编译
+
+## 利用元数据传递配置信息
+* 元数据是一种描述其他数据的数据，它相当于描述固定活动的参数信息
+* 在 activity 节点内部添加 meta-data 标签，通过属性 name 指定元数据的名称，通过属性 value 指定元数据的值
+
+## 在代码中获取元数据
+* 获取元数据信息的步骤分为三步：
+* 1、调用 getPackageManager 方法获得当前应用的包管理器
+* 2、调用包管理器的 getActivityInfo 方法获得当前活动的信息对象
+* 3、活动信息对象的 metaData 是 Bundle 包裹类型，调用包裹对象的 getString 即可获得指定名称的参数值
