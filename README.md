@@ -325,3 +325,24 @@
 * 5、ACTION_DIAL：准备拨号
 * 6、ACTION_SENDTO：发送短信
 * 6、ACTION_ANSWER：接听电话
+
+## 向下一个 Activity 发送数据
+* Intent 使用 Bundle 对象存放待传递的数据信息
+* Bundle 里有很多读写方法
+
+## Bundle
+* 在代码中发送消息包裹，调用意图对象的 putExtras 方法，即可存入消息包裹
+* 在代码中接收消息包裹，调用意图对象的 getExtras 方法，即可取出消息包裹
+```java
+public void onClick(View v) {
+    Intent intent = new Intent(this, ReceiveActivity.class);
+
+    Bundle bundle = new Bundle();
+    bundle.putString("name", "朴睦");
+    bundle.putString("age", "24");
+    bundle.putString("tv", textView.getText().toString());
+    intent.putExtras(bundle);
+
+    startActivity(intent);
+}
+```
