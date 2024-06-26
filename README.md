@@ -346,3 +346,14 @@ public void onClick(View v) {
     startActivity(intent);
 }
 ```
+
+## 向上一个 Activity 返回数据
+* 先注册
+```java
+// 向上一个 Activity 返回数据时这样用
+//         activityResultLauncher = registerForActivityResult(
+//                 new ActivityResultContracts.StartActivityForResult(),
+//                 // 下一个 activity 返回结果了会回调这个方法
+//                 this::onActivityResult
+//         );
+```

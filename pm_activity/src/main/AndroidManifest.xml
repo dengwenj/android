@@ -9,16 +9,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name=".ReceiveActivity"
+            android:name=".ResponseActivity"
             android:exported="false" />
-        <!-- <activity -->
+        <activity
+            android:name=".ReceiveActivity"
+            android:exported="false" /> <!-- <activity -->
         <!-- android:name=".IntentActivity" -->
         <!-- android:exported="true" /> -->
         <!-- <activity -->
         <!-- android:name=".FinishActivity" -->
         <!-- android:exported="true" /> -->
         <activity
-            android:name=".SendActivity"
+            android:name=".RequestActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
