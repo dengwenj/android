@@ -83,3 +83,6 @@
 * datetime：时间如期格式
 * date：日期格式
 * time：时间格式
+
+## 焦点变更监听器
+* 调用编辑框对象的 setOnFocusChangeListener 方法，即可在光标切换之时触发焦点更改事件
