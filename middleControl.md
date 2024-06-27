@@ -103,3 +103,7 @@
 * 但 DatePicker 并非弹窗模式，而是在当前页面占据一块区域，并且不会自动关闭
 * DatePickerDialog 相当于在 AlertDialog 上装载了 DatePicker，日期选择事件则由监听器 OnDateSetListener 负责响应
 * 在该监听器的 onDateSet 方法中
+
+## 时间对话框 TimePickerDialog
+* 时间选择器 TimePicker 可以让用户选择具体的小时和分钟
+* TimePickerDialog 的用法类似 DatePickerDialog
