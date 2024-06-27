@@ -40,7 +40,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:inputType="number"
             android:hint="请输入手机号码"
+            android:maxLength="11"
             android:textColorHint="#ccc"
             android:background="@drawable/edit_text_selector"/>
     </LinearLayout>
@@ -67,6 +69,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textColorHint="#ccc"
+                android:maxLength="6"
+                android:inputType="numberPassword"
                 android:hint="请输入密码"
                 android:background="@drawable/edit_text_selector"/>
             <TextView
