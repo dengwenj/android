@@ -93,3 +93,7 @@
 * 1、beforeTextChanged：在文本改变之前触发
 * 2、onTextChanged：在文本改变过程中触发
 * 3、afterTextChanged：在文本改变之后触发
+
+## 提醒对话框 AlertDialog
+* AlterDialog 可以完成常见的交互操作，例如提示、确认】选择等功能，AlertDialog 借助建造器 AlertDialog.Builder 才能完成参数设置
+* 调用建造器的 create 方法生成对话框实例，再调用对话框实例的 show 方法，在页面上弹出提醒对话框
