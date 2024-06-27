@@ -86,3 +86,10 @@
 
 ## 焦点变更监听器
 * 调用编辑框对象的 setOnFocusChangeListener 方法，即可在光标切换之时触发焦点更改事件
+
+## 文本变化监听的用法
+* 调用编辑框对象的 addTextChangedListener 方法即可注册文本监听器
+* 文本监听器的接口名称为 TextWatcher，该接口提供了 3 个监控方法：
+* 1、beforeTextChanged：在文本改变之前触发
+* 2、onTextChanged：在文本改变过程中触发
+* 3、afterTextChanged：在文本改变之后触发
