@@ -65,3 +65,21 @@
 * 1、check：选中指定资源编号的单选按钮
 * 2、getCheckedRadioButtonId：获取选中状态单选按钮的资源编号
 * 3、setOnCheckedChangeListener：设置单选按钮勾选变化的监听器
+
+## 编辑框 EditText
+* 编辑框 EditText 用于接收软键盘输入的文字，例如用户名、密码、评价内容等，它由文本视图派生而来，除了 TextView 已有的各种属性和方法，EditText 还支持下列 XML 属性
+* 1、inputType：指定输入的文本类型
+* 2、maxLength：指定文本允许输入的最大长度
+* 3、hint：指定提示文本的内容
+* 4、textColorHint：指定提示文本的颜色
+
+## inputType 的取值
+* text：文本
+* textPassword：文本密码
+* number：整型数
+* numberSigned：带符号的数字
+* numberDecimal：带小数点的数字
+* numberPassword：数字密码
+* datetime：时间如期格式
+* date：日期格式
+* time：时间格式
