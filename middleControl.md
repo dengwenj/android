@@ -97,3 +97,9 @@
 ## 提醒对话框 AlertDialog
 * AlterDialog 可以完成常见的交互操作，例如提示、确认】选择等功能，AlertDialog 借助建造器 AlertDialog.Builder 才能完成参数设置
 * 调用建造器的 create 方法生成对话框实例，再调用对话框实例的 show 方法，在页面上弹出提醒对话框
+
+## 日期对话框 DatePickerDialog
+* 日期选择器 DatePicker 可以让用户选择具体的年月日
+* 但 DatePicker 并非弹窗模式，而是在当前页面占据一块区域，并且不会自动关闭
+* DatePickerDialog 相当于在 AlertDialog 上装载了 DatePicker，日期选择事件则由监听器 OnDateSetListener 负责响应
+* 在该监听器的 onDateSet 方法中
