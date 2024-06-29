@@ -1,4 +1,10 @@
 ## 图形定制
+
+## 图形 Drawable
+* Drawable 类型表达了各种各样的图形，包括图片，色块，画板，背景等
+* 包含图片在内的图形文件放在 res 目录的各个 drawable 目录下，其中 drawable 目录一般保存描述性的 XML 文件，而图片文件一般放在具体分辨率的 drawable 目录下
+* 各视图的 background 属性，imageView 和 ImageButton 的 src 属性，TextView 和 Button 四个方向的 drawable*** 系列属性都可以引用图形文件
+
 ## 形状图形
 * Shape 图形又称形状图形，它用来描述常见的几何形状，包括矩形、圆角矩形、圆形、椭圆等等
 * 形状图形的定义文件是以 shape 标签为根节点的 XML 描述文件，它支持四种类型的形状”
