@@ -35,3 +35,6 @@
 * beginTransaction：开始事务
 * setTransactionSuccessful：设置事务的成功标志
 * endTransaction：结束事务
+
+## 私有存储空间与公共存储空间
+* Android 把外部存储分成了两块区域，一块是所有应用均可访问的公共空间，另一块是只有应用自己才可以访问的私有空间
