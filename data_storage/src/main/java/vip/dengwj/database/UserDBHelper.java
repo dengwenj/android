@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-import vip.dengwj.enity.User;
+import vip.dengwj.entity.User;
 
 public class UserDBHelper extends SQLiteOpenHelper {
 

@@ -1,4 +1,4 @@
-package vip.dengwj.enity;
+package vip.dengwj.entity;
 
 public class User {
 

@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.List;
 
 import vip.dengwj.database.UserDBHelper;
-import vip.dengwj.enity.User;
+import vip.dengwj.entity.User;
 import vip.dengwj.util.ToastUtil;
 
 public class SQLiteHelperActivity extends AppCompatActivity implements View.OnClickListener {
