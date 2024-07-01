@@ -36,5 +36,16 @@
 * setTransactionSuccessful：设置事务的成功标志
 * endTransaction：结束事务
 
-## 私有存储空间与公共存储空间
+## 私有存储空间与公共存储空间，文本文件
 * Android 把外部存储分成了两块区域，一块是所有应用均可访问的公共空间，另一块是只有应用自己才可以访问的私有空间
+
+## 在存储卡上读写图片文件
+* Android 的位图工具是 Bitmap，App 读写 Bitmap 可以使用性能更好的 BufferedOutputStream和BufferedInputStream
+* Android 还提供了 BitmapFactory 工具用于读取各种来源的图片，相关方法如下：
+* 1、decodeResource：该方法可从资源文件中读取图片信息
+* 2、decodeFile：该方法可将指定路径的图片读取到 Bitmap 对象
+* 3、decodeStream：该方法从输入流中读取位图数据
+
+## Application 的生命周期
+* Application 是 Android 的一大组件，在 App 运行过程中有且仅有一个 Application 对象贯穿整个生命周期
+
