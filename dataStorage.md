@@ -30,3 +30,8 @@
 * 1、新建一个继承自 SQLiteOpenHelper 的数据库操作类，提示重写 onCreate 和 onUpgrade 两个方法
 * 2、封装保证数据库安全的必要方法
 * 3、提供对表记录进行增删改查的操作方法
+
+## 事物类，用于事务层面的操作。一致性
+* beginTransaction：开始事务
+* setTransactionSuccessful：设置事务的成功标志
+* endTransaction：结束事务

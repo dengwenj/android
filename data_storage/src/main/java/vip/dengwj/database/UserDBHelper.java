@@ -15,7 +15,7 @@ public class UserDBHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "user.db";
     private static final String TABLE_NAME = "user_info";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
     private static UserDBHelper mHelper = null;
     private SQLiteDatabase mRDB = null;
     private SQLiteDatabase mWDB = null;
@@ -74,6 +74,7 @@ public class UserDBHelper extends SQLiteOpenHelper {
         db.execSQL(sql);
     }
 
+    // 版本发生更新会更改
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         String sql = "ALTER TABLE " + TABLE_NAME + " ADD COLUMN phone VARCHAR;";
@@ -97,15 +98,15 @@ public class UserDBHelper extends SQLiteOpenHelper {
         //return mWDB.insert(TABLE_NAME, null, values);
 
         try {
-            // mWDB.beginTransaction();
+            mWDB.beginTransaction();
             mWDB.insert(TABLE_NAME, null, values);
             //int i = 10 / 0;
-            // mWDB.insert(TABLE_NAME, null, values);
-            // mWDB.setTransactionSuccessful();
+            mWDB.insert(TABLE_NAME, null, values);
+            mWDB.setTransactionSuccessful();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            // mWDB.endTransaction();
+            mWDB.endTransaction();
         }
 
         return 1;
