@@ -23,11 +23,15 @@ public class FileWriterActivity extends AppCompatActivity implements View.OnClic
     private EditText height;
     private EditText weight;
     private CheckBox checkBox;
+    // 只有进程被杀死了，这内存才会释放
     private static String path;
     private TextView textView;
 
+    private MyApplication app;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        System.out.println("拉了");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_writer);
 
@@ -39,6 +43,27 @@ public class FileWriterActivity extends AppCompatActivity implements View.OnClic
         findViewById(R.id.save).setOnClickListener(this);
         findViewById(R.id.read).setOnClickListener(this);
         textView = findViewById(R.id.tv);
+
+        findViewById(R.id.global).setOnClickListener(this);
+        app = MyApplication.getInstance();
+        reload();
+    }
+
+    private void reload() {
+        String n = app.globalInfo.get("name");
+        if (n == null) {
+            return;
+        }
+
+        String a = app.globalInfo.get("age");
+        String h = app.globalInfo.get("height");
+        String w = app.globalInfo.get("weight");
+        String c = app.globalInfo.get("checked");
+        name.setText(n);
+        age.setText(a);
+        height.setText(h);
+        weight.setText(w);
+        checkBox.setChecked("是".equals(c));
     }
 
     @Override
@@ -81,6 +106,12 @@ public class FileWriterActivity extends AppCompatActivity implements View.OnClic
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+        } else if (id == R.id.global) {
+            app.globalInfo.put("name", string);
+            app.globalInfo.put("age", string1);
+            app.globalInfo.put("height", string2);
+            app.globalInfo.put("weight", string3);
+            app.globalInfo.put("checked", checked ? "是" : "否");
         }
     }
 }
