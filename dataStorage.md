@@ -23,3 +23,10 @@
 * close：关闭数据库
 * getVersion：获取数据库的版本号
 * setVersion：设置数据库的版本号
+
+## 数据库帮助器 SQLiteOpenHelper
+* SQLiteOpenHelper 是 Android 提供的数据库辅助工具，用于指导开发者进行 SQLite 的合理使用
+* SQLiteOpenHelper 的具体使用步骤如下：
+* 1、新建一个继承自 SQLiteOpenHelper 的数据库操作类，提示重写 onCreate 和 onUpgrade 两个方法
+* 2、封装保证数据库安全的必要方法
+* 3、提供对表记录进行增删改查的操作方法
