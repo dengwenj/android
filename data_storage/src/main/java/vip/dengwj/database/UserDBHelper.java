@@ -140,7 +140,7 @@ public class UserDBHelper extends SQLiteOpenHelper {
             user.height = cursor.getLong(3);
             user.weight = cursor.getFloat(4);
             //SQLite没有布尔型，用0表示false，用1表示true
-            user.married = (cursor.getInt(5) == 0) ? false : true;
+            user.married = cursor.getInt(5) != 0;
             list.add(user);
         }
         return list;
@@ -159,7 +159,7 @@ public class UserDBHelper extends SQLiteOpenHelper {
             user.height = cursor.getLong(3);
             user.weight = cursor.getFloat(4);
             //SQLite没有布尔型，用0表示false，用1表示true
-            user.married = (cursor.getInt(5) == 0) ? false : true;
+            user.married = cursor.getInt(5) != 0;
             list.add(user);
         }
         return list;

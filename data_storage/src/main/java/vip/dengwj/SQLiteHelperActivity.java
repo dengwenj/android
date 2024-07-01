@@ -1,11 +1,14 @@
 package vip.dengwj;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.List;
 
 import vip.dengwj.database.UserDBHelper;
 import vip.dengwj.enity.User;
@@ -30,6 +33,9 @@ public class SQLiteHelperActivity extends AppCompatActivity implements View.OnCl
         weight = findViewById(R.id.weight);
         checkBox = findViewById(R.id.checkbox);
         findViewById(R.id.insert).setOnClickListener(this);
+        findViewById(R.id.del).setOnClickListener(this);
+        findViewById(R.id.update).setOnClickListener(this);
+        findViewById(R.id.query).setOnClickListener(this);
     }
 
     @Override
@@ -52,6 +58,7 @@ public class SQLiteHelperActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View v) {
         int id = v.getId();
+        // 增
         if (id == R.id.insert) {
             User user = new User(
                     name.getText().toString(),
@@ -64,6 +71,34 @@ public class SQLiteHelperActivity extends AppCompatActivity implements View.OnCl
 
             if (insert > 0) {
                 ToastUtil.show(this, "添加成功");
+            }
+        } else if (id == R.id.del) {
+            // 删除
+            long l = userDBHelper.deleteByName(name.getText().toString());
+            if (l > 0) {
+                ToastUtil.show(this, "删除成功");
+            }
+        } else if (id == R.id.update) {
+            User user = new User(
+                    name.getText().toString(),
+                    Integer.parseInt(age.getText().toString()),
+                    Long.parseLong(height.getText().toString()),
+                    Float.parseFloat(weight.getText().toString()),
+                    checkBox.isChecked()
+            );
+            long update = userDBHelper.update(user);
+            if (update > 0) {
+                ToastUtil.show(this, "更新成功");
+            }
+        } else {
+            // 查询
+            List<User> users = userDBHelper.queryAll();
+            for (User user : users) {
+                Log.d("user", String.valueOf(user));
+            }
+            List<User> users1 = userDBHelper.queryByName(name.getText().toString());
+            for (User user : users1) {
+                Log.d("user", String.valueOf(user));
             }
         }
     }
