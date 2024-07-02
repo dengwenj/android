@@ -5,6 +5,8 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.util.List;
+
 import vip.dengwj.entity.CartInfo;
 
 @Dao
@@ -23,4 +25,8 @@ public interface CartDao {
     // 通过 goodsId 获取数据
     @Query("select * from cartinfo where goodsId = :goodsId")
     CartInfo getCartById(Integer goodsId);
+
+    // 获取全部数据
+    @Query("select * from cartinfo")
+    List<CartInfo> getCartInfoAll();
 }

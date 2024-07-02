@@ -22,4 +22,7 @@ public interface GoodsDao {
 
     @Query("select * from goodsinfo")
     List<GoodsInfo> query();
+
+    @Query("select * from goodsinfo where id = :id")
+    GoodsInfo getGoodsById(int id);
 }

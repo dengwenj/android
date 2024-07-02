@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_shopping"/>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!--top-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:paddingLeft="5dp"
+            android:paddingEnd="5dp"
+            android:background="#ccc">
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:text="图片"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="名称"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:text="数量"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:text="单价"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:text="总价"
+                android:gravity="center"/>
+        </LinearLayout>
+
+    <!--    list内容-->
+        <LinearLayout
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+    <!--    底部-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+            <Button
+                android:id="@+id/clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_style"
+                android:text="清空"
+                android:textSize="18dp"
+                android:textColor="#f1f1f1" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="right|center"
+                android:layout_height="match_parent"
+                android:layout_marginRight="6dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="总金额："/>
+                <TextView
+                    android:id="@+id/all_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="13000"
+                    android:textSize="20dp"
+                    android:textColor="#ff00"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/settlement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="结算"
+                android:textSize="18dp"
+                android:textColor="#f1f1f1"
+                android:background="@drawable/btn_style"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

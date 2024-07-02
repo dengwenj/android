@@ -1,5 +1,6 @@
 package vip.dengwj;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,9 +30,13 @@ public class GoodsShoppActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goods_shopp);
 
-         gridLayout = findViewById(R.id.grid_layout);
-
+        gridLayout = findViewById(R.id.grid_layout);
         cartNum = findViewById(R.id.cart_num);
+        TextView titleTv = findViewById(R.id.title);
+        titleTv.setText("手机商场");
+
+        findViewById(R.id.back).setOnClickListener(this::handleBack);
+        findViewById(R.id.cart).setOnClickListener(this::handleCart);
 
         // 展示商品
         showShopping();
@@ -49,6 +54,9 @@ public class GoodsShoppActivity extends AppCompatActivity {
     private void showShopping() {
         // 获取全部商品
         List<GoodsInfo> goodsInfos = MyApplication.getInstance().getGoodsDatabase().goodsDao().query();
+
+        // 先移除所有子视图
+        gridLayout.removeAllViews();
 
         // 屏幕宽度
         int widthPixels = getResources().getDisplayMetrics().widthPixels;
@@ -98,5 +106,17 @@ public class GoodsShoppActivity extends AppCompatActivity {
 
     private CartDao getCartDao() {
         return MyApplication.getInstance().getGoodsDatabase().cartDao();
+    }
+
+    // 点击返回
+    private void handleBack(View v) {
+        finish();
+    }
+
+    // 点击购物车
+    private void handleCart(View v) {
+        Intent intent = new Intent(this, ShoppingCartActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }
