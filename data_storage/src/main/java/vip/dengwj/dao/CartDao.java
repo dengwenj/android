@@ -29,4 +29,12 @@ public interface CartDao {
     // 获取全部数据
     @Query("select * from cartinfo")
     List<CartInfo> getCartInfoAll();
+
+    // 删除
+    @Query("delete from cartinfo where goodsId = :goodsId")
+    void deleteByGoodsId(int goodsId);
+
+    // 删除全部
+    @Query("delete from cartinfo")
+    void deleteAll();
 }

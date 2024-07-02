@@ -16,9 +16,13 @@ import vip.dengwj.dao.CartDao;
 import vip.dengwj.dao.GoodsDao;
 import vip.dengwj.entity.CartInfo;
 import vip.dengwj.entity.GoodsInfo;
+import vip.dengwj.util.AlertDialogUtil;
+import vip.dengwj.util.ToastUtil;
 
 public class ShoppingCartActivity extends AppCompatActivity {
     private LinearLayout linearLayout;
+
+    private TextView count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +32,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
         findViewById(R.id.back).setOnClickListener(this::handleBack);
         TextView title = findViewById(R.id.title);
         title.setText("购物车");
-        TextView count = findViewById(R.id.cart_num);
+        count = findViewById(R.id.cart_num);
         count.setText(String.valueOf(getCartDao().getCount()));
 
         // list
@@ -47,11 +51,14 @@ public class ShoppingCartActivity extends AppCompatActivity {
         // 先获取数据
         List<CartInfo> cartInfoAll = getCartDao().getCartInfoAll();
 
+        // 先移除
+        linearLayout.removeAllViews();
+
         for (CartInfo cartInfo : cartInfoAll) {
             GoodsInfo goods = getGoodsDao().getGoodsById(cartInfo.goodsId);
 
             // 获取子视图根节点
-            View view = LayoutInflater.from(this).inflate(R.layout.item_cart, null);
+            LinearLayout view = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.item_cart, null);
             // 图片
             ImageView cartImage = view.findViewById(R.id.cart_image);
             cartImage.setImageURI(Uri.parse(goods.picPath));
@@ -71,8 +78,33 @@ public class ShoppingCartActivity extends AppCompatActivity {
             TextView cartAllPrice = view.findViewById(R.id.cart_all_price);
             cartAllPrice.setText(String.valueOf(cartInfo.count * goods.price));
 
+            // 长按
+            view.setOnLongClickListener((v) -> {
+                handleDelete(goods.id, goods.name);
+                return true;
+            });
+
             linearLayout.addView(view);
         }
+    }
+
+    // 长按删除
+    private void handleDelete(int goodsId, String phoneName) {
+        AlertDialogUtil.show(
+                this,
+                "删除",
+                "是否删除" + phoneName,
+                "确定",
+                "取消",
+                (dialog, which) -> {
+                    getCartDao().deleteByGoodsId(goodsId);
+                    ToastUtil.show(this, "删除成功");
+                    // 更新
+                    showCartShopping();
+                    count.setText(String.valueOf(getCartDao().getCount()));
+                },
+                null
+        );
     }
 
     // 结算
@@ -82,7 +114,21 @@ public class ShoppingCartActivity extends AppCompatActivity {
 
     // 清空购物车
     private void handleClear(View view) {
-
+        AlertDialogUtil.show(
+                this,
+                "清空",
+                "是否清空",
+                "确定",
+                "取消",
+                (dialog, which) -> {
+                    getCartDao().deleteAll();
+                    ToastUtil.show(this, "清空成功");
+                    // 更新
+                    showCartShopping();
+                    count.setText(String.valueOf(getCartDao().getCount()));
+                },
+                null
+        );
     }
 
     // 返回
