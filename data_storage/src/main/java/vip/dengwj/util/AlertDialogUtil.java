@@ -8,6 +8,7 @@ import vip.dengwj.function.DialogCallbackClose;
 import vip.dengwj.function.DialogCallbackOk;
 
 public class AlertDialogUtil {
+    // 还可以弄重载，不同参数，不同处理
     public static void show(
             Context context,
             String title,
@@ -32,11 +33,7 @@ public class AlertDialogUtil {
                 .show();
     }
 
-    private static void ok(DialogInterface dialogInterface, int i) {
+    private static void ok(DialogInterface dialogInterface, int i) {}
 
-    }
-
-    private static void close(DialogInterface dialog, int which) {
-
-    }
+    private static void close(DialogInterface dialog, int which) {}
 }

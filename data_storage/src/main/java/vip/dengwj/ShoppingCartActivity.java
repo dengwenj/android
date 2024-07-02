@@ -54,8 +54,11 @@ public class ShoppingCartActivity extends AppCompatActivity {
         // 先移除
         linearLayout.removeAllViews();
 
+        double allAmount = 0;
         for (CartInfo cartInfo : cartInfoAll) {
             GoodsInfo goods = getGoodsDao().getGoodsById(cartInfo.goodsId);
+
+            allAmount += goods.price * cartInfo.count;
 
             // 获取子视图根节点
             LinearLayout view = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.item_cart, null);
@@ -84,6 +87,10 @@ public class ShoppingCartActivity extends AppCompatActivity {
                 return true;
             });
 
+            // 总金额
+            TextView allAmountTv = findViewById(R.id.all_amount);
+            allAmountTv.setText(String.valueOf(allAmount));
+
             linearLayout.addView(view);
         }
     }
@@ -109,7 +116,15 @@ public class ShoppingCartActivity extends AppCompatActivity {
 
     // 结算
     private void handleSettlement(View view) {
-
+        AlertDialogUtil.show(
+                this,
+                "结算",
+                "结算功能正在开发...",
+                "知道了",
+                "返回",
+                null,
+                null
+        );
     }
 
     // 清空购物车
