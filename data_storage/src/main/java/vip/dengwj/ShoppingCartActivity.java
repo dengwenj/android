@@ -1,5 +1,6 @@
 package vip.dengwj;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -51,8 +52,26 @@ public class ShoppingCartActivity extends AppCompatActivity {
         // 先获取数据
         List<CartInfo> cartInfoAll = getCartDao().getCartInfoAll();
 
+        LinearLayout tv = findViewById(R.id.no_null);
+        LinearLayout ll = findViewById(R.id.bottom);
+        // 数据为空
+        if (cartInfoAll.isEmpty()) {
+            ll.setVisibility(View.GONE);
+            linearLayout.setVisibility(View.GONE);
+            tv.setVisibility(View.VISIBLE);
+
+            // 逛逛手机商场
+            findViewById(R.id.phone_shopping).setOnClickListener(this::handlePhoneShopping);
+        } else {
+            ll.setVisibility(View.VISIBLE);
+            linearLayout.setVisibility(View.VISIBLE);
+            tv.setVisibility(View.GONE);
+        }
+
         // 先移除
         linearLayout.removeAllViews();
+        // 移除某个视图，有时改变某个数据用它
+        // linearLayout.removeView();
 
         double allAmount = 0;
         for (CartInfo cartInfo : cartInfoAll) {
@@ -93,6 +112,12 @@ public class ShoppingCartActivity extends AppCompatActivity {
 
             linearLayout.addView(view);
         }
+    }
+
+    private void handlePhoneShopping(View view) {
+        Intent intent = new Intent(this, GoodsShoppActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     // 长按删除

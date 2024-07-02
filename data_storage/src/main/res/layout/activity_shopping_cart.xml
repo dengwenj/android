@@ -55,15 +55,39 @@
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="visible">
 
+        </LinearLayout>
+
+    <!--    空数据-->
+        <LinearLayout
+            android:id="@+id/no_null"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="空空如也"
+                android:gravity="center" />
+
+            <Button
+                android:id="@+id/phone_shopping"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="逛逛手机商场"
+                android:background="@drawable/btn_style"/>
         </LinearLayout>
 
     <!--    底部-->
         <LinearLayout
+            android:id="@+id/bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp">
+            android:layout_margin="10dp"
+            android:visibility="visible">
             <Button
                 android:id="@+id/clear"
                 android:layout_width="wrap_content"
