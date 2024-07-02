@@ -96,14 +96,14 @@ public class FileWriterActivity extends AppCompatActivity implements View.OnClic
             try {
                 FileUtil.saveText(path, sb.toString());
                 ToastUtil.show(this, "保存成功");
-            } catch (IOException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         } else if (id == R.id.read) {
             try {
-                String s = FileUtil.readText(path);
+                String s = FileUtil.openText(path);
                 textView.setText(s);
-            } catch (IOException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         } else if (id == R.id.global) {
