@@ -14,10 +14,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
 
+import vip.dengwj.dao.CartDao;
+import vip.dengwj.entity.CartInfo;
 import vip.dengwj.entity.GoodsInfo;
+import vip.dengwj.util.ToastUtil;
 
 public class GoodsShoppActivity extends AppCompatActivity {
     private GridLayout gridLayout;
+
+    private TextView cartNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +31,19 @@ public class GoodsShoppActivity extends AppCompatActivity {
 
          gridLayout = findViewById(R.id.grid_layout);
 
+        cartNum = findViewById(R.id.cart_num);
+
         // 展示商品
         showShopping();
+    }
+
+    // 活动页面进入活跃状态，能够与用户正常交互
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        CartDao cartDao = getCartDao();
+        cartNum.setText(String.valueOf(cartDao.getCount()));
     }
 
     private void showShopping() {
@@ -51,7 +67,36 @@ public class GoodsShoppActivity extends AppCompatActivity {
             TextView price = view.findViewById(R.id.price);
             price.setText(String.valueOf(goods.price));
 
+            // 添加到购物车
+            view.findViewById(R.id.add_cart).setOnClickListener((v) -> handleAddCart(goods.id));
+
             gridLayout.addView(view, layoutParams);
         }
+    }
+
+    /**
+     * 加入购物车
+     */
+    private void handleAddCart(int goodsId) {
+        // 判断购物车有该条数据没，有 + 1，没有新增
+        CartDao cartDao = getCartDao();
+        CartInfo cartInfo = cartDao.getCartById(goodsId);
+        // 新增
+        if (cartInfo == null) {
+            cartDao.insert(new CartInfo(null, goodsId, 1));
+        } else {
+            // 更新 count
+            cartInfo.count += 1;
+            cartDao.update(cartInfo);
+        }
+        ToastUtil.show(this, "添加成功");
+
+        // 顶部购物车数量增加
+        int count = cartDao.getCount();
+        cartNum.setText(String.valueOf(count));
+    }
+
+    private CartDao getCartDao() {
+        return MyApplication.getInstance().getGoodsDatabase().cartDao();
     }
 }
