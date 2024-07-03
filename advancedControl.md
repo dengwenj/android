@@ -47,3 +47,6 @@ SimpleAdapter simpleAdapter = new SimpleAdapter(
 ## 基本适配器 BaseAdapter
 * BaseAdapter 是一种适应性更强的基本适配器
 * 条目与数据集合对应关系
+
+## 复用 convertView
+* 当列表的 item 从上方滚出屏幕视角之外
