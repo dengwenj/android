@@ -42,13 +42,13 @@ public class SpinnerActivity extends AppCompatActivity implements AdapterView.On
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        int id1 = view.getId();
+        int id2 = parent.getId();
 
-        if (id1 == R.id.spinner) {
+        if (id2 == R.id.spinner) {
             spinner.setSelection(position);
             ToastUtil.show(this, startArray[position]);
             System.out.println(id + "id");
-        } else if (id1 == R.id.spinnerDialog) {
+        } else if (id2 == R.id.spinnerDialog) {
             spinnerDialog.setSelection(position);
         }
     }
