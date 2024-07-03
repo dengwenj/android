@@ -3,8 +3,10 @@ package vip.dengwj;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,7 +19,7 @@ import vip.dengwj.util.ToastUtil;
 
 public class SpinnerIconActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private final int[] icons = {
-            R.drawable.shuixing, R.drawable.jinxing, R.drawable.diqiu,
+            11, R.drawable.jinxing, R.drawable.diqiu,
             R.drawable.huoxing, R.drawable.muxing, R.drawable.tuxing
     };
 
@@ -54,7 +56,10 @@ public class SpinnerIconActivity extends AppCompatActivity implements AdapterVie
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        System.out.println("id是：" + id);
+        LinearLayout childAt = (LinearLayout) parent.getChildAt(0);
+        TextView childAt1 = (TextView) childAt.getChildAt(0);
+        System.out.println(childAt1.getText() + "：childAt1");
+
         ToastUtil.show(this, labels[position]);
         spinner.setSelection(position);
     }
