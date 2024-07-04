@@ -50,3 +50,6 @@ SimpleAdapter simpleAdapter = new SimpleAdapter(
 
 ## 复用 convertView
 * 当列表的 item 从上方滚出屏幕视角之外
+
+## 列表视图 ListView
+* ListView 允许在页面上分行展示数据列表，结合自定义适配器 adapter
