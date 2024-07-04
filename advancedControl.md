@@ -68,3 +68,6 @@
 * columnWidth：若有剩余空间，则拉伸列宽挤掉空隙
 * spacingWidth：若有剩余空间，则列宽不变，把空间分配到每列间的空隙
 * spacingWidthUniform：若有剩余空间，则列宽不变，把空间分配到每列左右的空隙
+
+## 翻页视图 ViewPager
+* 翻页视图允许页面再水平向左右滑动
