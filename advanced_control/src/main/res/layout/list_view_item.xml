@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/listViewItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <!--android:descendantFocusability="blocksDescendants"
+        blocksDescendants 可阻止下级控件获得焦点，避免堵塞列表视图的点击事件-->
+    <ImageView
+        android:id="@+id/item_icon"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:src="@drawable/diqiu"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="水星"
+            android:textSize="20dp"
+            android:textColor="#000"/>
+
+        <TextView
+            android:id="@+id/item_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="描述哇唧唧哇 咳咳咳几节课空间为看就看外壳考核科技k"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/itemButtonClick"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="点我"
+        android:textSize="17sp"/>
+</LinearLayout>
