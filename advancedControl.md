@@ -53,3 +53,18 @@
 
 ## 列表视图 ListView
 * ListView 允许在页面上分行展示数据列表，结合自定义适配器 adapter
+
+## 网格视图 GridView
+
+## GridView 新增属性与方法
+* horizontalSpacing：指定网格项在水平方向的间距
+* verticalSpacing：指定网格项在垂直方向的间距
+* numColumns：指定列的数目
+* stretchMode：指定剩余空间的拉伸模式
+* columnWidth：指定每列的宽度。拉伸模式为 spacingWidth、spacingWidthUniform时，必须指定列宽
+
+## GridView 拉伸模式取值
+* none：不拉伸
+* columnWidth：若有剩余空间，则拉伸列宽挤掉空隙
+* spacingWidth：若有剩余空间，则列宽不变，把空间分配到每列间的空隙
+* spacingWidthUniform：若有剩余空间，则列宽不变，把空间分配到每列左右的空隙
