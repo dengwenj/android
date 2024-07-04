@@ -4,4 +4,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00000000</color>
     <color name="list_select">#ad8832</color>
+    <color name="primary">#6089ef</color>
 </resources>
