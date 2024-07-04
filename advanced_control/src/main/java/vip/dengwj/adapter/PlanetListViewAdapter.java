@@ -14,11 +14,13 @@ import java.util.List;
 
 import vip.dengwj.R;
 import vip.dengwj.entity.Planet;
-import vip.dengwj.util.ToastUtil;
+import vip.dengwj.function.BtnClick;
 
 public class PlanetListViewAdapter extends BaseAdapter {
     private final Context context;
     private final List<Planet> list;
+
+    private BtnClick callback;
 
     public PlanetListViewAdapter(Context context, List<Planet> list) {
         this.context = context;
@@ -70,11 +72,20 @@ public class PlanetListViewAdapter extends BaseAdapter {
         holder.img.setImageResource(planet.image);
         holder.title.setText(planet.name);
         holder.desc.setText(planet.desc);
-        holder.myClick.setOnClickListener(v -> {
-            ToastUtil.show(context, "我被点击了" + planet.name);
-        });
+        holder.myClick.setOnClickListener(this::setButtonClick);
 
         return convertView;
+    }
+
+    private void setButtonClick(View view) {
+        System.out.println("里面的");
+        if (callback != null) {
+            callback.click(view);
+        }
+    }
+
+    public void setBtn(BtnClick fn) {
+        callback = fn;
     }
 
     private static class Holder {

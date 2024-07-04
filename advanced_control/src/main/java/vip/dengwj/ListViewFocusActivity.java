@@ -14,20 +14,30 @@ import vip.dengwj.entity.Planet;
 import vip.dengwj.util.ToastUtil;
 
 public class ListViewFocusActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
-    private ListView listView;
 
     private List<Planet> planets;
+
+    private PlanetListViewAdapter planetListViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view_focus);
 
-        listView = findViewById(R.id.listView);
+        ListView listView = findViewById(R.id.listView);
         planets = Planet.getDefaultList();
-        listView.setAdapter(new PlanetListViewAdapter(this, planets));
-
+        planetListViewAdapter = new PlanetListViewAdapter(this, planets);
+        listView.setAdapter(planetListViewAdapter);
+        // 适配器里面写的按钮
+        planetListViewAdapter.setBtn(this::handleBtn);
         listView.setOnItemClickListener(this);
+    }
+
+    private void handleBtn(View view) {
+        planets.add(new Planet(R.drawable.cart, "购物车", "测试", planets.size() + 24));
+        System.out.println("进了吗：" + view.getId());
+        // 通知适配器发生变化，自动刷新
+        planetListViewAdapter.notifyDataSetChanged();
     }
 
     @Override
