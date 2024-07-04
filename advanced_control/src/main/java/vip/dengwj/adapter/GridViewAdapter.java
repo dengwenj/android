@@ -13,13 +13,21 @@ import java.util.List;
 import vip.dengwj.R;
 import vip.dengwj.entity.Planet;
 
-public class GridViewAdapter extends BaseAdapter {
+public class GridViewAdapter extends BaseAdapter implements View.OnClickListener {
     private final Context context;
     private final List<Planet> planets;
+
+    private CallbackDesc callbackDesc;
 
     public GridViewAdapter(Context context, List<Planet> planets) {
         this.context = context;
         this.planets = planets;
+    }
+
+    public GridViewAdapter(Context context, List<Planet> planets, CallbackDesc callbackDesc) {
+        this.context = context;
+        this.planets = planets;
+        this.callbackDesc = callbackDesc;
     }
 
     @Override
@@ -55,7 +63,14 @@ public class GridViewAdapter extends BaseAdapter {
         holder.title.setText(planets.get(position).name);
         holder.img.setImageResource(planets.get(position).image);
         holder.desc.setText(planets.get(position).desc);
+        holder.desc.setOnClickListener(this);
         return convertView;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (callbackDesc == null) return;
+        callbackDesc.handleDesc(((TextView) v).getText().toString());
     }
 
     public static class Holder {
@@ -72,5 +87,9 @@ public class GridViewAdapter extends BaseAdapter {
             this.desc = desc;
             this.img = img;
         }
+    }
+
+    public interface CallbackDesc {
+        void handleDesc(String desc);
     }
 }

@@ -13,7 +13,8 @@ import vip.dengwj.adapter.GridViewAdapter;
 import vip.dengwj.entity.Planet;
 import vip.dengwj.util.ToastUtil;
 
-public class GridViewActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class GridViewActivity extends AppCompatActivity
+        implements AdapterView.OnItemClickListener, GridViewAdapter.CallbackDesc {
     private GridView gridView;
 
     private List<Planet> planets;
@@ -25,7 +26,9 @@ public class GridViewActivity extends AppCompatActivity implements AdapterView.O
 
         gridView = findViewById(R.id.gridView);
         planets = Planet.getDefaultList();
-        GridViewAdapter gridViewAdapter = new GridViewAdapter(this, planets);
+        // GridViewAdapter gridViewAdapter = new GridViewAdapter(this, planets);
+        // GridViewAdapter gridViewAdapter = new GridViewAdapter(this, planets, new Desc());
+        GridViewAdapter gridViewAdapter = new GridViewAdapter(this, planets, this);
         gridView.setAdapter(gridViewAdapter);
         gridView.setOnItemClickListener(this);
     }
@@ -34,4 +37,16 @@ public class GridViewActivity extends AppCompatActivity implements AdapterView.O
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         ToastUtil.show(this, planets.get(position).name);
     }
+
+    @Override
+    public void handleDesc(String test) {
+        System.out.println(test);
+    }
+
+    // private static class Desc implements GridViewAdapter.CallbackDesc {
+    //     @Override
+    //     public void handleDesc(String desc) {
+    //         System.out.println(desc);
+    //     }
+    // }
 }
