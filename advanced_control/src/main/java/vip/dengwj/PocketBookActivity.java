@@ -9,12 +9,14 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Calendar;
 
 import vip.dengwj.entity.Bill;
+import vip.dengwj.util.ToastUtil;
 
 public class PocketBookActivity extends AppCompatActivity
         implements DatePickerDialog.OnDateSetListener, RadioGroup.OnCheckedChangeListener {
@@ -90,13 +92,25 @@ public class PocketBookActivity extends AppCompatActivity
         desc.clearFocus();
         amount.clearFocus();
 
+        String d = desc.getText().toString();
+        if (d.isEmpty()) {
+            ToastUtil.show(this, "请输入事项说明");
+            return;
+        }
+
+        String a = amount.getText().toString();
+        if (a.isEmpty()) {
+            ToastUtil.show(this, "请输入金额");
+            return;
+        }
         Bill bill = new Bill(
                 null,
                 date.getText().toString(),
                 billIncomeExpenditure,
-                desc.getText().toString(),
-                Double.parseDouble(amount.getText().toString())
+                d,
+                Double.parseDouble(a)
         );
         MyApplication.getInstance().getBillDatabase().billDao().insert(bill);
+        ToastUtil.show(this, "保存成功");
     }
 }

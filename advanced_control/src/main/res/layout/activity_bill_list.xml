@@ -4,7 +4,42 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BillListActivity">
+    tools:context=".BillListActivity"
+    android:orientation="vertical">
 
     <include layout="@layout/nav_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="14dp"
+        android:padding="8dp">
+
+        <!--选择月份-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginBottom="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="请选择月份："
+                android:textColor="#000"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/select_month"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="17sp"
+                android:text="2024-7-5"/>
+        </LinearLayout>
+
+    <!--    翻页-->
+    </LinearLayout>
 </LinearLayout>
