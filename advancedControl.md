@@ -80,3 +80,6 @@
 
 ## Fragment 注册
 * 静态注册在布局文件中直接指定 Fragment，而动态注册直到在代码中才动态添加 Fragment
+
+## Fragment 优点
+* 降低代码耦合
