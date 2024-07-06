@@ -6,6 +6,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
+import java.util.Calendar;
+import java.util.List;
+
+import vip.dengwj.adapter.BillListAdapter;
+import vip.dengwj.entity.Bill;
 
 public class BillListActivity extends AppCompatActivity {
 
@@ -21,6 +28,19 @@ public class BillListActivity extends AppCompatActivity {
 
         navbarRight.setOnClickListener(this::handleNavbarRight);
         findViewById(R.id.back).setOnClickListener(this::handleBack);
+
+        TextView selectMonth = findViewById(R.id.select_month);
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        String val = String.format(year + "-" + month);
+        selectMonth.setText(val);
+        // 获取数据
+        List<Bill> billList = MyApplication.getInstance().getBillDatabase().billDao().query(val + "%");
+
+        ViewPager viewPagerMonth = findViewById(R.id.view_pager_month);
+        BillListAdapter billListAdapter = new BillListAdapter(getSupportFragmentManager(), billList);
+        viewPagerMonth.setAdapter(billListAdapter);
     }
 
     private void handleBack(View view) {

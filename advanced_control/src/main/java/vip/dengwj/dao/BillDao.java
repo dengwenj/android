@@ -16,6 +16,5 @@ public interface BillDao {
 
     // 查询
     @Query("select * from bill where date like :formatDate order by date")
-    // date -> '2024-07%'
-    List<Bill> query(String formatDate);
+    List<Bill> query(String formatDate); // date -> '2024-07%'
 }
