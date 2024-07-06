@@ -1,20 +1,26 @@
 package vip.dengwj;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import java.util.Calendar;
-import java.util.List;
 
 import vip.dengwj.adapter.BillListAdapter;
-import vip.dengwj.entity.Bill;
 
-public class BillListActivity extends AppCompatActivity {
+public class BillListActivity extends AppCompatActivity
+        implements ViewPager.OnPageChangeListener, DatePickerDialog.OnDateSetListener {
+    private Integer year;
+    private int month;
+
+    private ViewPager viewPagerMonth;
+    private TextView selectMonth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,18 +35,28 @@ public class BillListActivity extends AppCompatActivity {
         navbarRight.setOnClickListener(this::handleNavbarRight);
         findViewById(R.id.back).setOnClickListener(this::handleBack);
 
-        TextView selectMonth = findViewById(R.id.select_month);
+        selectMonth = findViewById(R.id.select_month);
         Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH) + 1;
-        String val = String.format(year + "-" + month);
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        String val = String.format(year + "-" + (month + 1));
         selectMonth.setText(val);
-        // 获取数据
-        List<Bill> billList = MyApplication.getInstance().getBillDatabase().billDao().query(val + "%");
+        // 把年份保存到全局
+        MyApplication.getInstance().globalInfo.put("year", year);
 
-        ViewPager viewPagerMonth = findViewById(R.id.view_pager_month);
-        BillListAdapter billListAdapter = new BillListAdapter(getSupportFragmentManager(), billList);
+        viewPagerMonth = findViewById(R.id.view_pager_month);
+        BillListAdapter billListAdapter = new BillListAdapter(getSupportFragmentManager());
         viewPagerMonth.setAdapter(billListAdapter);
+        viewPagerMonth.setCurrentItem(month);
+        viewPagerMonth.addOnPageChangeListener(this);
+        selectMonth.setOnClickListener(this::handleSelectMonth);
+    }
+
+    // 选择月份
+    private void handleSelectMonth(View v) {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this);
+        datePickerDialog.show();
+        datePickerDialog.setOnDateSetListener(this);
     }
 
     private void handleBack(View view) {
@@ -51,5 +67,33 @@ public class BillListActivity extends AppCompatActivity {
         Intent intent = new Intent(this, PocketBookActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    // 切换翻页页面
+    @Override
+    public void onPageSelected(int position) {
+        month = position;
+        selectMonth.setText(String.format(year + "-" + (month + 1)));
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
+
+    // 选择日期
+    @Override
+    public void onDateSet(DatePicker view, int y, int m, int dayOfMonth) {
+        year = y;
+        month = m;
+        viewPagerMonth.setCurrentItem(month);
+        selectMonth.setText(String.format(year + "-" + (month + 1)));
+        // 把年份保存到全局
+        MyApplication.getInstance().globalInfo.put("year", year);
     }
 }

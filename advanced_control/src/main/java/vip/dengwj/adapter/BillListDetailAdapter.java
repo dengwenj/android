@@ -54,7 +54,8 @@ public class BillListDetailAdapter extends BaseAdapter {
         Bill bill = billList.get(position);
         holder.left.setText(bill.getDate());
         holder.center.setText(bill.getDesc());
-        holder.right.setText(String.format(bill.getAmount() + ""));
+        String z = bill.getBillIncomeExpenditure() == 1 ? "收入" : "支出";
+        holder.right.setText(String.format(z + bill.getAmount() + "元"));
         return convertView;
     }
 

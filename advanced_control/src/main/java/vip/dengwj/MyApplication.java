@@ -4,10 +4,15 @@ import android.app.Application;
 
 import androidx.room.Room;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import vip.dengwj.database.BillDatabase;
 
 public class MyApplication extends Application {
     public static MyApplication app;
+
+    public Map<String, Object> globalInfo = new HashMap<>();
 
     private BillDatabase billDatabase;
 
