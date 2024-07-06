@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.List;
@@ -17,7 +18,10 @@ import vip.dengwj.R;
 import vip.dengwj.adapter.BillListDetailAdapter;
 import vip.dengwj.entity.Bill;
 
-public class BillFragment extends Fragment {
+public class BillFragment extends Fragment implements AdapterView.OnItemClickListener {
+    private List<Bill> billList;
+    private BillListDetailAdapter billListDetailAdapter;
+
     public static BillFragment newInstance(int position) {
         BillFragment fragment = new BillFragment();
         Bundle args = new Bundle();
@@ -41,20 +45,29 @@ public class BillFragment extends Fragment {
         // TODO 更新年份的时候没有执行
         System.out.println("year" + year);
         // 从这里去获取数据
-        List<Bill> billList = getData(year + "-" + (month + 1) + "%");
+        billList = getData(year + "-" + (month + 1) + "%");
         // 最后一行合计
         billList.add(new Bill(0L, "", 0, "", 0));
 
         // bill_detail_list
         ListView listView = view.findViewById(R.id.bill_detail_list);
-        BillListDetailAdapter billListDetailAdapter = new BillListDetailAdapter(context, billList);
+        billListDetailAdapter = new BillListDetailAdapter(context, billList);
         listView.setAdapter(billListDetailAdapter);
-
+        listView.setOnItemClickListener(this);
         return view;
     }
 
     // 获取数据
     private List<Bill> getData(String str) {
         return MyApplication.getInstance().getBillDatabase().billDao().query(str + "%");
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        billList.remove(billList.size() - 1);
+        billList.add(new Bill(10L, "2024-7-6", 1, "测试", 17.0));
+        // 最后一行合计
+        billList.add(new Bill(0L, "", 0, "", 0));
+        billListDetailAdapter.notifyDataSetChanged();
     }
 }
