@@ -42,6 +42,8 @@ public class BillFragment extends Fragment {
         System.out.println("year" + year);
         // 从这里去获取数据
         List<Bill> billList = getData(year + "-" + (month + 1) + "%");
+        // 最后一行合计
+        billList.add(new Bill(0L, "", 0, "", 0));
 
         // bill_detail_list
         ListView listView = view.findViewById(R.id.bill_detail_list);

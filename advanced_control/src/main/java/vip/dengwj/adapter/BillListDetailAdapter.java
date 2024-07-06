@@ -51,11 +51,37 @@ public class BillListDetailAdapter extends BaseAdapter {
             holder = (Holder) convertView.getTag();
         }
 
+        // 最后一行
+        String date;
+        String desc;
+        String amount;
         Bill bill = billList.get(position);
-        holder.left.setText(bill.getDate());
-        holder.center.setText(bill.getDesc());
-        String z = bill.getBillIncomeExpenditure() == 1 ? "收入" : "支出";
-        holder.right.setText(String.format(z + bill.getAmount() + "元"));
+        if (position == billList.size() -1) {
+            date = "合计";
+
+            Double reduce = billList.stream()
+                    .filter((item) -> item.getBillIncomeExpenditure() == 1)
+                    .map(Bill::getAmount)
+                    .reduce((double) 0, Double::sum);
+            Double reduce1 = billList.stream()
+                    .filter((item) -> item.getBillIncomeExpenditure() == 2)
+                    .map(Bill::getAmount)
+                    .reduce((double) 0, Double::sum);
+            desc = "收入" + reduce + "\n" + "支出" + reduce1;
+
+            Double reduce2 = billList.stream()
+                    .map(Bill::getAmount)
+                    .reduce((double) 0, Double::sum);
+            amount = "余额" + reduce2 + "元";
+        } else {
+            date = bill.getDate();
+            desc = bill.getDesc();
+            String z = bill.getBillIncomeExpenditure() == 1 ? "收入" : "支出";
+            amount = z + bill.getAmount() + "元";
+        }
+        holder.left.setText(date);
+        holder.center.setText(desc);
+        holder.right.setText(amount);
         return convertView;
     }
 

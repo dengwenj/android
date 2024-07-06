@@ -9,7 +9,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,6 +25,7 @@ public class PocketBookActivity extends AppCompatActivity
     private TextView date;
     private EditText desc;
     private EditText amount;
+    private RadioGroup billType;
 
     // 账单类型 1、收入，2、支出
     private int billIncomeExpenditure = Income;
@@ -36,7 +36,7 @@ public class PocketBookActivity extends AppCompatActivity
         setContentView(R.layout.activity_pocket_book);
 
         date = findViewById(R.id.date);
-        RadioGroup billType = findViewById(R.id.bill_type);
+        billType = findViewById(R.id.bill_type);
         desc = findViewById(R.id.desc);
         amount = findViewById(R.id.amount);
         Button save = findViewById(R.id.save);
@@ -53,6 +53,21 @@ public class PocketBookActivity extends AppCompatActivity
 
         // 主页面隐藏返回按钮
         findViewById(R.id.back).setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // 初始化文本框内容
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        date.setText(String.format(year + "-" + month + "-" + day));
+        desc.setText("");
+        amount.setText("");
+        billType.check(R.id.income);
     }
 
     // 跳转到 list 页面

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="40dp"
     android:padding="3dp">
 
     <TextView
         android:id="@+id/bill_detail_list_left"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:gravity="start|center"
         android:text="2024-7-6"/>
 
     <TextView
@@ -16,14 +17,14 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:text="2024-7-6"/>
 
     <TextView
         android:id="@+id/bill_detail_list_right"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:gravity="end"
+        android:layout_height="match_parent"
+        android:gravity="end|center"
         android:text="2024-7-6"/>
 </LinearLayout>
