@@ -23,6 +23,9 @@ public class StandardActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         Intent integer = new Intent(StandardReceiver.PUMU);
+        Bundle bundle = new Bundle();
+        bundle.putInt("year", 2023);
+        integer.putExtras(bundle);
         // 发送广播
         sendBroadcast(integer);
     }
