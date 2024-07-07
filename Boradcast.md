@@ -36,3 +36,9 @@
 * PendingIntent 代表延迟的意图，它指向的组件不会马上激活，而 Intent 代表实时的意图，它指向的组件会马上激活
 * PendingIntent 是一类消息的组合，不但包含目标的 Intent 对象，还包含请求代码、请求方式等信息
 * PendingIntent 对象在创建之时便已知晓将要用于活动还是广播
+
+## 系统配置变更的处理机制
+* 为了避免横竖屏切换时重新加载界面的情况，Android 设计了一种配置变更机制，在指定的环境配置发生变更之时
+* 无需重启活动页面，只需执行特定的变更行为。该机制的实现过程分为两步：
+* 修改 AndroidManifest.xml，给 activity 节点增加 android:configChanges 属性
+* 修改活动页面的 Java 代码，重写活动的 onConfigurationChanged 方法，补充对应的代码处理逻辑
