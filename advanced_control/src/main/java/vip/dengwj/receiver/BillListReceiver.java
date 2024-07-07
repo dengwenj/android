@@ -20,7 +20,7 @@ public class BillListReceiver extends BroadcastReceiver {
         int month = intent.getIntExtra("month", 0);
         if (action.equals(BILLLISTDATA)) {
             // 回调
-            new BillFragment().updateBillList(year, month);
+            BillFragment.updateBillList(year, month);
         }
     }
 }

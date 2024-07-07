@@ -94,7 +94,7 @@ public class BillFragment extends Fragment implements AdapterView.OnItemClickLis
     }
 
     // 选择日期的时候，有时没触发onCreateView, 自己更新 list 列表
-    public void updateBillList(int year, int month) {
+    public static void updateBillList(int year, int month) {
         List<BillFragment> list = billFragments.stream()
                 .filter((item) -> item.m == month)
                 .collect(Collectors.toList());
@@ -102,7 +102,10 @@ public class BillFragment extends Fragment implements AdapterView.OnItemClickLis
 
         // 引用不能断，不能重新指向
         billFragment.billList.clear();
-        billFragment.billList.addAll(getData(year + "-" + (month + 1) + "%"));
+        String str = year + "-" + (month + 1) + "%";
+        billFragment.billList.addAll(
+                MyApplication.getInstance().getBillDatabase().billDao().query(str + "%")
+        );
         // 最后一行合计
         billFragment.billList.add(new Bill(0L, "", 0, "", 0));
         // 刷新列表
