@@ -21,7 +21,7 @@
         </receiver>
 
         <activity
-            android:name=".SystemMinuteActivity"
+            android:name=".AlarmActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

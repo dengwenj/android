@@ -17,3 +17,22 @@
 ## 静态注册广播
 * 在代码中注册接收器，该方式被称作动态注册
 * 在 AndroidManifest.xml 中注册接收器，该方式被称作静态注册
+
+## 监听系统广播
+* 接收分钟到达广播
+* Intent.ACTION_TIME_TICK
+* 接收网络变更广播
+* android.net.conn.CONNECTIVITY_CHANGE
+
+## 定时管理器 AlarmManager
+* Android 提供了专门的定时管理器 AlarmManager，它利用系统闹钟定时发送广播，常见方法：
+* set：设置一次性定时器
+* setAndAllowWhileIDle：设置一次性定时器，即使设备处于空闲状态，也会保证执行定时器
+* setRepeating：设置重复定时器，但系统不保证按时发送广播
+* cancel：取消指定延迟意图的定时器
+
+## 延迟意图 PendingIntent
+* 定时管理器使用了 PendingIntent，它与 Intent 之间的差异主要有下列三点：
+* PendingIntent 代表延迟的意图，它指向的组件不会马上激活，而 Intent 代表实时的意图，它指向的组件会马上激活
+* PendingIntent 是一类消息的组合，不但包含目标的 Intent 对象，还包含请求代码、请求方式等信息
+* PendingIntent 对象在创建之时便已知晓将要用于活动还是广播
