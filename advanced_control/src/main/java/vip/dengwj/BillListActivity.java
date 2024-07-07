@@ -2,6 +2,7 @@ package vip.dengwj;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
@@ -13,6 +14,7 @@ import androidx.viewpager.widget.ViewPager;
 import java.util.Calendar;
 
 import vip.dengwj.adapter.BillListAdapter;
+import vip.dengwj.receiver.BillListReceiver;
 
 public class BillListActivity extends AppCompatActivity
         implements ViewPager.OnPageChangeListener, DatePickerDialog.OnDateSetListener {
@@ -21,6 +23,8 @@ public class BillListActivity extends AppCompatActivity
 
     private ViewPager viewPagerMonth;
     private TextView selectMonth;
+
+    private BillListReceiver billListReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,5 +99,27 @@ public class BillListActivity extends AppCompatActivity
         selectMonth.setText(String.format(year + "-" + (month + 1)));
         // 把年份保存到全局
         MyApplication.getInstance().globalInfo.put("year", year);
+
+        // 发送广播
+        Intent intent = new Intent(BillListReceiver.BILLLISTDATA);
+        intent.putExtra("year", year);
+        intent.putExtra("month", month);
+        sendBroadcast(intent);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // 注册广播
+        billListReceiver = new BillListReceiver();
+        IntentFilter filter = new IntentFilter(BillListReceiver.BILLLISTDATA);
+        registerReceiver(billListReceiver, filter);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        // 取消注册广播
+        unregisterReceiver(billListReceiver);
     }
 }
