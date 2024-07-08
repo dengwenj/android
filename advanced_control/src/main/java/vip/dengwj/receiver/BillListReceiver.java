@@ -7,7 +7,7 @@ import android.content.Intent;
 import vip.dengwj.fragment.BillFragment;
 
 public class BillListReceiver extends BroadcastReceiver {
-    public static final String BILLLISTDATA = "billListData";
+    public static final String BILLLISTDATA = "vip.dengwj.receiver.BILLLISTDATA";
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent == null) {

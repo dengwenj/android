@@ -37,9 +37,4 @@ dependencies {
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
-
-    def core_version = "1.13.1"
-
-    // Java language implementation
-    implementation "androidx.core:core:$core_version"
 }

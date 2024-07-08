@@ -102,7 +102,7 @@ public class BillFragment extends Fragment implements AdapterView.OnItemClickLis
 
         // 引用不能断，不能重新指向
         billFragment.billList.clear();
-        String str = year + "-" + (month + 1) + "%";
+        String str = year + "-" + (month + 1);
         billFragment.billList.addAll(
                 MyApplication.getInstance().getBillDatabase().billDao().query(str + "%")
         );
