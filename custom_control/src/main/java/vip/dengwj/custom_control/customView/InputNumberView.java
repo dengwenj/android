@@ -14,6 +14,8 @@ public class InputNumberView extends RelativeLayout {
 
     private EditText editText;
 
+    private OnNumberChangeListener onNumberChangeListener;
+
     public InputNumberView(Context context) {
         // 统一在一个构造方法中处理
         this(context, null);
@@ -54,11 +56,15 @@ public class InputNumberView extends RelativeLayout {
 
     public void setNumber(int currentNumber) {
         this.currentNumber = currentNumber;
-        updateNumber();
+        editText.setText(String.valueOf(currentNumber));
     }
 
     public void updateNumber() {
         editText.setText(String.valueOf(currentNumber));
+
+        if (onNumberChangeListener != null) {
+            onNumberChangeListener.onChange(currentNumber);
+        }
     }
 
     private void handleAdd(View view) {
@@ -69,5 +75,15 @@ public class InputNumberView extends RelativeLayout {
     private void handleDec(View view) {
         currentNumber--;
         updateNumber();
+    }
+
+    // 外面调用的，里面的回调方法会在 val 改变时调用
+    public void setOnNumberChangeListener(OnNumberChangeListener listener) {
+        onNumberChangeListener = listener;
+    }
+
+    //  暴露接收给外面使用
+    public interface OnNumberChangeListener {
+        void onChange(int number);
     }
 }
