@@ -12,13 +12,6 @@
     <vip.dengwj.custom_control.customView.InputNumberView
         android:id="@+id/input_number_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        pumu:max="24"
-        pumu:min="0"
-        pumu:step="2"
-        pumu:disabled="true"
-        pumu:defaultValue="3"
-        pumu:btnBackground="@drawable/selector_inp_right"
-        pumu:valueSize="18dp"/>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

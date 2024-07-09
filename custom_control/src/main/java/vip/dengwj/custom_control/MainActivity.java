@@ -21,10 +21,21 @@ public class MainActivity extends AppCompatActivity implements InputNumberView.O
 
         inputNumberView = findViewById(R.id.input_number_view);
         inputNumberView.setOnNumberChangeListener(this);
+        inputNumberView.setMDisabled(true);
     }
 
     @Override
     public void onChange(int number) {
         Log.d(PUMU, "number:" + number);
+    }
+
+    @Override
+    public void onNumberMax(int number) {
+        Log.d(PUMU, "最大值" + number);
+    }
+
+    @Override
+    public void onNumberMin(int number) {
+        Log.d(PUMU, "最小值" + number);
     }
 }
