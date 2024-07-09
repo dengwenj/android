@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:pumu="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,6 +12,13 @@
     <vip.dengwj.custom_control.customView.InputNumberView
         android:id="@+id/input_number_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        pumu:max="24"
+        pumu:min="0"
+        pumu:step="2"
+        pumu:disabled="true"
+        pumu:defaultValue="3"
+        pumu:btnBackground="@drawable/selector_inp_right"
+        pumu:valueSize="18dp"/>
 
 </LinearLayout>
