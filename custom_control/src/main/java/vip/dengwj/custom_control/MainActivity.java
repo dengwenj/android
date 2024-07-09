@@ -2,11 +2,10 @@ package vip.dengwj.custom_control;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import vip.dengwj.custom_control.customView.InputNumberView;
+import vip.dengwj.custom_control.customView.inputNumberView.InputNumberView;
 
 public class MainActivity extends AppCompatActivity implements InputNumberView.OnNumberChangeListener {
 

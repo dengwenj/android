@@ -1,9 +1,8 @@
-package vip.dengwj.custom_control.customView;
+package vip.dengwj.custom_control.customView.inputNumberView;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -12,6 +11,14 @@ import android.widget.TextView;
 
 import vip.dengwj.custom_control.R;
 
+/**
+ * 步骤：
+ * 1、继承自一个 ViewGroup，比如说 LinearLayout
+ * 2、定义相关属性，获取相关属性
+ * 3、加载组合的 View，根据属性修改 UI/数据
+ * 4、处理事件/数据
+ * 5、定义功能接口，对外暴露设置接口方法
+ */
 public class InputNumberView extends RelativeLayout {
     private static final String PUMU = "InputNumberView";
 
