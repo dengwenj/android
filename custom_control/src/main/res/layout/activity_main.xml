@@ -4,7 +4,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="#96a9e2"
+    android:gravity="center">
 
     <vip.dengwj.custom_control.customView.InputNumberView
         android:layout_width="wrap_content"
