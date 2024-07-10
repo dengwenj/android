@@ -77,10 +77,11 @@
             style="@style/NumberKeyPad"
             android:text="0" />
 
-        <TextView
+        <ImageView
             android:id="@+id/number_back"
             style="@style/NumberKeyPad"
             android:layout_weight="2"
-            android:text="取消" />
+            android:src="@mipmap/delete"
+            android:padding="10dp"/>
     </LinearLayout>
 </LinearLayout>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/top_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="飞跃神天账号登录"
+            android:textColor="#e7724c"
+            android:textSize="20dp"
+            app:drawableLeftCompat="@mipmap/user"
+            android:layout_marginBottom="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/shape_form_item"
+                android:drawableLeft="@mipmap/phone"
+                android:drawablePadding="10dp"
+                android:focusable="false"
+                android:hint="请输入11位手机号码"
+                android:paddingLeft="16dp"
+                android:paddingTop="12dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="12dp"
+                android:textColorHint="#898789"
+                android:textSize="14sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_form_item"
+                    android:drawableLeft="@mipmap/password"
+                    android:drawablePadding="10dp"
+                    android:hint="请输入验证码"
+                    android:focusable="false"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="12dp"
+                    android:paddingEnd="140dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="12dp"
+                    android:textColorHint="#898789"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="40dp"
+                    android:layout_toLeftOf="@+id/get_code"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/shape_line"/>
+                <TextView
+                    android:id="@+id/get_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="25dp"
+                    android:text="获取验证码"
+                    android:textColor="#e7724c"
+                    android:textSize="16dp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="同意《飞跃神天用户使用协议》"
+            android:textColor="#e7724c" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/shape_login"
+            android:gravity="center"
+            android:padding="14dp"
+            android:text="确定"
+            android:textColor="#fff"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+    <!--下面键盘-->
+    <vip.dengwj.custom_control.customView.loginPage.LoginKeyBoard
+        android:id="@+id/login_key_board"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="4dp" />
+</LinearLayout>

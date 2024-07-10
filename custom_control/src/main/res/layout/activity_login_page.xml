@@ -4,11 +4,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginPageActivity"
-    android:gravity="center">
+    tools:context=".LoginPageActivity">
 
-    <vip.dengwj.custom_control.customView.loginPage.LoginKeyBoard
-        android:id="@+id/login_key_board"
-        android:layout_width="300dp"
-        android:layout_height="300dp"/>
+    <vip.dengwj.custom_control.customView.loginPage.LoginPageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>
