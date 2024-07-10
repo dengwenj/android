@@ -7,6 +7,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -22,6 +24,11 @@ public class LoginPageView extends FrameLayout implements LoginKeyBoard.OnKeyPre
     private EditText phoneEdT;
     private EditText codeEdt;
     private TextView getCodeTv;
+    private TextView confirmTV;
+    private CheckBox checkBox;
+    private String phone = "";
+    private String code = "";
+    private boolean isChecked;
 
     public LoginPageView(@NonNull Context context) {
         this(context, null);
@@ -41,6 +48,8 @@ public class LoginPageView extends FrameLayout implements LoginKeyBoard.OnKeyPre
     private void initEvent() {
         loginKeyBoard.setOnKeyPressListener(this);
         getCodeTv.setOnClickListener(this::handleGetCode);
+        confirmTV.setOnClickListener(this::handleOk);
+        checkBox.setOnCheckedChangeListener(this::handleCheckBox);
     }
 
     private void initView() {
@@ -57,6 +66,8 @@ public class LoginPageView extends FrameLayout implements LoginKeyBoard.OnKeyPre
         phoneEdT.setShowSoftInputOnFocus(false);
         codeEdt.setShowSoftInputOnFocus(false);
         getCodeTv = findViewById(R.id.get_code);
+        confirmTV = findViewById(R.id.confirm);
+        checkBox = findViewById(R.id.checkbox);
     }
 
     private void editIconSize(int idRes, int drawableId) {
@@ -87,16 +98,13 @@ public class LoginPageView extends FrameLayout implements LoginKeyBoard.OnKeyPre
         EditText focusEdt = getFocusEdt();
         if (focusEdt == null) return;
 
+        int id = focusEdt.getId();
         Editable text = focusEdt.getText();
         // focusEdt.setText(text.toString() + number);
         int index = focusEdt.getSelectionEnd();
         text.insert(index, number + "");
 
-        if (text.toString().length() == 11) {
-            getCodeTv.setEnabled(true);
-        } else {
-            getCodeTv.setEnabled(false);
-        }
+        btnEnabled(id, text.toString());
     }
 
     // 点击返回
@@ -105,14 +113,46 @@ public class LoginPageView extends FrameLayout implements LoginKeyBoard.OnKeyPre
         EditText focusEdt = getFocusEdt();
         if (focusEdt == null) return;
 
+        int id = focusEdt.getId();
         Editable val = focusEdt.getText();
         int index = focusEdt.getSelectionEnd();
         val.delete(index - 1, index);
+
+        btnEnabled(id, val.toString());
+    }
+
+    private void btnEnabled(int id, String val) {
+        Log.d("pumu", val);
+        // 手机号
+        if (id == R.id.phone) {
+            phone = val;
+            getCodeTv.setEnabled(val.length() == 11);
+            updateConfirm();
+        } else if (id == R.id.password) {
+            // 验证码
+            code = val;
+            updateConfirm();
+        }
     }
 
     // 点击获取验证码
-    public void handleGetCode(View v) {
+    private void handleGetCode(View v) {
 
+    }
+
+    // 点击同意
+    private void handleCheckBox(CompoundButton buttonView, boolean isC) {
+        isChecked = isC;
+        updateConfirm();
+    }
+
+    // 点击登录
+    private void handleOk(View v) {
+
+    }
+
+    private void updateConfirm() {
+        confirmTV.setEnabled(phone.length() == 11 && code.length() == 6 && isChecked);
     }
 
     public interface OnLoginListener {
