@@ -19,12 +19,12 @@
             android:id="@+id/top_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:gravity="center"
             android:text="飞跃神天账号登录"
             android:textColor="#e7724c"
             android:textSize="20dp"
-            app:drawableLeftCompat="@mipmap/user"
-            android:layout_marginBottom="10dp"/>
+            app:drawableLeftCompat="@mipmap/user" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -41,12 +41,13 @@
                 android:background="@drawable/shape_form_item"
                 android:drawableLeft="@mipmap/phone"
                 android:drawablePadding="10dp"
-                android:focusable="false"
                 android:hint="请输入11位手机号码"
+                android:maxLength="11"
                 android:paddingLeft="16dp"
                 android:paddingTop="12dp"
                 android:paddingRight="16dp"
                 android:paddingBottom="12dp"
+                android:textColor="#fff"
                 android:textColorHint="#898789"
                 android:textSize="14sp" />
 
@@ -55,31 +56,33 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:background="@drawable/shape_form_item"
                     android:drawableLeft="@mipmap/password"
                     android:drawablePadding="10dp"
                     android:hint="请输入验证码"
-                    android:focusable="false"
+                    android:maxLength="6"
                     android:paddingLeft="16dp"
                     android:paddingTop="12dp"
                     android:paddingEnd="140dp"
                     android:paddingRight="16dp"
                     android:paddingBottom="12dp"
+                    android:textColor="#fff"
                     android:textColorHint="#898789"
                     android:textSize="14sp" />
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="40dp"
-                    android:layout_toLeftOf="@+id/get_code"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="20dp"
-                    android:background="@drawable/shape_line"/>
+                    android:layout_toLeftOf="@+id/get_code"
+                    android:background="@drawable/shape_line" />
+
                 <TextView
                     android:id="@+id/get_code"
                     android:layout_width="wrap_content"
@@ -102,6 +105,7 @@
             android:textColor="#e7724c" />
 
         <TextView
+            android:id="@+id/confirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"

@@ -6,26 +6,32 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 
 import vip.dengwj.custom_control.customView.loginPage.LoginKeyBoard;
+import vip.dengwj.custom_control.customView.loginPage.LoginPageView;
 
-public class LoginPageActivity extends AppCompatActivity
-        implements LoginKeyBoard.OnKeyPressListener {
+public class LoginPageActivity extends AppCompatActivity implements LoginPageView.OnLoginListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
 
-        LoginKeyBoard loginKeyBoard = findViewById(R.id.login_key_board);
-        loginKeyBoard.setOnKeyPressListener(this);
+        LoginPageView loginPageView = findViewById(R.id.login_page_view);
+
+        loginPageView.setOnLoginListener(this);
     }
 
     @Override
-    public void onNumberPress(int number) {
-        Log.d("pumu", "number:" + number);
+    public void onGetCodeClick() {
+
     }
 
     @Override
-    public void onBackPress() {
-        Log.d("pumu", "back");
+    public void onCheckClick() {
+
+    }
+
+    @Override
+    public void onConfirmClick() {
+
     }
 }
