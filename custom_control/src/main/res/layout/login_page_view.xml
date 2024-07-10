@@ -49,6 +49,7 @@
                 android:paddingBottom="12dp"
                 android:textColor="#fff"
                 android:textColorHint="#898789"
+                android:textCursorDrawable="@drawable/shape_cursor"
                 android:textSize="14sp" />
 
             <RelativeLayout
@@ -73,6 +74,7 @@
                     android:paddingBottom="12dp"
                     android:textColor="#fff"
                     android:textColorHint="#898789"
+                    android:textCursorDrawable="@drawable/shape_cursor"
                     android:textSize="14sp" />
 
                 <View
@@ -90,8 +92,9 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="25dp"
+                    android:enabled="false"
                     android:text="获取验证码"
-                    android:textColor="#e7724c"
+                    android:textColor="@drawable/slector_code"
                     android:textSize="16dp" />
             </RelativeLayout>
         </LinearLayout>

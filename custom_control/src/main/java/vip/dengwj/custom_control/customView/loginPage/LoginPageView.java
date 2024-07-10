@@ -21,6 +21,7 @@ public class LoginPageView extends FrameLayout implements LoginKeyBoard.OnKeyPre
     private LoginKeyBoard loginKeyBoard;
     private EditText phoneEdT;
     private EditText codeEdt;
+    private TextView getCodeTv;
 
     public LoginPageView(@NonNull Context context) {
         this(context, null);
@@ -39,6 +40,7 @@ public class LoginPageView extends FrameLayout implements LoginKeyBoard.OnKeyPre
 
     private void initEvent() {
         loginKeyBoard.setOnKeyPressListener(this);
+        getCodeTv.setOnClickListener(this::handleGetCode);
     }
 
     private void initView() {
@@ -54,6 +56,7 @@ public class LoginPageView extends FrameLayout implements LoginKeyBoard.OnKeyPre
         // 禁止显示键盘
         phoneEdT.setShowSoftInputOnFocus(false);
         codeEdt.setShowSoftInputOnFocus(false);
+        getCodeTv = findViewById(R.id.get_code);
     }
 
     private void editIconSize(int idRes, int drawableId) {
@@ -88,6 +91,12 @@ public class LoginPageView extends FrameLayout implements LoginKeyBoard.OnKeyPre
         // focusEdt.setText(text.toString() + number);
         int index = focusEdt.getSelectionEnd();
         text.insert(index, number + "");
+
+        if (text.toString().length() == 11) {
+            getCodeTv.setEnabled(true);
+        } else {
+            getCodeTv.setEnabled(false);
+        }
     }
 
     // 点击返回
@@ -99,6 +108,11 @@ public class LoginPageView extends FrameLayout implements LoginKeyBoard.OnKeyPre
         Editable val = focusEdt.getText();
         int index = focusEdt.getSelectionEnd();
         val.delete(index - 1, index);
+    }
+
+    // 点击获取验证码
+    public void handleGetCode(View v) {
+
     }
 
     public interface OnLoginListener {
