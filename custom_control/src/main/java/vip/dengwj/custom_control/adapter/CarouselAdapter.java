@@ -1,6 +1,9 @@
 package vip.dengwj.custom_control.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.viewpager.widget.PagerAdapter;
 
 import java.util.ArrayList;
@@ -65,7 +69,18 @@ public class CarouselAdapter extends PagerAdapter {
         v.setLayoutParams(layoutParams);
 
         if (i == position) {
-            v.setBackgroundResource(R.drawable.shape_red_round);
+            Drawable drawable = AppCompatResources.getDrawable(context, R.drawable.shape_red_round);
+            // 确认Drawable是可以修改的
+            if (drawable instanceof GradientDrawable) {
+                GradientDrawable gradientDrawable = (GradientDrawable) drawable;
+                // 使用Color.parseColor()方法将十六进制颜色代码转换为int类型的颜色值
+                // TODO 抽取属性
+                int i1 = Color.parseColor("#5e85e8");
+                // 更改默认颜色
+                gradientDrawable.setColor(i1);
+            }
+            v.setBackground(drawable);
+            // v.setBackgroundResource(R.drawable.shape_red_round);
         } else {
             v.setBackgroundResource(R.drawable.shape_white_round);
         }
