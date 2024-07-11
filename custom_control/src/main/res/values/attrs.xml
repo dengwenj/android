@@ -14,4 +14,8 @@
     <declare-styleable name="LoginPageView">
         <attr name="time" format="integer" />
     </declare-styleable>
+
+    <declare-styleable name="Carousel">
+
+    </declare-styleable>
 </resources>

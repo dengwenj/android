@@ -1,6 +1,7 @@
 package vip.dengwj.custom_control;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ public class LoginPageActivity extends AppCompatActivity implements LoginPageVie
 
     @Override
     public void onConfirmClick(String phoneNum, String code) {
+        // 类似定时器
         App.getHandler().postDelayed(new Runnable() {
             @Override
             public void run() {
