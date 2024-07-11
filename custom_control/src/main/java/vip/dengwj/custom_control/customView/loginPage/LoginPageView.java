@@ -1,6 +1,7 @@
 package vip.dengwj.custom_control.customView.loginPage;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -48,8 +49,14 @@ public class LoginPageView extends FrameLayout implements LoginKeyBoard.OnKeyPre
     public LoginPageView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
+        initAttrs(attrs);
         initView();
         initEvent();
+    }
+
+    private void initAttrs(@Nullable AttributeSet attrs) {
+        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.LoginPageView);
+        totalTime = a.getInt(R.styleable.LoginPageView_time, 60000);
     }
 
     private void initEvent() {
@@ -104,7 +111,7 @@ public class LoginPageView extends FrameLayout implements LoginKeyBoard.OnKeyPre
 
     // 使用 CountDownTimer 倒计时
     private void beginCountDownTimer() {
-        new CountDownTimer(60000, 1000) {
+        new CountDownTimer(totalTime, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 getCodeTv.setText(String.valueOf((millisUntilFinished / 1000) + " 秒"));
