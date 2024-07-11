@@ -2,6 +2,7 @@ package vip.dengwj.custom_control.customView.loginPage;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.text.Editable;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import vip.dengwj.custom_control.App;
 import vip.dengwj.custom_control.R;
 
 public class LoginPageView extends FrameLayout implements LoginKeyBoard.OnKeyPressListener {
@@ -29,6 +31,10 @@ public class LoginPageView extends FrameLayout implements LoginKeyBoard.OnKeyPre
     private String phone = "";
     private String code = "";
     private boolean isChecked;
+    private Handler handler;
+    private int totalTime = 60;
+    private int dTime = 1;
+    private int interval = totalTime;
 
     public LoginPageView(@NonNull Context context) {
         this(context, null);
@@ -65,9 +71,34 @@ public class LoginPageView extends FrameLayout implements LoginKeyBoard.OnKeyPre
         // 禁止显示键盘
         phoneEdT.setShowSoftInputOnFocus(false);
         codeEdt.setShowSoftInputOnFocus(false);
+        // 聚焦焦点
+        phoneEdT.requestFocus();
         getCodeTv = findViewById(R.id.get_code);
         confirmTV = findViewById(R.id.confirm);
         checkBox = findViewById(R.id.checkbox);
+    }
+
+    // 使用 handler 倒计时
+    private void startCountDown() {
+        handler = App.getHandler();
+        // lambda 里面的 this 指向的是外层的 this
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                interval -= dTime;
+                // 大于 0 就一直跑
+                if (interval > 0) {
+                    // delayMillis 是毫秒，这个方法时每隔 1 秒钟执行
+                    handler.postDelayed(this, dTime * 1000L);
+                    getCodeTv.setText(String.valueOf(interval + " 秒"));
+                    getCodeTv.setEnabled(false);
+                } else {
+                    interval = totalTime;
+                    getCodeTv.setText("获取验证码");
+                    getCodeTv.setEnabled(true);
+                }
+            }
+        });
     }
 
     private void editIconSize(int idRes, int drawableId) {
@@ -116,39 +147,48 @@ public class LoginPageView extends FrameLayout implements LoginKeyBoard.OnKeyPre
         int id = focusEdt.getId();
         Editable val = focusEdt.getText();
         int index = focusEdt.getSelectionEnd();
-        val.delete(index - 1, index);
+        if (index != 0) {
+            val.delete(index - 1, index);
+        }
 
         btnEnabled(id, val.toString());
     }
 
     private void btnEnabled(int id, String val) {
-        Log.d("pumu", val);
         // 手机号
         if (id == R.id.phone) {
             phone = val;
             getCodeTv.setEnabled(val.length() == 11);
-            updateConfirm();
         } else if (id == R.id.password) {
             // 验证码
             code = val;
-            updateConfirm();
         }
+        updateConfirm();
     }
 
     // 点击获取验证码
     private void handleGetCode(View v) {
+        if (onLoginListener == null) return;
 
+        onLoginListener.onGetCodeClick(phone);
+        startCountDown();
     }
 
     // 点击同意
     private void handleCheckBox(CompoundButton buttonView, boolean isC) {
         isChecked = isC;
         updateConfirm();
+        if (onLoginListener == null) return;
+        onLoginListener.onCheckClick();
     }
 
     // 点击登录
     private void handleOk(View v) {
+        if (onLoginListener == null) {
+            return;
+        }
 
+        onLoginListener.onConfirmClick(phone, code);
     }
 
     private void updateConfirm() {
@@ -156,10 +196,10 @@ public class LoginPageView extends FrameLayout implements LoginKeyBoard.OnKeyPre
     }
 
     public interface OnLoginListener {
-        void onGetCodeClick();
+        void onGetCodeClick(String phoneNum);
 
         void onCheckClick();
 
-        void onConfirmClick();
+        void onConfirmClick(String phoneNum, String code);
     }
 }

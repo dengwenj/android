@@ -21,8 +21,8 @@ public class LoginPageActivity extends AppCompatActivity implements LoginPageVie
     }
 
     @Override
-    public void onGetCodeClick() {
-
+    public void onGetCodeClick(String phoneNum) {
+        Log.d("pumu", "phoneNum -> " + phoneNum);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class LoginPageActivity extends AppCompatActivity implements LoginPageVie
     }
 
     @Override
-    public void onConfirmClick() {
+    public void onConfirmClick(String phoneNum, String code) {
 
     }
 }
