@@ -2,6 +2,7 @@ package vip.dengwj.custom_control.customView.loginPage;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.text.Editable;
 import android.util.AttributeSet;
@@ -101,6 +102,24 @@ public class LoginPageView extends FrameLayout implements LoginKeyBoard.OnKeyPre
         });
     }
 
+    // 使用 CountDownTimer 倒计时
+    private void beginCountDownTimer() {
+        new CountDownTimer(60000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                getCodeTv.setText(String.valueOf((millisUntilFinished / 1000) + " 秒"));
+                getCodeTv.setEnabled(false);
+            }
+
+            @Override
+            public void onFinish() {
+                // 倒计时结束
+                getCodeTv.setText("获取验证码");
+                getCodeTv.setEnabled(true);
+            }
+        }.start();
+    }
+
     private void editIconSize(int idRes, int drawableId) {
         TextView textView = findViewById(idRes);
         Drawable icon = getResources().getDrawable(drawableId);
@@ -171,7 +190,8 @@ public class LoginPageView extends FrameLayout implements LoginKeyBoard.OnKeyPre
         if (onLoginListener == null) return;
 
         onLoginListener.onGetCodeClick(phone);
-        startCountDown();
+        // startCountDown();
+        beginCountDownTimer();
     }
 
     // 点击同意
