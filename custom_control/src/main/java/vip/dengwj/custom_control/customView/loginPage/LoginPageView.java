@@ -37,6 +37,7 @@ public class LoginPageView extends FrameLayout implements LoginKeyBoard.OnKeyPre
     private int totalTime = 60;
     private int dTime = 1;
     private int interval = totalTime;
+    private CountDownTimer countDownTimer;
 
     public LoginPageView(@NonNull Context context) {
         this(context, null);
@@ -111,7 +112,7 @@ public class LoginPageView extends FrameLayout implements LoginKeyBoard.OnKeyPre
 
     // 使用 CountDownTimer 倒计时
     private void beginCountDownTimer() {
-        new CountDownTimer(totalTime, 1000) {
+        countDownTimer = new CountDownTimer(totalTime, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 getCodeTv.setText(String.valueOf((millisUntilFinished / 1000) + " 秒"));
@@ -123,6 +124,7 @@ public class LoginPageView extends FrameLayout implements LoginKeyBoard.OnKeyPre
                 // 倒计时结束
                 getCodeTv.setText("获取验证码");
                 getCodeTv.setEnabled(true);
+                countDownTimer = null;
             }
         }.start();
     }
@@ -216,6 +218,16 @@ public class LoginPageView extends FrameLayout implements LoginKeyBoard.OnKeyPre
         }
 
         onLoginListener.onConfirmClick(phone, code);
+    }
+
+    // 验证码错误
+    public void onVerifyCodeError() {
+        // 清空验证码输入框里的内容
+        codeEdt.getText().clear();
+        // 停止倒计时
+        if (countDownTimer == null) return;
+        countDownTimer.cancel();
+        countDownTimer.onFinish();
     }
 
     private void updateConfirm() {
