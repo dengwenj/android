@@ -132,6 +132,10 @@ public class FlowLayout extends ViewGroup {
             for (View view : views) {
                 int width = view.getMeasuredWidth();
                 right += (int) (width + horizontalMargin);
+                // 判断最右边的边界
+                if (right > getMeasuredWidth() -horizontalMargin) {
+                    right = (int) (getMeasuredWidth() -horizontalMargin);
+                }
                 view.layout(left, top, right, bottom);
                 left = (int) (right + horizontalMargin);
             }

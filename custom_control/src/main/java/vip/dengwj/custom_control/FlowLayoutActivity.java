@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import vip.dengwj.custom_control.customView.flowLayout.FlowLayout;
+import vip.dengwj.custom_control.util.SizeUtils;
 
 public class FlowLayoutActivity extends AppCompatActivity {
 
@@ -31,7 +32,7 @@ public class FlowLayoutActivity extends AppCompatActivity {
         list.add("陶渊明1");
         list.add("陶渊明2");
         list.add("陶渊明3");
-        list.add("陶渊明4");
+        list.add("陶渊明4陶渊明4陶渊明4陶渊明4陶渊明4陶渊明4陶渊明4陶渊明4");
         list.add("陶渊明5");
         list.add("到涩味");
         flowLayout.setData(list);

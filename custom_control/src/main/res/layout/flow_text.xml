@@ -4,5 +4,7 @@
     android:layout_height="wrap_content"
     android:text="测试赛"
     android:padding="8dp"
-    android:background="@drawable/shape_flow_text">
+    android:background="@drawable/shape_flow_text"
+    android:ellipsize="end"
+    android:singleLine="true">
 </TextView>
