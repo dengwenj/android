@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import vip.dengwj.custom_control.R;
+import vip.dengwj.custom_control.util.SizeUtils;
 
 public class FlowLayout extends ViewGroup {
     private int maxLine;
@@ -43,12 +44,12 @@ public class FlowLayout extends ViewGroup {
     private void initAttrs(AttributeSet attrs) {
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.FlowLayout);
         maxLine = a.getInt(R.styleable.FlowLayout_maxLine, 3);
-        horizontalMargin = a.getDimension(R.styleable.FlowLayout_itemHorizontalMargin, 6);
-        verticalMargin = a.getDimension(R.styleable.FlowLayout_itemVerticalMargin, 6);
+        horizontalMargin = a.getDimension(R.styleable.FlowLayout_itemHorizontalMargin, SizeUtils.dip2px(6));
+        verticalMargin = a.getDimension(R.styleable.FlowLayout_itemVerticalMargin, SizeUtils.dip2px(6));
         textMaxLength = a.getInt(R.styleable.FlowLayout_textMaxLength, 20);
         textColor = a.getColor(R.styleable.FlowLayout_textColor, Color.parseColor("#5e85e8"));
         borderColor = a.getColor(R.styleable.FlowLayout_borderColor, Color.parseColor("#333333"));
-        borderRadius = a.getDimension(R.styleable.FlowLayout_borderRadius, 6);
+        borderRadius = a.getDimension(R.styleable.FlowLayout_borderRadius, SizeUtils.dip2px(6));
 
         a.recycle();
     }
@@ -91,10 +92,10 @@ public class FlowLayout extends ViewGroup {
                 int totalWidth = 0;
                 for (View view : line) {
                     int childWidth = view.getMeasuredWidth();
-                    totalWidth += childWidth;
+                    totalWidth += (int) (childWidth + horizontalMargin);
                 }
                 // 加完之后再加上当前这个
-                totalWidth += child.getMeasuredWidth();
+                totalWidth += (int) (child.getMeasuredWidth() + horizontalMargin);
                 // 换行
                 if (totalWidth > parentWidthSize) {
                     lineList.add(line);
@@ -114,27 +115,29 @@ public class FlowLayout extends ViewGroup {
             lineList.add(line);
         }
         // 测量父容器
-        setMeasuredDimension(parentWidthSize, lineList.size() * getChildAt(0).getMeasuredHeight());
+        int parentHeight = getChildAt(0).getMeasuredHeight();
+        int size = lineList.size();
+        setMeasuredDimension(parentWidthSize, (int) (size * parentHeight + (size + 1) * horizontalMargin));
     }
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         View childAt = getChildAt(0);
         int left = 0;
-        int top = 0;
+        int top = (int) horizontalMargin;
         int right = 0;
-        int bottom = childAt.getMeasuredHeight();
+        int bottom = (int) (childAt.getMeasuredHeight() + horizontalMargin);
         for (List<View> views : lineList) {
             for (View view : views) {
                 int width = view.getMeasuredWidth();
                 right += width;
                 view.layout(left, top, right, bottom);
-                left = right;
+                left = (int) (right + horizontalMargin);
             }
             left = 0;
             right = 0;
-            bottom += childAt.getMeasuredHeight();
-            top += childAt.getMeasuredHeight();
+            bottom += (int) (childAt.getMeasuredHeight() + horizontalMargin);
+            top += (int) (childAt.getMeasuredHeight() + horizontalMargin);
         }
     }
 
