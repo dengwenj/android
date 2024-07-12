@@ -5,6 +5,10 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import vip.dengwj.custom_control.R;
 
@@ -16,6 +20,7 @@ public class FlowLayout extends ViewGroup {
     private int textColor;
     private int borderColor;
     private float borderRadius;
+    private List<String> list = new ArrayList<>();
 
     public FlowLayout(Context context) {
         this(context, null);
@@ -47,6 +52,24 @@ public class FlowLayout extends ViewGroup {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
 
+    }
+
+    public void setData(List<String> data) {
+        this.list.clear();
+        this.list.addAll(data);
+
+        setUpChildren();
+    }
+
+    private void setUpChildren() {
+        // 先清除以前数据
+        removeAllViews();
+
+        for (String val : list) {
+            TextView textView = new TextView(getContext());
+            textView.setText(val);
+            addView(textView);
+        }
     }
 
     public int getMaxLine() {
