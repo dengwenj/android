@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -113,7 +114,7 @@ public class FlowLayout extends ViewGroup {
             lineList.add(line);
         }
         // 测量父容器
-        setMeasuredDimension(parentWidthSize, 500);
+        setMeasuredDimension(parentWidthSize, lineList.size() * getChildAt(0).getMeasuredHeight());
     }
 
     @Override
@@ -149,7 +150,8 @@ public class FlowLayout extends ViewGroup {
         removeAllViews();
 
         for (String val : list) {
-            TextView textView = new TextView(getContext());
+            // TextView textView = new TextView(getContext());
+            TextView textView = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.flow_text, null);
             textView.setText(val);
             addView(textView);
         }
