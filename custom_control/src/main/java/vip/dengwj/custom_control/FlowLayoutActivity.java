@@ -27,7 +27,12 @@ public class FlowLayoutActivity extends AppCompatActivity {
         list.add("玛丽");
         list.add("王阳明");
         list.add("苏轼");
-        list.add("陶渊明");
+        list.add("陶渊明1");
+        list.add("陶渊明2");
+        list.add("陶渊明3");
+        list.add("陶渊明4");
+        list.add("陶渊明5");
+        list.add("到涩味");
         flowLayout.setData(list);
     }
 }

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -21,6 +23,7 @@ public class FlowLayout extends ViewGroup {
     private int borderColor;
     private float borderRadius;
     private List<String> list = new ArrayList<>();
+    private List<List<View>> lineList = new ArrayList<>();
 
     public FlowLayout(Context context) {
         this(context, null);
@@ -49,9 +52,89 @@ public class FlowLayout extends ViewGroup {
         a.recycle();
     }
 
+    /**
+     * 测量
+     * 主要就是一行可以放多少个根据内容定的，如果一行的全部宽度大于了父容器的宽度就换行
+     */
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int parentWidthSize = MeasureSpec.getSize(widthMeasureSpec);
+        int parentHeightSize = MeasureSpec.getSize(heightMeasureSpec);
+
+        int childCount = getChildCount();
+        if (childCount == 0) return;
+
+        // 每次进来清空
+        lineList.clear();
+
+        int childWidthSpec = MeasureSpec.makeMeasureSpec(parentWidthSize, MeasureSpec.AT_MOST);
+        int childHeightSpec = MeasureSpec.makeMeasureSpec(parentHeightSize, MeasureSpec.AT_MOST);
+        // 放入行
+        List<View> line = new ArrayList<>();
+        boolean isNewLine = false;
+        for (int i = 0; i < childCount; i++) {
+            View child = getChildAt(i);
+            if (child.getVisibility() != VISIBLE) {
+                continue;
+            }
+
+            // 测量孩子
+            measureChild(child, childWidthSpec, childHeightSpec);
+
+            if (line.isEmpty()) {
+                line.add(child);
+            } else {
+                // 判断这行的宽度是否大于父容器的宽度,如果大于就换行，小于等于就添加到该行
+                // view 是子元素
+                int totalWidth = 0;
+                for (View view : line) {
+                    int childWidth = view.getMeasuredWidth();
+                    totalWidth += childWidth;
+                }
+                // 加完之后再加上当前这个
+                totalWidth += child.getMeasuredWidth();
+                // 换行
+                if (totalWidth > parentWidthSize) {
+                    lineList.add(line);
+                    line = new ArrayList<>();
+                    // 下一行的第一个
+                    line.add(child);
+                    isNewLine = true;
+                } else {
+                    // 添加到该行
+                    line.add(child);
+                    isNewLine = false;
+                }
+            }
+        }
+        // 最后一行不满没有换行，要添加进去
+        if (!isNewLine) {
+            lineList.add(line);
+        }
+        // 测量父容器
+        setMeasuredDimension(parentWidthSize, 500);
+    }
+
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-
+        View childAt = getChildAt(0);
+        int left = 0;
+        int top = 0;
+        int right = 0;
+        int bottom = childAt.getMeasuredHeight();
+        for (List<View> views : lineList) {
+            for (View view : views) {
+                int width = view.getMeasuredWidth();
+                right += width;
+                view.layout(left, top, right, bottom);
+                left = right;
+            }
+            left = 0;
+            right = 0;
+            bottom += childAt.getMeasuredHeight();
+            top += childAt.getMeasuredHeight();
+        }
     }
 
     public void setData(List<String> data) {
