@@ -1,6 +1,8 @@
 package vip.dengwj.custom_control;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,5 +35,11 @@ public class FlowLayoutActivity extends AppCompatActivity {
         list.add("陶渊明5");
         list.add("到涩味");
         flowLayout.setData(list);
+        flowLayout.setOnTextClickListener(new FlowLayout.OnTextClickListener() {
+            @Override
+            public void onTextClick(View v, String s) {
+                Log.d("pumu", "SSS:" + s);
+            }
+        });
     }
 }

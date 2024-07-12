@@ -26,6 +26,7 @@ public class FlowLayout extends ViewGroup {
     private float borderRadius;
     private List<String> list = new ArrayList<>();
     private List<List<View>> lineList = new ArrayList<>();
+    private OnTextClickListener onTextClickListener;
 
     public FlowLayout(Context context) {
         this(context, null);
@@ -89,7 +90,7 @@ public class FlowLayout extends ViewGroup {
             } else {
                 // 判断这行的宽度是否大于父容器的宽度,如果大于就换行，小于等于就添加到该行
                 // view 是子元素
-                int totalWidth = 0;
+                int totalWidth = (int) horizontalMargin;
                 for (View view : line) {
                     int childWidth = view.getMeasuredWidth();
                     totalWidth += (int) (childWidth + horizontalMargin);
@@ -123,18 +124,18 @@ public class FlowLayout extends ViewGroup {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         View childAt = getChildAt(0);
-        int left = 0;
+        int left = (int) horizontalMargin;
         int top = (int) horizontalMargin;
         int right = 0;
         int bottom = (int) (childAt.getMeasuredHeight() + horizontalMargin);
         for (List<View> views : lineList) {
             for (View view : views) {
                 int width = view.getMeasuredWidth();
-                right += width;
+                right += (int) (width + horizontalMargin);
                 view.layout(left, top, right, bottom);
                 left = (int) (right + horizontalMargin);
             }
-            left = 0;
+            left = (int) horizontalMargin;
             right = 0;
             bottom += (int) (childAt.getMeasuredHeight() + horizontalMargin);
             top += (int) (childAt.getMeasuredHeight() + horizontalMargin);
@@ -156,8 +157,20 @@ public class FlowLayout extends ViewGroup {
             // TextView textView = new TextView(getContext());
             TextView textView = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.flow_text, null);
             textView.setText(val);
+            textView.setOnClickListener((v) -> {
+                if (onTextClickListener == null) return;
+                onTextClickListener.onTextClick(v, val);
+            });
             addView(textView);
         }
+    }
+
+    public void setOnTextClickListener(OnTextClickListener listener) {
+        onTextClickListener = listener;
+    }
+
+    public interface OnTextClickListener {
+        void onTextClick(View v, String s);
     }
 
     public int getMaxLine() {
