@@ -16,6 +16,16 @@ import java.util.List;
 import vip.dengwj.custom_control.R;
 import vip.dengwj.custom_control.util.SizeUtils;
 
+/**
+ * 步骤：
+ * 1、继承自 ViewGroup
+ * 2、定义相关属性，获取相关属性
+ * 3、把子 View 添加进来
+ * 4、测量：测量孩子、测量自己
+ * 5、布局 layout
+ * 6、定义功能接口
+ * 7、处理事件和数据
+ */
 public class FlowLayout extends ViewGroup {
     private int maxLine;
     private float horizontalMargin;
