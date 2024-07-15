@@ -2,6 +2,9 @@ package vip.dengwj.custom_control.customView.keypad;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -9,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import vip.dengwj.custom_control.R;
+import vip.dengwj.custom_control.util.SizeUtils;
 
 public class KeypadView extends ViewGroup {
     private int numberColor;
@@ -43,7 +47,26 @@ public class KeypadView extends ViewGroup {
             // 字体
             textView.setTextColor(numberColor);
             // 设置背景
+            textView.setBackground(setItemBg());
         }
+    }
+
+    private Drawable setItemBg() {
+        // shape
+        GradientDrawable press = new GradientDrawable();
+        press.setColor(getResources().getColor(R.color.itemPressColor));
+        press.setCornerRadius(SizeUtils.dip2px(8));
+
+        GradientDrawable normal = new GradientDrawable();
+        normal.setColor(getResources().getColor(R.color.numberColor));
+        normal.setCornerRadius(SizeUtils.dip2px(8));
+
+        // selector
+        StateListDrawable listDrawable = new StateListDrawable();
+        listDrawable.addState(new int[]{android.R.attr.state_pressed}, press);
+        listDrawable.addState(new int[]{}, normal);
+
+        return listDrawable;
     }
 
     private void initAttrs(Context context, AttributeSet attrs) {
