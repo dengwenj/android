@@ -28,6 +28,7 @@ public class KeypadView extends ViewGroup {
     private int itemPressColor;
     private int itemNormalColor;
     private int itemMargin = SizeUtils.dip2px(4);
+    private OnItemClickListener onItemClickListener;
 
     public KeypadView(Context context) {
         this(context, null);
@@ -50,7 +51,7 @@ public class KeypadView extends ViewGroup {
         for (int i = 0; i < 11; i++) {
             TextView textView = new TextView(getContext());
             // 内容
-            textView.setText(String.valueOf(i));
+            textView.setText(i == 10 ? "删除" : String.valueOf(i));
             // 大小
             textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, numberSize);
             // 居中
@@ -63,7 +64,12 @@ public class KeypadView extends ViewGroup {
             textView.setTag(i == 10);
 
             textView.setOnClickListener((view) -> {
-
+                Boolean isDelete = (Boolean) view.getTag();
+                if (isDelete) {
+                    onItemClickListener.onDeleteClick();
+                } else {
+                    onItemClickListener.onNumberClick(Integer.parseInt(((TextView) view).getText().toString()));
+                }
             });
 
             addView(textView);
@@ -73,11 +79,11 @@ public class KeypadView extends ViewGroup {
     private Drawable setItemBg() {
         // shape
         GradientDrawable press = new GradientDrawable();
-        press.setColor(getResources().getColor(R.color.itemPressColor));
+        press.setColor(itemPressColor);
         press.setCornerRadius(SizeUtils.dip2px(8));
 
         GradientDrawable normal = new GradientDrawable();
-        normal.setColor(getResources().getColor(R.color.numberColor));
+        normal.setColor(itemNormalColor);
         normal.setCornerRadius(SizeUtils.dip2px(8));
 
         // selector
@@ -159,5 +165,15 @@ public class KeypadView extends ViewGroup {
             item.layout(left, top, right, bottom);
             left += item.getMeasuredWidth() + itemMargin;
         }
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        onItemClickListener = listener;
+    }
+
+    public interface OnItemClickListener {
+        void onNumberClick(int num);
+
+        void onDeleteClick();
     }
 }

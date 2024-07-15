@@ -8,17 +8,11 @@
     tools:context=".KeypadActivity">
 
     <vip.dengwj.custom_control.customView.keypad.KeypadView
+        android:id="@+id/key_pad"
         android:layout_width="300dp"
         android:layout_height="400dp"
         app:numberSize="20sp"
         android:background="#00ffaa"
-        app:itemMargin="8dp"/>
-
-    <!--<TextView-->
-    <!--    android:id="@+id/test"-->
-    <!--    android:layout_width="wrap_content"-->
-    <!--    android:layout_height="wrap_content"-->
-    <!--    android:padding="20sp"-->
-    <!--    android:text="测试"-->
-    <!--    android:textColor="#fff"/>-->
+        app:itemMargin="8dp"
+        app:numberColor="#00ffaa" />
 </LinearLayout>
