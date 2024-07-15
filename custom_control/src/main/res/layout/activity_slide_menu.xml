@@ -5,11 +5,18 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SlideMenuActivity">
+    tools:context=".SlideMenuActivity"
+    >
 
     <vip.dengwj.custom_control.customView.slide.SlideMenuView
         android:id="@+id/slide_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:function="delete"/>
+        app:function="delete">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textColor="#ff00"
+            android:text="群通知"/>
+    </vip.dengwj.custom_control.customView.slide.SlideMenuView>
 </LinearLayout>
