@@ -36,4 +36,15 @@
         <attr name="itemNormalColor" format="color" />
         <attr name="itemMargin" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="SlideMenuView">
+        <attr name="function" format="flags">
+            <!--置顶-->
+            <flag name="top" value="0x03" />
+            <!--已读-->
+            <flag name="read" value="0x50" />
+            <!--删除-->
+            <flag name="delete" value="0x30" />
+        </attr>
+    </declare-styleable>
 </resources>
