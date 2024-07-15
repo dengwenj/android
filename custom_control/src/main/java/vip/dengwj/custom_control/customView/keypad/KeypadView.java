@@ -104,19 +104,22 @@ public class KeypadView extends ViewGroup {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int paddingLR = getPaddingLeft() + getPaddingRight();
+        int paddingTB = getPaddingTop() + getPaddingBottom();
+
         // px
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
 
         // 每行 3 个
-        int itemWidth = (widthSize - itemMargin * (column + 1)) / column;
+        int itemWidth = (widthSize - itemMargin * (column + 1) - paddingLR) / column;
         // 每列四个
-        int itemHeight = (heightSize - itemMargin * (row + 1)) / row;
+        int itemHeight = (heightSize - itemMargin * (row + 1) - paddingTB) / row;
         // EXACTLY exactly 固定
         int itemWidthSpec = MeasureSpec.makeMeasureSpec(itemWidth, MeasureSpec.EXACTLY);
         int itemHeightSpec = MeasureSpec.makeMeasureSpec(itemHeight, MeasureSpec.EXACTLY);
         // 最后一个
-        int deleteWidthSpec = MeasureSpec.makeMeasureSpec(itemWidth * 2, MeasureSpec.EXACTLY);
+        int deleteWidthSpec = MeasureSpec.makeMeasureSpec(itemWidth * 2 + itemMargin, MeasureSpec.EXACTLY);
 
         for (int i = 0; i < getChildCount(); i++) {
             View child = getChildAt(i);
@@ -134,7 +137,10 @@ public class KeypadView extends ViewGroup {
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         int childCount = getChildCount();
 
-        int left = itemMargin;
+        int paddingLeft = getPaddingLeft();
+        int paddingTop = getPaddingTop();
+
+        int left = itemMargin + paddingLeft;
         int top;
         int right;
         int bottom;
@@ -145,9 +151,9 @@ public class KeypadView extends ViewGroup {
             int columnIdx = i % column;
             // 说明换行了
             if (columnIdx == 0) {
-                left = itemMargin;
+                left = itemMargin + paddingLeft;
             }
-            top = rowIdx * item.getMeasuredHeight() + ((rowIdx + 1) * itemMargin);
+            top = rowIdx * item.getMeasuredHeight() + ((rowIdx + 1) * itemMargin) + paddingTop;
             right = left + item.getMeasuredWidth();
             bottom = top + item.getMeasuredHeight();
             item.layout(left, top, right, bottom);
