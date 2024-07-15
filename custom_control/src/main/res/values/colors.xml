@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="numberColor">#383838</color>
+    <color name="itemPressColor">#666666</color>
 </resources>
