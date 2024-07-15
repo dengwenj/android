@@ -10,7 +10,8 @@
     <vip.dengwj.custom_control.customView.keypad.KeypadView
         android:layout_width="300dp"
         android:layout_height="400dp"
-        app:numberSize="20sp"/>
+        app:numberSize="20sp"
+        app:itemMargin="8dp"/>
 
     <!--<TextView-->
     <!--    android:id="@+id/test"-->

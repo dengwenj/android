@@ -27,6 +27,7 @@ public class KeypadView extends ViewGroup {
     private float numberSize;
     private int itemPressColor;
     private int itemNormalColor;
+    private int itemMargin = SizeUtils.dip2px(4);
 
     public KeypadView(Context context) {
         this(context, null);
@@ -94,6 +95,7 @@ public class KeypadView extends ViewGroup {
         numberSize = a.getDimensionPixelSize(R.styleable.KeypadView_numberSize, 16);
         itemPressColor = a.getColor(R.styleable.KeypadView_itemPressColor, getResources().getColor(R.color.itemPressColor));
         itemNormalColor = a.getColor(R.styleable.KeypadView_itemNormalColor, getResources().getColor(R.color.numberColor));
+        itemMargin = a.getDimensionPixelSize(R.styleable.KeypadView_itemMargin, itemMargin);
 
         a.recycle();
     }
@@ -107,9 +109,9 @@ public class KeypadView extends ViewGroup {
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
 
         // 每行 3 个
-        int itemWidth = widthSize / column;
+        int itemWidth = (widthSize - itemMargin * (column + 1)) / column;
         // 每列四个
-        int itemHeight = heightSize / row;
+        int itemHeight = (heightSize - itemMargin * (row + 1)) / row;
         // EXACTLY exactly 固定
         int itemWidthSpec = MeasureSpec.makeMeasureSpec(itemWidth, MeasureSpec.EXACTLY);
         int itemHeightSpec = MeasureSpec.makeMeasureSpec(itemHeight, MeasureSpec.EXACTLY);
@@ -132,7 +134,7 @@ public class KeypadView extends ViewGroup {
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         int childCount = getChildCount();
 
-        int left = 0;
+        int left = itemMargin;
         int top;
         int right;
         int bottom;
@@ -143,13 +145,13 @@ public class KeypadView extends ViewGroup {
             int columnIdx = i % column;
             // 说明换行了
             if (columnIdx == 0) {
-                left = 0;
+                left = itemMargin;
             }
-            top = rowIdx * item.getMeasuredHeight();
+            top = rowIdx * item.getMeasuredHeight() + ((rowIdx + 1) * itemMargin);
             right = left + item.getMeasuredWidth();
             bottom = top + item.getMeasuredHeight();
             item.layout(left, top, right, bottom);
-            left += item.getMeasuredWidth();
+            left += item.getMeasuredWidth() + itemMargin;
         }
     }
 }

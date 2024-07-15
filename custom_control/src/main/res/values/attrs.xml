@@ -34,5 +34,6 @@
         <attr name="numberSize" format="dimension" />
         <attr name="itemPressColor" format="color" />
         <attr name="itemNormalColor" format="color" />
+        <attr name="itemMargin" format="dimension" />
     </declare-styleable>
 </resources>
