@@ -18,6 +18,10 @@ import vip.dengwj.custom_control.util.SizeUtils;
 
 public class KeypadView extends ViewGroup {
     private static final String TAG = "pumu";
+    // 行
+    private static final int row = 4;
+    // 列
+    private static final int column = 3;
 
     private int numberColor;
     private float numberSize;
@@ -40,6 +44,8 @@ public class KeypadView extends ViewGroup {
     }
 
     private void setupItem() {
+        removeAllViews();
+
         for (int i = 0; i < 11; i++) {
             TextView textView = new TextView(getContext());
             // 内容
@@ -54,6 +60,10 @@ public class KeypadView extends ViewGroup {
             textView.setBackground(setItemBg());
             // 标签
             textView.setTag(i == 10);
+
+            textView.setOnClickListener((view) -> {
+
+            });
 
             addView(textView);
         }
@@ -80,7 +90,7 @@ public class KeypadView extends ViewGroup {
     private void initAttrs(Context context, AttributeSet attrs) {
         // 获取属性
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.KeypadView);
-        numberColor = a.getColor(R.styleable.KeypadView_numberColor, getResources().getColor(R.color.numberColor));
+        numberColor = a.getColor(R.styleable.KeypadView_numberColor, getResources().getColor(R.color.white));
         numberSize = a.getDimensionPixelSize(R.styleable.KeypadView_numberSize, 16);
         itemPressColor = a.getColor(R.styleable.KeypadView_itemPressColor, getResources().getColor(R.color.itemPressColor));
         itemNormalColor = a.getColor(R.styleable.KeypadView_itemNormalColor, getResources().getColor(R.color.numberColor));
@@ -97,13 +107,13 @@ public class KeypadView extends ViewGroup {
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
 
         // 每行 3 个
-        int itemWidth = widthSize / 3;
+        int itemWidth = widthSize / column;
         // 每列四个
-        int itemHeight = heightSize / 4;
+        int itemHeight = heightSize / row;
         // EXACTLY exactly 固定
         int itemWidthSpec = MeasureSpec.makeMeasureSpec(itemWidth, MeasureSpec.EXACTLY);
         int itemHeightSpec = MeasureSpec.makeMeasureSpec(itemHeight, MeasureSpec.EXACTLY);
-        // 最后一个宽度
+        // 最后一个
         int deleteWidthSpec = MeasureSpec.makeMeasureSpec(itemWidth * 2, MeasureSpec.EXACTLY);
 
         for (int i = 0; i < getChildCount(); i++) {
@@ -117,8 +127,29 @@ public class KeypadView extends ViewGroup {
         setMeasuredDimension(widthMeasureSpec, heightMeasureSpec);
     }
 
+    // 布局
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        int childCount = getChildCount();
 
+        int left = 0;
+        int top;
+        int right;
+        int bottom;
+        for (int i = 0; i < childCount; i++) {
+            View item = getChildAt(i);
+            // 第几行，第几列
+            int rowIdx = i / column;
+            int columnIdx = i % column;
+            // 说明换行了
+            if (columnIdx == 0) {
+                left = 0;
+            }
+            top = rowIdx * item.getMeasuredHeight();
+            right = left + item.getMeasuredWidth();
+            bottom = top + item.getMeasuredHeight();
+            item.layout(left, top, right, bottom);
+            left += item.getMeasuredWidth();
+        }
     }
 }
