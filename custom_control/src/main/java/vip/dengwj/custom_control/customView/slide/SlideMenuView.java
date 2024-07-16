@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Scroller;
 import android.widget.TextView;
 
 import vip.dengwj.custom_control.R;
@@ -25,6 +26,7 @@ public class SlideMenuView extends ViewGroup {
     private OnActionClickListener onActionClickListener;
     private int contentLeft = 0;
     private int downX = 0;
+    private Scroller scroller;
 
     public SlideMenuView(Context context) {
         this(context, null);
@@ -41,6 +43,8 @@ public class SlideMenuView extends ViewGroup {
         func = a.getInt(R.styleable.SlideMenuView_function, 0x30);
 
         a.recycle();
+
+        scroller = new Scroller(context);
     }
 
     // 完成加载
@@ -172,6 +176,7 @@ public class SlideMenuView extends ViewGroup {
                 // 方式二：移动屏幕，是这个相关这个类的移动，不在这个类中的不会移动
                 // 往右是负，往左是正
                 int scrollX = getScrollX();
+                // 边界判断
                 int res = scrollX - dx;
                 if (res < 0) {
                     scrollTo(0, 0);
@@ -182,11 +187,34 @@ public class SlideMenuView extends ViewGroup {
                 }
                 break;
             case ACTION_UP:
-                Log.d("pumu", "up");
+                // 处理释放之后，是显示还是收缩回去
+                int scrollX1 = getScrollX();
+                int editWidth = editView.getMeasuredWidth();
+                // 判断已经滑动的值，是否已经超过编辑部分的宽度的一半
+                if (scrollX1 > editWidth / 2) {
+                    // 显示
+                    // scrollTo(editWidth, 0);
+                    scroller.startScroll(scrollX1, 0, editWidth - scrollX1, 0, 500);
+                } else {
+                    // 收回
+                    // scrollTo(0, 0);
+                    scroller.startScroll(scrollX1, 0, -scrollX1, 0, 500);
+                }
+                invalidate();
         }
 
         // 返回 true 才向下传递
         return true;
+    }
+
+    @Override
+    public void computeScroll() {
+        if (scroller.computeScrollOffset()) {
+            int currX = scroller.getCurrX();
+            // 滑动到指定位置
+            scrollTo(currX, 0);
+            invalidate();
+        }
     }
 
     public void setOnActionClickListener(OnActionClickListener listener) {
