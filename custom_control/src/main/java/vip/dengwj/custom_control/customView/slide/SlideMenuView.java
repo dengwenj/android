@@ -88,11 +88,9 @@ public class SlideMenuView extends ViewGroup {
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
 
-        Log.d("pumu", "widthSize -> " + widthSize);
-        Log.d("pumu", "widthMeasureSpec -> " + widthMeasureSpec);
-
         // 高度三种情况，如果指定大小，那获取到它的大小，直接测量，如果是包裹内容，atmost, 如果是 match_parent,就给他大小
-        int height = contentView.getHeight();
+        LayoutParams layoutParams = contentView.getLayoutParams();
+        int height = layoutParams.height;
         int contentHeightMeasureSpec;
         if (height == LayoutParams.MATCH_PARENT) {
             contentHeightMeasureSpec = MeasureSpec.makeMeasureSpec(heightSize, MeasureSpec.EXACTLY);
@@ -111,11 +109,21 @@ public class SlideMenuView extends ViewGroup {
         editView.measure(actionWidthMeasureSpec, contentHeightMeasureSpec);
 
         // 测量自己
+        // actionWidthMeasureSpec + widthMeasureSpec
         setMeasuredDimension(actionWidth + widthSize, contentHeightMeasureSpec);
     }
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        int contentLeft = -540;
+        int contentTop = 0;
+        int contentRight = contentLeft + contentView.getMeasuredWidth();
+        int contentBottom = contentTop + contentView.getMeasuredHeight();
+        contentView.layout(contentLeft, contentTop, contentRight, contentBottom);
 
+        // action 布局
+        int actionRight = contentRight + editView.getMeasuredWidth();
+        int actionBottom = contentTop + editView.getMeasuredHeight();
+        editView.layout(contentRight, contentTop, actionRight, actionBottom);
     }
 }

@@ -15,8 +15,10 @@
         app:function="delete">
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:textColor="#ff00"
-            android:text="群通知"/>
+            android:layout_height="50dp"
+            android:background="#ff00"
+            android:text="群通知"
+            android:gravity="center"
+            android:textColor="#fff"/>
     </vip.dengwj.custom_control.customView.slide.SlideMenuView>
 </LinearLayout>
