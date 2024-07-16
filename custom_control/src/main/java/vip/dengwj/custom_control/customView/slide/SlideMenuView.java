@@ -27,6 +27,7 @@ public class SlideMenuView extends ViewGroup {
     private int contentLeft = 0;
     private int downX = 0;
     private Scroller scroller;
+    private int interceptDownX = 0;
 
     public SlideMenuView(Context context) {
         this(context, null);
@@ -89,16 +90,16 @@ public class SlideMenuView extends ViewGroup {
         // colorString 十六进制
         ele.setBackgroundColor(Color.parseColor(colorString));
         ele.setTag(title);
-        // ele.setOnClickListener((view) -> {
-        //     String tag = (String) view.getTag();
-        //     if ("置顶".equals(tag)) {
-        //         onActionClickListener.onTopClick(view);
-        //     } else if ("已读".equals(tag)) {
-        //         onActionClickListener.onReadClick(view);
-        //     } else if ("删除".equals(tag)) {
-        //         onActionClickListener.onDeleteClick(view);
-        //     }
-        // });
+        ele.setOnClickListener((view) -> {
+            String tag = (String) view.getTag();
+            if ("置顶".equals(tag)) {
+                onActionClickListener.onTopClick(view);
+            } else if ("已读".equals(tag)) {
+                onActionClickListener.onReadClick(view);
+            } else if ("删除".equals(tag)) {
+                onActionClickListener.onDeleteClick(view);
+            }
+        });
 
         return ele;
     }
@@ -191,7 +192,7 @@ public class SlideMenuView extends ViewGroup {
                 int scrollX1 = getScrollX();
                 int editWidth = editView.getMeasuredWidth();
                 // 判断已经滑动的值，是否已经超过编辑部分的宽度的一半
-                if (scrollX1 > editWidth / 2) {
+                if (scrollX1 > editWidth * 3 / 4) {
                     // 显示
                     // scrollTo(editWidth, 0);
                     scroller.startScroll(scrollX1, 0, editWidth - scrollX1, 0, 500);
@@ -205,6 +206,22 @@ public class SlideMenuView extends ViewGroup {
 
         // 返回 true 才向下传递
         return true;
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        int action = ev.getAction();
+
+        if (action == ACTION_DOWN) {
+            interceptDownX = (int) ev.getX();
+        } else if (action == ACTION_MOVE) {
+            float x = ev.getX();
+            // 解决点击 action 冲突
+            if (Math.abs(x - interceptDownX) > 0) {
+                return true;
+            }
+        }
+        return super.onInterceptTouchEvent(ev);
     }
 
     @Override
