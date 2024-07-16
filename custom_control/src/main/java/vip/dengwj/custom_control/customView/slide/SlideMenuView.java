@@ -1,11 +1,16 @@
 package vip.dengwj.custom_control.customView.slide;
 
+import static android.view.MotionEvent.ACTION_DOWN;
+import static android.view.MotionEvent.ACTION_MOVE;
+import static android.view.MotionEvent.ACTION_UP;
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -137,6 +142,30 @@ public class SlideMenuView extends ViewGroup {
         int actionRight = contentRight + editView.getMeasuredWidth();
         int actionBottom = contentTop + editView.getMeasuredHeight();
         editView.layout(contentRight, contentTop, actionRight, actionBottom);
+    }
+
+    // 触摸事件
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        int action = event.getAction();
+
+        switch (action) {
+            case ACTION_DOWN:
+                Log.d("pumu", "down");
+                break;
+            case ACTION_MOVE:
+                float x = event.getX();
+                float y = event.getY();
+                Log.d("pumu", "move");
+                Log.d("pumu", "x ->" + x);
+                Log.d("pumu", "y ->" + y);
+                break;
+            case ACTION_UP:
+                Log.d("pumu", "up");
+        }
+
+        // 返回 true 才向下传递
+        return true;
     }
 
     public void setOnActionClickListener(OnActionClickListener listener) {
