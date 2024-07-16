@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,6 +15,8 @@ import vip.dengwj.custom_control.R;
 
 public class SlideMenuView extends ViewGroup {
     private int func;
+    private TextView contentView;
+    private View editView;
 
     public SlideMenuView(Context context) {
         this(context, null);
@@ -39,6 +42,7 @@ public class SlideMenuView extends ViewGroup {
 
         Context context = getContext();
 
+        contentView  = (TextView) getChildAt(0);
         int childCount = getChildCount();
         // 只能有一个子 view
         if (childCount > 1) {
@@ -56,7 +60,7 @@ public class SlideMenuView extends ViewGroup {
         linearLayout.addView(createTextView("删除", "#ec694a"));
 
         addView(linearLayout);
-        Log.d("pumu", "getChildCount -> " + getChildCount());
+        editView = linearLayout;
     }
 
     private TextView createTextView(String title, String colorString) {
@@ -74,6 +78,40 @@ public class SlideMenuView extends ViewGroup {
         ele.setBackgroundColor(Color.parseColor(colorString));
 
         return ele;
+    }
+
+    // 测量
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        // 测量内容
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+
+        Log.d("pumu", "widthSize -> " + widthSize);
+        Log.d("pumu", "widthMeasureSpec -> " + widthMeasureSpec);
+
+        // 高度三种情况，如果指定大小，那获取到它的大小，直接测量，如果是包裹内容，atmost, 如果是 match_parent,就给他大小
+        int height = contentView.getHeight();
+        int contentHeightMeasureSpec;
+        if (height == LayoutParams.MATCH_PARENT) {
+            contentHeightMeasureSpec = MeasureSpec.makeMeasureSpec(heightSize, MeasureSpec.EXACTLY);
+        } else if (height == LayoutParams.WRAP_CONTENT) {
+            contentHeightMeasureSpec = MeasureSpec.makeMeasureSpec(heightSize, MeasureSpec.AT_MOST);
+        } else {
+            // 指定了大小
+            contentHeightMeasureSpec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY);
+        }
+        // 第一个孩子测量
+        contentView.measure(widthMeasureSpec, contentHeightMeasureSpec);
+
+        // 第二个孩子测量,宽度是一半，高度是一样的
+        int actionWidth = widthSize / 2;
+        int actionWidthMeasureSpec = MeasureSpec.makeMeasureSpec(actionWidth, MeasureSpec.EXACTLY);
+        editView.measure(actionWidthMeasureSpec, contentHeightMeasureSpec);
+
+        // 测量自己
+        setMeasuredDimension(actionWidth + widthSize, contentHeightMeasureSpec);
     }
 
     @Override
