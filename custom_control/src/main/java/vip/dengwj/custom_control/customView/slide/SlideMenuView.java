@@ -17,6 +17,7 @@ public class SlideMenuView extends ViewGroup {
     private int func;
     private TextView contentView;
     private View editView;
+    private OnActionClickListener onActionClickListener;
 
     public SlideMenuView(Context context) {
         this(context, null);
@@ -76,6 +77,17 @@ public class SlideMenuView extends ViewGroup {
         ele.setTextColor(getResources().getColor(R.color.white));
         // colorString 十六进制
         ele.setBackgroundColor(Color.parseColor(colorString));
+        ele.setTag(title);
+        ele.setOnClickListener((view) -> {
+            String tag = (String) view.getTag();
+            if ("置顶".equals(tag)) {
+                onActionClickListener.onTopClick(view);
+            } else if ("已读".equals(tag)) {
+                onActionClickListener.onReadClick(view);
+            } else if ("删除".equals(tag)) {
+                onActionClickListener.onDeleteClick(view);
+            }
+        });
 
         return ele;
     }
@@ -125,5 +137,17 @@ public class SlideMenuView extends ViewGroup {
         int actionRight = contentRight + editView.getMeasuredWidth();
         int actionBottom = contentTop + editView.getMeasuredHeight();
         editView.layout(contentRight, contentTop, actionRight, actionBottom);
+    }
+
+    public void setOnActionClickListener(OnActionClickListener listener) {
+        onActionClickListener = listener;
+    }
+
+    public interface OnActionClickListener {
+        void onReadClick(View view);
+
+        void onTopClick(View view);
+
+        void onDeleteClick(View view);
     }
 }
