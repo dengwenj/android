@@ -85,16 +85,16 @@ public class SlideMenuView extends ViewGroup {
         // colorString 十六进制
         ele.setBackgroundColor(Color.parseColor(colorString));
         ele.setTag(title);
-        ele.setOnClickListener((view) -> {
-            String tag = (String) view.getTag();
-            if ("置顶".equals(tag)) {
-                onActionClickListener.onTopClick(view);
-            } else if ("已读".equals(tag)) {
-                onActionClickListener.onReadClick(view);
-            } else if ("删除".equals(tag)) {
-                onActionClickListener.onDeleteClick(view);
-            }
-        });
+        // ele.setOnClickListener((view) -> {
+        //     String tag = (String) view.getTag();
+        //     if ("置顶".equals(tag)) {
+        //         onActionClickListener.onTopClick(view);
+        //     } else if ("已读".equals(tag)) {
+        //         onActionClickListener.onReadClick(view);
+        //     } else if ("删除".equals(tag)) {
+        //         onActionClickListener.onDeleteClick(view);
+        //     }
+        // });
 
         return ele;
     }
@@ -158,11 +158,28 @@ public class SlideMenuView extends ViewGroup {
                 float moveX = event.getX();
                 // 移动的值 - 按下的值 = 移动了多少
                 int dx = (int) moveX - downX;
-                contentLeft = dx;
-                // 移动屏幕
-                // scrollBy(-dx, 0);
-                // 重新加载布局
-                requestLayout();
+                // 方式一：改变 contentLeft
+                // if (dx > 0) {
+                //     contentLeft = 0;
+                // } else if (Math.abs(dx) >= editView.getMeasuredWidth()) {
+                //     contentLeft = -editView.getMeasuredWidth();
+                // } else {
+                //     contentLeft = dx;
+                // }
+                // // 重新加载布局
+                // requestLayout();
+
+                // 方式二：移动屏幕，是这个相关这个类的移动，不在这个类中的不会移动
+                // 往右是负，往左是正
+                int scrollX = getScrollX();
+                int res = scrollX - dx;
+                if (res < 0) {
+                    scrollTo(0, 0);
+                } else if (res > editView.getMeasuredWidth()) {
+                    scrollTo(editView.getMeasuredWidth(), 0);
+                } else {
+                    scrollBy(-dx, 0);
+                }
                 break;
             case ACTION_UP:
                 Log.d("pumu", "up");

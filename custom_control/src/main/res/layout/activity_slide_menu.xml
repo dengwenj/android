@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SlideMenuActivity"
+    android:orientation="vertical"
     >
 
     <vip.dengwj.custom_control.customView.slide.SlideMenuView
@@ -21,4 +22,9 @@
             android:gravity="center"
             android:textColor="#000"/>
     </vip.dengwj.custom_control.customView.slide.SlideMenuView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="你好"/>
 </LinearLayout>
