@@ -17,6 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.Scroller;
 import android.widget.TextView;
 
+import java.util.function.Function;
+
 import vip.dengwj.custom_control.R;
 
 public class SlideMenuView extends ViewGroup {
@@ -28,6 +30,8 @@ public class SlideMenuView extends ViewGroup {
     private int downX = 0;
     private Scroller scroller;
     private int interceptDownX = 0;
+    private boolean isOpen;
+    private Function<Boolean, Void> onOpenOrCloseListener;
 
     public SlideMenuView(Context context) {
         this(context, null);
@@ -99,6 +103,12 @@ public class SlideMenuView extends ViewGroup {
             } else if ("删除".equals(tag)) {
                 onActionClickListener.onDeleteClick(view);
             }
+
+            // 点击了关闭
+            scroller.startScroll(getScrollX(), 0, -getScrollX(), 0, 500);
+            invalidate();
+            isOpen = false;
+            onOpenOrCloseListener.apply(false);
         });
 
         return ele;
@@ -196,10 +206,14 @@ public class SlideMenuView extends ViewGroup {
                     // 显示
                     // scrollTo(editWidth, 0);
                     scroller.startScroll(scrollX1, 0, editWidth - scrollX1, 0, 500);
+                    isOpen = true;
+                    onOpenOrCloseListener.apply(true);
                 } else {
                     // 收回
                     // scrollTo(0, 0);
                     scroller.startScroll(scrollX1, 0, -scrollX1, 0, 500);
+                    isOpen = false;
+                    onOpenOrCloseListener.apply(false);
                 }
                 invalidate();
         }
@@ -236,6 +250,14 @@ public class SlideMenuView extends ViewGroup {
 
     public void setOnActionClickListener(OnActionClickListener listener) {
         onActionClickListener = listener;
+    }
+
+    public void setOnOpenOrCloseListener(Function<Boolean, Void> function) {
+        onOpenOrCloseListener = function;
+    }
+
+    public boolean isOpen() {
+        return this.isOpen;
     }
 
     public interface OnActionClickListener {

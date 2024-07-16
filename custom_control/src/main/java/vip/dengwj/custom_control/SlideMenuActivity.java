@@ -35,5 +35,14 @@ public class SlideMenuActivity extends AppCompatActivity {
 
             }
         });
+
+        slideMenuView.setOnOpenOrCloseListener(isOpen -> {
+            if (isOpen) {
+                Log.d("pumu", "打开" + isOpen);
+            } else {
+                Log.d("pumu", "关闭" + isOpen);
+            }
+            return null;
+        });
     }
 }
