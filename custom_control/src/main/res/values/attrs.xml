@@ -47,4 +47,13 @@
             <flag name="delete" value="0x30" />
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="WatchFace">
+        <attr name="secondColor" format="color" />
+        <attr name="minColor" format="color" />
+        <attr name="hourColor" format="color" />
+        <attr name="scaleColor" format="color" />
+        <attr name="faceBackground" format="reference" />
+        <attr name="scaleShow" format="boolean" />
+    </declare-styleable>
 </resources>
