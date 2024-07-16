@@ -23,6 +23,8 @@ public class SlideMenuView extends ViewGroup {
     private TextView contentView;
     private View editView;
     private OnActionClickListener onActionClickListener;
+    private int contentLeft = 0;
+    private int downX = 0;
 
     public SlideMenuView(Context context) {
         this(context, null);
@@ -132,7 +134,6 @@ public class SlideMenuView extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        int contentLeft = -540;
         int contentTop = 0;
         int contentRight = contentLeft + contentView.getMeasuredWidth();
         int contentBottom = contentTop + contentView.getMeasuredHeight();
@@ -151,14 +152,17 @@ public class SlideMenuView extends ViewGroup {
 
         switch (action) {
             case ACTION_DOWN:
-                Log.d("pumu", "down");
+                downX = (int) event.getX();
                 break;
             case ACTION_MOVE:
-                float x = event.getX();
-                float y = event.getY();
-                Log.d("pumu", "move");
-                Log.d("pumu", "x ->" + x);
-                Log.d("pumu", "y ->" + y);
+                float moveX = event.getX();
+                // 移动的值 - 按下的值 = 移动了多少
+                int dx = (int) moveX - downX;
+                contentLeft = dx;
+                // 移动屏幕
+                // scrollBy(-dx, 0);
+                // 重新加载布局
+                requestLayout();
                 break;
             case ACTION_UP:
                 Log.d("pumu", "up");
