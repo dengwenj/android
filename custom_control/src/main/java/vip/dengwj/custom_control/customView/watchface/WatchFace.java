@@ -2,10 +2,13 @@ package vip.dengwj.custom_control.customView.watchface;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import vip.dengwj.custom_control.R;
@@ -36,7 +39,24 @@ public class WatchFace extends View {
         scaleColor = a.getColor(R.styleable.WatchFace_scaleColor, getResources().getColor(R.color.scaleDefaultColor));
         faceBackground = a.getResourceId(R.styleable.WatchFace_faceBackground, -1);
         scaleShow = a.getBoolean(R.styleable.WatchFace_scaleShow, true);
-        Log.d("pumu", "secondColor" + secondColor);
         a.recycle();
+    }
+
+    // 测量
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightSize = MeasureSpec.getSize(widthMeasureSpec);
+        // 谁小用谁
+        int size = Math.min(widthSize, heightSize);
+        // 测量自己
+        setMeasuredDimension(size, size);
+    }
+
+    @Override
+    protected void onDraw(@NonNull Canvas canvas) {
+        canvas.drawColor(Color.parseColor("#ff00ff"));
     }
 }
