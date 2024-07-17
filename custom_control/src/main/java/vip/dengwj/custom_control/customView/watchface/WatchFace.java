@@ -20,6 +20,9 @@ import vip.dengwj.custom_control.R;
  * 2、定义相关属性，获取相关属性
  * 3、测量自己
  * 4、创建相关画笔
+ * 5、
+ *
+ * 可以做图表📈，折线图，柱状图📊
  */
 public class WatchFace extends View {
     private int secondColor;
@@ -55,7 +58,7 @@ public class WatchFace extends View {
      */
     private void initPaints() {
         // 秒针
-        secondPaint = createPaint(secondColor, 2f);
+        secondPaint = createPaint(secondColor, 40f);
         // 分针
         minPaint = createPaint(minColor, 3f);
         // 时针
@@ -69,7 +72,7 @@ public class WatchFace extends View {
         paint.setStrokeWidth(strokeWidth);
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeCap(Paint.Cap.ROUND);
+        // paint.setStrokeCap(Paint.Cap.ROUND);
         return paint;
     }
 
@@ -99,9 +102,12 @@ public class WatchFace extends View {
 
     @Override
     protected void onDraw(@NonNull Canvas canvas) {
-        canvas.drawColor(Color.parseColor("#ff00ff"));
+        canvas.drawColor(Color.parseColor("#000000"));
         int measuredWidth = getMeasuredWidth();
         int measuredHeight = getMeasuredHeight();
-        canvas.drawLine(100, 0, measuredWidth / 2f, measuredHeight / 2f, secondPaint);
+        canvas.drawLine(100, measuredHeight, 100, 500, secondPaint);
+        canvas.drawLine(200, measuredHeight, 200, 600, secondPaint);
+        canvas.drawLine(300, measuredHeight, 300, 800, secondPaint);
+        canvas.drawLine(400, measuredHeight, 400, 200, secondPaint);
     }
 }
