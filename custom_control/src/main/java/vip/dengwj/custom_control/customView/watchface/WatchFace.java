@@ -72,6 +72,7 @@ public class WatchFace extends View {
         paint.setStrokeWidth(strokeWidth);
         paint.setAntiAlias(true);
         paint.setStyle(Paint.Style.STROKE);
+        paint.setTextSize(30f);
         // paint.setStrokeCap(Paint.Cap.ROUND);
         return paint;
     }
@@ -109,5 +110,11 @@ public class WatchFace extends View {
         canvas.drawLine(200, measuredHeight, 200, 600, secondPaint);
         canvas.drawLine(300, measuredHeight, 300, 800, secondPaint);
         canvas.drawLine(400, measuredHeight, 400, 200, secondPaint);
+        canvas.drawText("你好", 70, 490, scalePaint);
+
+        canvas.drawLine(500, 10, 600, 30, minPaint);
+        canvas.drawLine(600, 30, 700, 80, minPaint);
+        canvas.drawLine(700, 80, 800, 200, minPaint);
+        canvas.drawLine(800, 200, 900, 0, minPaint);
     }
 }
