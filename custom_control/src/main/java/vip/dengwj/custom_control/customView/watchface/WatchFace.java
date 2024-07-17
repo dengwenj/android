@@ -20,7 +20,7 @@ import vip.dengwj.custom_control.R;
  * 2、定义相关属性，获取相关属性
  * 3、测量自己
  * 4、创建相关画笔
- * 5、
+ * 5、覆写 onDraw 方法，绘制相关内容
  *
  * 可以做图表📈，折线图，柱状图📊
  */
@@ -106,12 +106,13 @@ public class WatchFace extends View {
         canvas.drawColor(Color.parseColor("#000000"));
         int measuredWidth = getMeasuredWidth();
         int measuredHeight = getMeasuredHeight();
+        // 柱状图
         canvas.drawLine(100, measuredHeight, 100, 500, secondPaint);
         canvas.drawLine(200, measuredHeight, 200, 600, secondPaint);
         canvas.drawLine(300, measuredHeight, 300, 800, secondPaint);
         canvas.drawLine(400, measuredHeight, 400, 200, secondPaint);
         canvas.drawText("你好", 70, 490, scalePaint);
-
+        // 折线图
         canvas.drawLine(500, 10, 600, 30, minPaint);
         canvas.drawLine(600, 30, 700, 80, minPaint);
         canvas.drawLine(700, 80, 800, 200, minPaint);

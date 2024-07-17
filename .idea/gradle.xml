@@ -19,6 +19,7 @@
             <option value="$PROJECT_DIR$/custom_control" />
             <option value="$PROJECT_DIR$/data_storage" />
             <option value="$PROJECT_DIR$/middle_control" />
+            <option value="$PROJECT_DIR$/network" />
             <option value="$PROJECT_DIR$/pm_activity" />
             <option value="$PROJECT_DIR$/simple_control" />
           </set>
