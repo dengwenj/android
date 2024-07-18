@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -17,6 +19,8 @@ import java.net.URLConnection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import vip.dengwj.network.domian.GetTextItem;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,7 +51,10 @@ public class MainActivity extends AppCompatActivity {
                         InputStream inputStream = connection.getInputStream();
                         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                         String data = bufferedReader.readLine();
-                        Log.d("pumu", "数据 -> " + data);
+
+                        Gson gson = new Gson();
+                        GetTextItem getTextItem = gson.fromJson(data, GetTextItem.class);
+                        Log.d("pumu", "getTextItem ->" + getTextItem.toString());
                     }
                 } catch (Exception e) {
                     throw new RuntimeException(e);

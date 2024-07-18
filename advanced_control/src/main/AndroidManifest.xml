@@ -10,10 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/MyStyle">
         <activity
-            android:name=".BillListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".PocketBookActivity"
+            android:name=".RecyclerViewActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
