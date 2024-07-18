@@ -7,12 +7,14 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import vip.dengwj.adapter.GridRecyclerAdapter;
 import vip.dengwj.adapter.RecyclerAdapter;
 import vip.dengwj.domain.RecyclerItem;
 
@@ -45,7 +47,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 50; i++) {
             RecyclerItem recyclerItem = new RecyclerItem();
             recyclerItem.setTitle("第" + i + "行");
             list.add(recyclerItem);
@@ -61,6 +63,14 @@ public class RecyclerViewActivity extends AppCompatActivity {
         // 适配器
         RecyclerAdapter recyclerAdapter = new RecyclerAdapter(list);
         recyclerView.setAdapter(recyclerAdapter);
+    }
+
+    private void showGrid(boolean isVertical, boolean isReverse) {
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
+        recyclerView.setLayoutManager(layoutManager);
+        layoutManager.setOrientation(isVertical ? RecyclerView.VERTICAL : RecyclerView.HORIZONTAL);
+        layoutManager.setReverseLayout(isReverse);
+        recyclerView.setAdapter(new GridRecyclerAdapter(list));
     }
 
     @Override
@@ -83,13 +93,13 @@ public class RecyclerViewActivity extends AppCompatActivity {
         } else if (itemId == R.id.list_view_demo4) {
             showList(false, true);
         } else if (itemId == R.id.grid_view_demo1) {
-
+            showGrid(true, false);
         } else if (itemId == R.id.grid_view_demo2) {
-
+            showGrid(true, true);
         } else if (itemId == R.id.grid_view_demo3) {
-
+            showGrid(false, false);
         } else if (itemId == R.id.grid_view_demo4) {
-
+            showGrid(false, true);
         } else if (itemId == R.id.stagger_view_demo1) {
 
         } else if (itemId == R.id.stagger_view_demo2) {
