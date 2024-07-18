@@ -35,6 +35,10 @@ import vip.dengwj.domain.RecyclerItem;
  * 4、创建适配器
  * 5、设置适配器
  */
+
+/**
+ * 上拉刷新是自己实现的，当滑动到最后一个时，去加载数据
+ */
 public class RecyclerViewActivity extends AppCompatActivity {
     private List<RecyclerItem> list = new ArrayList<>();
 
@@ -56,6 +60,30 @@ public class RecyclerViewActivity extends AppCompatActivity {
         showList(true, false);
 
         handlerDownPullUpdate();
+
+        // 上拉加载更多
+        handleLoadMore();
+    }
+
+    private void handleLoadMore() {
+        adapter.setOnLoadMoreListener(new BaseRecyclerAdapter.OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                // 一般来说，去请求数据再开一个线程
+                // 更新 UI，只执行一次
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // 添加数据
+                        RecyclerItem recyclerItem = new RecyclerItem();
+                        recyclerItem.setTitle("上拉刷新添加的数据哈哈");
+                        list.add(recyclerItem);
+                        // 更新列表
+                        adapter.notifyDataSetChanged();
+                    }
+                }, 2000);
+            }
+        });
     }
 
     private void handlerDownPullUpdate() {

@@ -20,7 +20,12 @@ public class RecyclerAdapter extends BaseRecyclerAdapter {
 
     @Override
     public View getSubView(ViewGroup parent, int viewType) {
-        return LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler, parent, false);
+        // 加载 item
+        if (viewType == loadItem) {
+            return LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler, parent, false);
+        }
+        // 加载更多
+        return LayoutInflater.from(parent.getContext()).inflate(R.layout.load_more, parent, false);
     }
 
     // // 创建条目 view，即 item

@@ -1,5 +1,6 @@
 package vip.dengwj.adapter;
 
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -13,9 +14,14 @@ import vip.dengwj.R;
 import vip.dengwj.domain.RecyclerItem;
 
 public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseRecyclerAdapter.Holder> {
+    public static final int loadMore = 0;
+    public static final int loadItem = 1;
+
     private List<RecyclerItem> list;
 
     private OnItemClickListener onItemClickListener;
+
+    private OnLoadMoreListener onLoadMoreListener;
 
     public BaseRecyclerAdapter(List<RecyclerItem> list) {
         this.list = list;
@@ -29,8 +35,37 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseRecyc
     }
 
     @Override
+    public int getItemViewType(int position) {
+        // 最后一个，加载中
+        if (list.size() - 1 == position) {
+            return loadMore;
+        }
+        return loadItem;
+    }
+
+    @Override
     public void onBindViewHolder(@NonNull BaseRecyclerAdapter.Holder holder, int position) {
+        Log.d("pumu", "position -> " + position);
+        // 最后一个，加载中...
+        if (list.size() - 1 == position) {
+            if (onLoadMoreListener != null) {
+                onLoadMoreListener.onLoadMore();
+            }
+            return;
+        }
+
+        // item 数据
         holder.setData(list.get(position), position);
+    }
+
+    // 上拉加载更多回调
+    public void setOnLoadMoreListener(OnLoadMoreListener listener) {
+        this.onLoadMoreListener = listener;
+    }
+
+    // 上拉加载更多回调接口
+    public interface OnLoadMoreListener {
+        void onLoadMore();
     }
 
     @Override
@@ -64,8 +99,10 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseRecyc
         }
 
         public void setData(RecyclerItem itemData, int position) {
-            this.position = position;
-            textView.setText(itemData.getTitle());
+            if (textView != null) {
+                this.position = position;
+                textView.setText(itemData.getTitle());
+            }
         }
     }
 }
