@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import java.util.ArrayList;
 import java.util.List;
 
+import vip.dengwj.adapter.BaseRecyclerAdapter;
 import vip.dengwj.adapter.GridRecyclerAdapter;
 import vip.dengwj.adapter.RecyclerAdapter;
 import vip.dengwj.adapter.StaggerRecyclerAdapter;
@@ -34,6 +36,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
     private List<RecyclerItem> list = new ArrayList<>();
 
     private RecyclerView recyclerView;
+    private BaseRecyclerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,12 @@ public class RecyclerViewActivity extends AppCompatActivity {
         initData();
 
         showList(true, false);
+    }
+
+    private void initListener() {
+        adapter.setOnItemClickListener((view, position) -> {
+            Toast.makeText(this, "position: " + position, Toast.LENGTH_SHORT).show();
+        });
     }
 
     private void initData() {
@@ -68,16 +77,21 @@ public class RecyclerViewActivity extends AppCompatActivity {
         layoutManager.setReverseLayout(isReverse);
         recyclerView.setLayoutManager(layoutManager);
         // 适配器
-        RecyclerAdapter recyclerAdapter = new RecyclerAdapter(list);
-        recyclerView.setAdapter(recyclerAdapter);
+        adapter = new RecyclerAdapter(list);
+        recyclerView.setAdapter(adapter);
+
+        initListener();
     }
 
     private void showGrid(boolean isVertical, boolean isReverse) {
         GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
-        recyclerView.setLayoutManager(layoutManager);
         layoutManager.setOrientation(isVertical ? RecyclerView.VERTICAL : RecyclerView.HORIZONTAL);
         layoutManager.setReverseLayout(isReverse);
-        recyclerView.setAdapter(new GridRecyclerAdapter(list));
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new GridRecyclerAdapter(list);
+        recyclerView.setAdapter(adapter);
+
+        initListener();
     }
 
     private void showStagger(boolean isVertical, boolean isReverse) {
@@ -85,8 +99,12 @@ public class RecyclerViewActivity extends AppCompatActivity {
                 2,
                 isVertical ? StaggeredGridLayoutManager.VERTICAL : StaggeredGridLayoutManager.HORIZONTAL
         );
+        layoutManager.setReverseLayout(isReverse);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(new StaggerRecyclerAdapter(list));
+        adapter = new StaggerRecyclerAdapter(list);
+        recyclerView.setAdapter(adapter);
+
+        initListener();
     }
 
     @Override
