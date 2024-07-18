@@ -11,8 +11,7 @@
         <TextView
             android:id="@+id/tv"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
             android:gravity="center"
-            android:text="你好" />
+            android:layout_height="wrap_content" />
     </androidx.cardview.widget.CardView>
 </LinearLayout>

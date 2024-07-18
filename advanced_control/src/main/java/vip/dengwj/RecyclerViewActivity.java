@@ -10,12 +10,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import vip.dengwj.adapter.GridRecyclerAdapter;
 import vip.dengwj.adapter.RecyclerAdapter;
+import vip.dengwj.adapter.StaggerRecyclerAdapter;
 import vip.dengwj.domain.RecyclerItem;
 
 /**
@@ -49,7 +51,12 @@ public class RecyclerViewActivity extends AppCompatActivity {
     private void initData() {
         for (int i = 0; i < 50; i++) {
             RecyclerItem recyclerItem = new RecyclerItem();
-            recyclerItem.setTitle("第" + i + "行");
+            if (i % 2 == 0) {
+                recyclerItem.setTitle("第" + i + "行");
+            } else {
+                // 测试瀑布流
+                recyclerItem.setTitle("深蓝的天空中挂着一轮金黄的圆月，下面是海边的沙地，都种着一望无际的、碧绿的西瓜。其间有一个十一、二岁的少年，项带银圈，手捏一柄钢叉，向一匹猹尽力地刺去。那猹却将身一扭，反从他的胯下逃走了");
+            }
             list.add(recyclerItem);
         }
     }
@@ -71,6 +78,15 @@ public class RecyclerViewActivity extends AppCompatActivity {
         layoutManager.setOrientation(isVertical ? RecyclerView.VERTICAL : RecyclerView.HORIZONTAL);
         layoutManager.setReverseLayout(isReverse);
         recyclerView.setAdapter(new GridRecyclerAdapter(list));
+    }
+
+    private void showStagger(boolean isVertical, boolean isReverse) {
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(
+                2,
+                isVertical ? StaggeredGridLayoutManager.VERTICAL : StaggeredGridLayoutManager.HORIZONTAL
+        );
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(new StaggerRecyclerAdapter(list));
     }
 
     @Override
@@ -101,13 +117,13 @@ public class RecyclerViewActivity extends AppCompatActivity {
         } else if (itemId == R.id.grid_view_demo4) {
             showGrid(false, true);
         } else if (itemId == R.id.stagger_view_demo1) {
-
+            showStagger(true, false);
         } else if (itemId == R.id.stagger_view_demo2) {
-
+            showStagger(true, true);
         } else if (itemId == R.id.stagger_view_demo3) {
-
+            showStagger(false, false);
         } else if (itemId == R.id.stagger_view_demo4) {
-
+            showStagger(false, true);
         }
         return super.onOptionsItemSelected(item);
     }
