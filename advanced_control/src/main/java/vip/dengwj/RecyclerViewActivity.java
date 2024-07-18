@@ -1,9 +1,11 @@
 package vip.dengwj;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +40,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private BaseRecyclerAdapter adapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +48,40 @@ public class RecyclerViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recycler_view);
 
         recyclerView = findViewById(R.id.recycler_view);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
 
         // 初始化数据
         initData();
 
         showList(true, false);
+
+        handlerDownPullUpdate();
+    }
+
+    private void handlerDownPullUpdate() {
+        swipeRefreshLayout.setEnabled(true);
+        swipeRefreshLayout.setColorSchemeResources(R.color.primary, R.color.list_select);
+        // 下拉刷新会触发
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // 添加数据
+                RecyclerItem recyclerItem = new RecyclerItem();
+                recyclerItem.setTitle("下拉刷新添加的数据");
+                list.add(0, recyclerItem);
+                // 一般来说，去请求数据再开一个线程
+                // 更新 UI，只执行一次
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // 刷新停止
+                        swipeRefreshLayout.setRefreshing(false);
+                        // 更新列表
+                        adapter.notifyDataSetChanged();
+                    }
+                }, 2000);
+            }
+        });
     }
 
     private void initListener() {
