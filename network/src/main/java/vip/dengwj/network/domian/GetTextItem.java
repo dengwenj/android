@@ -2,13 +2,14 @@ package vip.dengwj.network.domian;
 
 import androidx.annotation.NonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GetTextItem {
     private boolean success;
     private int code;
     private String message;
-    private List<DataBean> data;
+    private List<DataBean> data = new ArrayList<>();
 
     public boolean isSuccess() {
         return success;
@@ -116,5 +117,28 @@ public class GetTextItem {
         public void setCover(String cover) {
             this.cover = cover;
         }
+
+        @Override
+        public String toString() {
+            return "DataBean{" +
+                    "id='" + id + '\'' +
+                    ", title='" + title + '\'' +
+                    ", viewCount=" + viewCount +
+                    ", commentCount=" + commentCount +
+                    ", publishTime='" + publishTime + '\'' +
+                    ", userName='" + userName + '\'' +
+                    ", cover='" + cover + '\'' +
+                    '}';
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "GetTextItem{" +
+                "success=" + success +
+                ", code=" + code +
+                ", message='" + message + '\'' +
+                ", data=" + data +
+                '}';
     }
 }
