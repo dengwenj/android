@@ -1,5 +1,7 @@
 package vip.dengwj.network;
 
+import static java.net.HttpURLConnection.HTTP_OK;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -7,14 +9,19 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
+import vip.dengwj.network.domian.CommentItem;
 
 public class OkhttpActivity extends AppCompatActivity {
 
@@ -24,8 +31,46 @@ public class OkhttpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_okhttp);
 
         findViewById(R.id.get_btn).setOnClickListener(this::handleGetRequest);
+
+        findViewById(R.id.post_btn).setOnClickListener(this::handlePostRequest);
     }
 
+    // post 请求
+    private void handlePostRequest(View view) {
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(1000, TimeUnit.MILLISECONDS)
+                .build();
+
+
+        CommentItem commentItem = new CommentItem("123321", "杰克 and 肉丝");
+        Gson gson = new Gson();
+        String str = gson.toJson(commentItem);
+        MediaType mediaType = MediaType.parse("application/json");
+        RequestBody requestBody = RequestBody.create(str, mediaType);
+        Request request = new Request.Builder()
+                .post(requestBody)
+                .url("http://10.0.2.2:9102/post/comment")
+                .build();
+
+        Call task = okHttpClient.newCall(request);
+        task.enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Log.d("pumu", "失败了");
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if (response.code() == HTTP_OK) {
+                    assert response.body() != null;
+                    String data = response.body().string();
+                    Log.d("pumu", "data -> " + data);
+                }
+            }
+        });
+    }
+
+    // get 请求
     private void handleGetRequest(View view) {
         // 要有客户端，类似我们要有一个浏览器
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
