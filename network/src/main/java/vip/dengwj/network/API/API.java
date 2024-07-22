@@ -8,6 +8,9 @@ import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.HeaderMap;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
@@ -32,13 +35,14 @@ public interface API {
     Call<GetTextParam> getParam(@Url String url);
 
     @POST("/post/comment")
-    Call<PostComment> postBody(@Body CommentItem commentItem);
+    Call<PostComment> postBody(@Body CommentItem commentItem, @Header("token") String token);
 
+    @Headers({"iphone:16", "length:10"})
     @FormUrlEncoded
     @POST("/login")
     Call<LoginResult> login(@Field("userName") String userName, @Field("password") String password);
 
     @FormUrlEncoded
     @POST("/login")
-    Call<LoginResult> login(@FieldMap Map<String, String> params);
+    Call<LoginResult> login(@FieldMap Map<String, String> params, @HeaderMap Map<String, String> headers);
 }

@@ -61,7 +61,11 @@ public class RetrofitActivity extends AppCompatActivity {
         params.put("userName", "pumu");
         params.put("password", "123321");
 
-        api.login(params).enqueue(new Callback<LoginResult>() {
+        Map<String, String> headers = new HashMap<>();
+        headers.put("client", "android");
+        headers.put("date", "2024-07-22");
+
+        api.login(params, headers).enqueue(new Callback<LoginResult>() {
             @Override
             public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
                 if (response.code() == HTTP_OK) {
@@ -97,7 +101,7 @@ public class RetrofitActivity extends AppCompatActivity {
     // post body 注解
     private void handlePostBodyRequest(View view) {
         API api = RetrofitManager.getRetrofit().create(API.class);
-        api.postBody(new CommentItem("111", "评论真好")).enqueue(new Callback<PostComment>() {
+        api.postBody(new CommentItem("111", "评论真好"), "token1233211234567").enqueue(new Callback<PostComment>() {
             @Override
             public void onResponse(Call<PostComment> call, Response<PostComment> response) {
                 if (response.code() == HTTP_OK) {
