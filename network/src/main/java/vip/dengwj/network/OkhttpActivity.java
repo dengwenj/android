@@ -11,12 +11,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -33,6 +35,43 @@ public class OkhttpActivity extends AppCompatActivity {
         findViewById(R.id.get_btn).setOnClickListener(this::handleGetRequest);
 
         findViewById(R.id.post_btn).setOnClickListener(this::handlePostRequest);
+
+        findViewById(R.id.post_file_btn).setOnClickListener(this::handlePostFileRequest);
+    }
+
+    // 上传文件
+    private void handlePostFileRequest(View view) {
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(10000, TimeUnit.MILLISECONDS)
+                .build();
+
+        File file = new File("/data/data/vip.dengwj.network/files/yuyuyuyu.png");
+        MediaType mediaType = MediaType.parse("image/jpg");
+        RequestBody fileBody = RequestBody.create(file, mediaType);
+        RequestBody requestBody = new MultipartBody.Builder()
+                .addFormDataPart("file", file.getName(), fileBody)
+                .build();
+
+        Request request = new Request.Builder()
+                .url("http://10.0.2.2:9102/file/upload")
+                .post(requestBody)
+                .build();
+
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Log.d("pumu", "失败了");
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                Log.d("pumu", "res" + response.code());
+                if (response.code() == HTTP_OK) {
+                    assert response.body() != null;
+                    Log.d("pumu", response.body().string());
+                }
+            }
+        });
     }
 
     // post 请求
