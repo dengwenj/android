@@ -41,8 +41,30 @@ public class RetrofitActivity extends AppCompatActivity {
         findViewById(R.id.get_param_btn).setOnClickListener(this::handleGetParamRequest);
 
         findViewById(R.id.get_query_map_btn).setOnClickListener(this::handleGetQueryMapRequest);
+
+        findViewById(R.id.get_query_url_btn).setOnClickListener(this::handleGetParamUrlRequest);
     }
 
+    // Url 注解
+    private void handleGetParamUrlRequest(View view) {
+        API api = RetrofitManager.getRetrofit().create(API.class);
+        String url = "/get/param?keyword=搜索搜索...&page=2&order=0";
+        api.getParam(url).enqueue(new Callback<GetTextParam>() {
+            @Override
+            public void onResponse(Call<GetTextParam> call, Response<GetTextParam> response) {
+                if (response.code() == HTTP_OK) {
+                    Log.d("pumu", "url -> " + response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetTextParam> call, Throwable t) {
+
+            }
+        });
+    }
+
+    // QueryMap 注解
     private void handleGetQueryMapRequest(View view) {
         API api = RetrofitManager.getRetrofit().create(API.class);
         Map<String, Object> params = new HashMap<>();
