@@ -19,8 +19,10 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import vip.dengwj.network.API.API;
 import vip.dengwj.network.adapter.RetrofitRecyclerAdapter;
+import vip.dengwj.network.domian.CommentItem;
 import vip.dengwj.network.domian.GetTextItem;
 import vip.dengwj.network.domian.GetTextParam;
+import vip.dengwj.network.domian.PostComment;
 import vip.dengwj.network.util.RetrofitManager;
 
 public class RetrofitActivity extends AppCompatActivity {
@@ -43,6 +45,26 @@ public class RetrofitActivity extends AppCompatActivity {
         findViewById(R.id.get_query_map_btn).setOnClickListener(this::handleGetQueryMapRequest);
 
         findViewById(R.id.get_query_url_btn).setOnClickListener(this::handleGetParamUrlRequest);
+
+        findViewById(R.id.post_body_btn).setOnClickListener(this::handlePostBodyRequest);
+    }
+
+    // post body 注解
+    private void handlePostBodyRequest(View view) {
+        API api = RetrofitManager.getRetrofit().create(API.class);
+        api.postBody(new CommentItem("111", "评论真好")).enqueue(new Callback<PostComment>() {
+            @Override
+            public void onResponse(Call<PostComment> call, Response<PostComment> response) {
+                if (response.code() == HTTP_OK) {
+                    Log.d("pumu", "post body -> " + response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PostComment> call, Throwable t) {
+
+            }
+        });
     }
 
     // Url 注解

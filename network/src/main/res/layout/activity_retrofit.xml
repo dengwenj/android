@@ -32,6 +32,12 @@
         android:layout_height="wrap_content"
         android:text="Get Param Url Request"/>
 
+    <Button
+        android:id="@+id/post_body_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Post Body Request"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
