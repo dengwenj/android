@@ -1,10 +1,10 @@
 package vip.dengwj.network.API;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import vip.dengwj.network.domian.GetTextItem;
 
 public interface API {
     @GET("/get/text")
-    Call<ResponseBody> getJSON();
+    Call<GetTextItem> getJSON();
 }

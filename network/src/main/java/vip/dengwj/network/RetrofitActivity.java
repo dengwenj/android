@@ -10,11 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.Gson;
-
-import java.io.IOException;
-
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,6 +17,7 @@ import retrofit2.Retrofit;
 import vip.dengwj.network.API.API;
 import vip.dengwj.network.adapter.RetrofitRecyclerAdapter;
 import vip.dengwj.network.domian.GetTextItem;
+import vip.dengwj.network.util.RetrofitManager;
 
 public class RetrofitActivity extends AppCompatActivity {
     private RetrofitRecyclerAdapter retrofitRecyclerAdapter;
@@ -40,31 +36,23 @@ public class RetrofitActivity extends AppCompatActivity {
     }
 
     private void handleGetRequest(View view) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:9102")
-                .build();
+        Retrofit retrofit = RetrofitManager.getRetrofit();
 
         API api = retrofit.create(API.class);
-        Call<ResponseBody> task = api.getJSON();
+        Call<GetTextItem> task = api.getJSON();
 
-        task.enqueue(new Callback<ResponseBody>() {
+        task.enqueue(new Callback<GetTextItem>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<GetTextItem> call, Response<GetTextItem> response) {
                 if (response.code() == HTTP_OK) {
-                    try {
-                        assert response.body() != null;
-                        String json = response.body().string();
-                        Gson gson = new Gson();
-                        GetTextItem getTextItem = gson.fromJson(json, GetTextItem.class);
-                        updateList(getTextItem);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+                    GetTextItem getTextItem = response.body();
+                    assert getTextItem != null;
+                    updateList(getTextItem);
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<GetTextItem> call, Throwable t) {
 
             }
         });
