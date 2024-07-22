@@ -22,6 +22,7 @@ import vip.dengwj.network.adapter.RetrofitRecyclerAdapter;
 import vip.dengwj.network.domian.CommentItem;
 import vip.dengwj.network.domian.GetTextItem;
 import vip.dengwj.network.domian.GetTextParam;
+import vip.dengwj.network.domian.LoginResult;
 import vip.dengwj.network.domian.PostComment;
 import vip.dengwj.network.util.RetrofitManager;
 
@@ -47,6 +48,50 @@ public class RetrofitActivity extends AppCompatActivity {
         findViewById(R.id.get_query_url_btn).setOnClickListener(this::handleGetParamUrlRequest);
 
         findViewById(R.id.post_body_btn).setOnClickListener(this::handlePostBodyRequest);
+
+        findViewById(R.id.post_login_btn).setOnClickListener(this::handleLoginRequest);
+
+        findViewById(R.id.post_login_fieldMap_btn).setOnClickListener(this::handleLoginFieldMapRequest);
+    }
+
+    // login fieldMap
+    private void handleLoginFieldMapRequest(View view) {
+        API api = RetrofitManager.getRetrofit().create(API.class);
+        Map<String, String> params = new HashMap<>();
+        params.put("userName", "pumu");
+        params.put("password", "123321");
+
+        api.login(params).enqueue(new Callback<LoginResult>() {
+            @Override
+            public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
+                if (response.code() == HTTP_OK) {
+                    Log.d("pumu", "data -> " + response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginResult> call, Throwable t) {
+
+            }
+        });
+    }
+
+    // login
+    private void handleLoginRequest(View view) {
+        API api = RetrofitManager.getRetrofit().create(API.class);
+        api.login("朴睦", "123456").enqueue(new Callback<LoginResult>() {
+            @Override
+            public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
+                if (response.code() == HTTP_OK) {
+                    Log.d("pumu", " data -> " + response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginResult> call, Throwable t) {
+
+            }
+        });
     }
 
     // post body 注解

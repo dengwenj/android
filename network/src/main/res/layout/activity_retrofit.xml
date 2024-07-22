@@ -38,6 +38,18 @@
         android:layout_height="wrap_content"
         android:text="Post Body Request"/>
 
+    <Button
+        android:id="@+id/post_login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Post Login Request"/>
+
+    <Button
+        android:id="@+id/post_login_fieldMap_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Post Login Field Map Request"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
