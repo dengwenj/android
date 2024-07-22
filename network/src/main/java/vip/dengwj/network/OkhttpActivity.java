@@ -50,6 +50,7 @@ public class OkhttpActivity extends AppCompatActivity {
         RequestBody fileBody = RequestBody.create(file, mediaType);
         RequestBody requestBody = new MultipartBody.Builder()
                 .addFormDataPart("file", file.getName(), fileBody)
+                // 多个文件 .addFormDataPart .addFormDataPart
                 .build();
 
         Request request = new Request.Builder()
