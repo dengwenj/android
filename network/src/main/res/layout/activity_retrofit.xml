@@ -20,6 +20,12 @@
         android:layout_height="wrap_content"
         android:text="Get Param Request"/>
 
+    <Button
+        android:id="@+id/get_query_map_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Param QueryMap Request"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"

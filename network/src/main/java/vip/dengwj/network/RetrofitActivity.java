@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,6 +39,29 @@ public class RetrofitActivity extends AppCompatActivity {
         recyclerView.setAdapter(retrofitRecyclerAdapter);
 
         findViewById(R.id.get_param_btn).setOnClickListener(this::handleGetParamRequest);
+
+        findViewById(R.id.get_query_map_btn).setOnClickListener(this::handleGetQueryMapRequest);
+    }
+
+    private void handleGetQueryMapRequest(View view) {
+        API api = RetrofitManager.getRetrofit().create(API.class);
+        Map<String, Object> params = new HashMap<>();
+        params.put("keyword", "你好你好");
+        params.put("page", 3);
+        params.put("order", "1");
+        api.getParam(params).enqueue(new Callback<GetTextParam>() {
+            @Override
+            public void onResponse(Call<GetTextParam> call, Response<GetTextParam> response) {
+                if (response.code() == HTTP_OK){
+                    Log.d("pumu", "data -> " + response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetTextParam> call, Throwable t) {
+
+            }
+        });
     }
 
     // 带参数的 get 请求
