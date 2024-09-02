@@ -21,6 +21,7 @@
             <option value="$PROJECT_DIR$/middle_control" />
             <option value="$PROJECT_DIR$/network" />
             <option value="$PROJECT_DIR$/pm_activity" />
+            <option value="$PROJECT_DIR$/service" />
             <option value="$PROJECT_DIR$/simple_control" />
           </set>
         </option>
