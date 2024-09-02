@@ -10,7 +10,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import vip.dengwj.service.interfaces.ICommunication;
+import vip.dengwj.service.actions.interfaces.ICommunication;
 import vip.dengwj.service.services.FirstService;
 
 public class MainActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package vip.dengwj.service.interfaces;
+package vip.dengwj.service.actions.interfaces;
 
 public interface INormalUserAction {
     // 存钱

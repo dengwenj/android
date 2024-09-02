@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import vip.dengwj.service.interfaces.ICommunication;
+import vip.dengwj.service.actions.interfaces.ICommunication;
 
 public class FirstService extends Service {
     public static final String TAG = "pumu";
