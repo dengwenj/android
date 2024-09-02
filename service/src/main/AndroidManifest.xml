@@ -19,7 +19,26 @@
         </activity>
 
         <!-- 注册服务 -->
-        <service android:name=".services.FirstService" />
+        <!--<service android:name=".services.FirstService" />-->
+        <!--隐式意图绑定-->
+        <service
+            android:name=".services.BankService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="vip.dengwj.ACTION_NORMAL_USER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="vip.dengwj.ACTION_BANK_WORKER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="vip.dengwj.ACTION_BANK_BOSS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
