@@ -10,11 +10,12 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import vip.dengwj.service.interfaces.ICommunication;
 import vip.dengwj.service.services.FirstService;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static FirstService.MyBinder mService;
+    private static ICommunication mService;
     private boolean isService;
     private ServiceConnection serviceConnection;
 
@@ -59,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
     public void handleUnbindService(View view) {
         if (isService && serviceConnection != null) {
             unbindService(serviceConnection);
-            mService = null;
         }
     }
 
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void handleServiceInnerMethod(View view) {
         if (mService != null) {
-            mService.callMethod();
+            mService.callServiceInnerMethod();
         }
     }
 
@@ -77,12 +77,13 @@ public class MainActivity extends AppCompatActivity {
         public void onServiceConnected(ComponentName name, IBinder service) {
             // IBinder service 就是在服务类里面自己 new 的
             Log.d("pumu", "onServiceConnected..." + " name" + name);
-            mService = (FirstService.MyBinder) service;
+            mService = (ICommunication) service;
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
             Log.d("pumu", "onServiceDisconnected..." + " name" + name);
+            mService = null;
         }
     };
 }

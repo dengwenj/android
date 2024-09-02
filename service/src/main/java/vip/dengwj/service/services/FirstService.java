@@ -9,11 +9,14 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import vip.dengwj.service.interfaces.ICommunication;
+
 public class FirstService extends Service {
     public static final String TAG = "pumu";
 
-    public class MyBinder extends Binder {
-        public void callMethod() {
+    private class MyBinder extends Binder implements ICommunication {
+        @Override
+        public void callServiceInnerMethod() {
             sayHello();
         }
     }

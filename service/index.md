@@ -4,3 +4,7 @@
 ### 服务的启动方式有两种
 * 1、startService 方式
 * 2、绑定服务方式
+
+### 两种开启服务的优缺点
+* startService 的方法可以长期的在后台运行，而 bindService 的方法则不可以长期在后台运行
+* bindService 启动服务，可以跟服务进行通讯，但 startService 启动服务不可以跟服务进行通讯
