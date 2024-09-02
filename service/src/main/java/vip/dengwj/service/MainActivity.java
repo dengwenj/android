@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void handleUnbindService(View view) {
         if (isService && serviceConnection != null) {
+            // TODO unbindService 没执行 onServiceDisconnected
             unbindService(serviceConnection);
         }
     }
