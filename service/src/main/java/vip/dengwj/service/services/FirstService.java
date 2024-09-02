@@ -2,18 +2,27 @@ package vip.dengwj.service.services;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 public class FirstService extends Service {
     public static final String TAG = "pumu";
 
+    public class MyBinder extends Binder {
+        public void callMethod() {
+            sayHello();
+        }
+    }
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        Log.d(TAG, "onBind。。。");
+        return new MyBinder();
     }
 
     @Override
@@ -38,5 +47,9 @@ public class FirstService extends Service {
     public void onDestroy() {
         super.onDestroy();
         Log.d(TAG, "onDestroy。。。");
+    }
+
+    private void sayHello() {
+        Toast.makeText(this, "你好", Toast.LENGTH_SHORT).show();
     }
 }
