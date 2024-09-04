@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.RemoteException;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +14,8 @@ import vip.dengwj.service.actions.interfaces.INormalUserAction;
 
 public class NormalUserActivity extends AppCompatActivity {
     private MyServiceConnection myServiceConnection;
-    private static INormalUserAction normalUserAction;
+    // private static INormalUserAction normalUserAction;
+    private static NormalUserAction normalUserAction;
     private boolean isBindService;
 
     @Override
@@ -38,7 +40,8 @@ public class NormalUserActivity extends AppCompatActivity {
 
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            normalUserAction = (INormalUserAction) service;
+            // normalUserAction = (INormalUserAction) service;
+            normalUserAction = NormalUserAction.Stub.asInterface(service);
         }
 
         @Override
@@ -48,18 +51,18 @@ public class NormalUserActivity extends AppCompatActivity {
     }
 
     // 存钱
-    public void handleSaveMoneyClick(View view) {
+    public void handleSaveMoneyClick(View view) throws RemoteException {
         normalUserAction.saveMoney(100000);
     }
 
     // 取钱
-    public void handleGetMoneyClick(View view) {
+    public void handleGetMoneyClick(View view) throws RemoteException {
         normalUserAction.getMoney();
     }
 
     // 贷款
     public void handleLoanMoneyClick(View view) {
-        normalUserAction.loanMoney();
+        // normalUserAction.loanMoney();
     }
 
     @Override

@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 
 import vip.dengwj.service.actions.impl.BankBossActionImpl;
 import vip.dengwj.service.actions.impl.BankWorkerActionImpl;
+import vip.dengwj.service.actions.impl.NormalUserAIDLActionImpl;
 import vip.dengwj.service.actions.impl.NormalUserActionImpl;
 
 public class BankService extends Service {
@@ -21,7 +22,8 @@ public class BankService extends Service {
         if (!TextUtils.isEmpty(actionName)) {
             // 根据意图动作返回接口实现
             if ("vip.dengwj.ACTION_NORMAL_USER".equals(actionName)) {
-                return new NormalUserActionImpl();
+                // return new NormalUserActionImpl();
+                return new NormalUserAIDLActionImpl();
             } else if ("vip.dengwj.ACTION_BANK_WORKER".equals(actionName)) {
                 return new BankWorkerActionImpl();
             } else if ("vip.dengwj.ACTION_BANK_BOSS".equals(actionName)) {
