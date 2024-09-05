@@ -96,13 +96,13 @@ public class PlayerActivity extends AppCompatActivity implements IPlayerViewCont
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
                 // 手已经触摸上去拖动
-                isUserTouchProgressBar = false;
+                isUserTouchProgressBar = true;
                 Log.d("pumu", "手已经触摸上去拖动...");
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                isUserTouchProgressBar = true;
+                isUserTouchProgressBar = false;
                 // 停止拖动
                 Log.d("pumu", "停止拖动..." + seekBar.getProgress());
                 if (playerControl != null) {
@@ -138,6 +138,7 @@ public class PlayerActivity extends AppCompatActivity implements IPlayerViewCont
     protected void onDestroy() {
         super.onDestroy();
         if (playerConnection != null) {
+            playerControl.unRegisterViewController();
             // 解绑服务
             unbindService(playerConnection);
         }
@@ -158,8 +159,7 @@ public class PlayerActivity extends AppCompatActivity implements IPlayerViewCont
 
     @Override
     public void onSeekChange(int seek) {
-        if (isUserTouchProgressBar) {
-            playerControl.unRegisterViewController();
+        if (!isUserTouchProgressBar) {
             seekBar.setProgress(seek);
         }
     }
