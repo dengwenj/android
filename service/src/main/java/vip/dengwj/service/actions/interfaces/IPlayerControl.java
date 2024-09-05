@@ -2,19 +2,9 @@ package vip.dengwj.service.actions.interfaces;
 
 public interface IPlayerControl {
     /**
-     * 播放音乐
+     * 播放或暂停音乐
      */
-    void play();
-
-    /**
-     * 暂停播放
-     */
-    void pause();
-
-    /**
-     * 继续播放
-     */
-    void resume();
+    void playOrPause();
 
     /**
      * 停止播放
