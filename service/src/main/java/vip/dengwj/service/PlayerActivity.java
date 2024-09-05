@@ -1,5 +1,9 @@
 package vip.dengwj.service;
 
+import static vip.dengwj.service.actions.interfaces.IPlayerControl.PLAY_STATE_PAUSE;
+import static vip.dengwj.service.actions.interfaces.IPlayerControl.PLAY_STATE_PLAY;
+import static vip.dengwj.service.actions.interfaces.IPlayerControl.PLAY_STATE_STOP;
+
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -12,14 +16,16 @@ import android.widget.SeekBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import vip.dengwj.service.actions.interfaces.IPlayerControl;
+import vip.dengwj.service.actions.interfaces.IPlayerViewControl;
 import vip.dengwj.service.services.PlayerService;
 
-public class PlayerActivity extends AppCompatActivity {
+public class PlayerActivity extends AppCompatActivity implements IPlayerViewControl {
     private static IPlayerControl playerControl;
     private SeekBar seekBar;
     private Button playerPauseBtn;
     private Button closeBtn;
     private PlayerConnection playerConnection;
+    private boolean isUserTouchProgressBar = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +46,12 @@ public class PlayerActivity extends AppCompatActivity {
         bindService(intent, playerConnection, BIND_AUTO_CREATE);
     }
 
-    private static class PlayerConnection implements ServiceConnection {
+    private class PlayerConnection implements ServiceConnection {
 
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             playerControl = (IPlayerControl) service;
+            playerControl.registerViewController(PlayerActivity.this);
         }
 
         @Override
@@ -68,11 +75,13 @@ public class PlayerActivity extends AppCompatActivity {
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
                 // 手已经触摸上去拖动
+                isUserTouchProgressBar = false;
                 Log.d("pumu", "手已经触摸上去拖动...");
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+                isUserTouchProgressBar = true;
                 // 停止拖动
                 Log.d("pumu", "停止拖动..." + seekBar.getProgress());
                 if (playerControl != null) {
@@ -110,6 +119,26 @@ public class PlayerActivity extends AppCompatActivity {
         if (playerConnection != null) {
             // 解绑服务
             unbindService(playerConnection);
+        }
+    }
+
+    @Override
+    public void onPlayerStateChange(int state) {
+        // 播放
+        if (state == PLAY_STATE_PLAY) {
+            playerPauseBtn.setText("暂停");
+        } else if (state == PLAY_STATE_PAUSE) {
+            playerPauseBtn.setText("播放");
+        } else if (state == PLAY_STATE_STOP) {
+            // 停止
+        }
+    }
+
+    @Override
+    public void onSeekChange(int seek) {
+        if (isUserTouchProgressBar) {
+            playerControl.unRegisterViewController();
+            seekBar.setProgress(seek);
         }
     }
 }

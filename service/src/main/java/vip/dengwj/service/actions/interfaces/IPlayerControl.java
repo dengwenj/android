@@ -1,6 +1,10 @@
 package vip.dengwj.service.actions.interfaces;
 
 public interface IPlayerControl {
+    public static final int PLAY_STATE_PLAY = 1;
+    int PLAY_STATE_PAUSE = 2;
+    int PLAY_STATE_STOP = 3;
+
     /**
      * 播放或暂停音乐
      */
