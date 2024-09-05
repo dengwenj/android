@@ -7,6 +7,7 @@ import static vip.dengwj.service.actions.interfaces.IPlayerControl.PLAY_STATE_ST
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.SeekBar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import vip.dengwj.service.actions.interfaces.IPlayerControl;
 import vip.dengwj.service.actions.interfaces.IPlayerViewControl;
@@ -27,10 +29,28 @@ public class PlayerActivity extends AppCompatActivity implements IPlayerViewCont
     private PlayerConnection playerConnection;
     private boolean isUserTouchProgressBar = false;
 
+    private void openPermissions() {
+        String readRequest = android.Manifest.permission.READ_EXTERNAL_STORAGE;
+        boolean readFlag = ActivityCompat.checkSelfPermission(this, readRequest) != PackageManager.PERMISSION_GRANTED;
+
+        if (readFlag) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, readRequest)) {
+                // 引导用户打开读取联系人权限
+            }
+            ActivityCompat.requestPermissions(this, new String[]{readRequest}, 100);
+
+        } else {
+            // getContacts()
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
+
+        // 打开权限
+        openPermissions();
 
         initView();
         initEvent();
@@ -132,6 +152,7 @@ public class PlayerActivity extends AppCompatActivity implements IPlayerViewCont
             playerPauseBtn.setText("播放");
         } else if (state == PLAY_STATE_STOP) {
             // 停止
+            playerPauseBtn.setText("播放");
         }
     }
 
