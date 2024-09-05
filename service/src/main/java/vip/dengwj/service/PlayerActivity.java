@@ -159,8 +159,16 @@ public class PlayerActivity extends AppCompatActivity implements IPlayerViewCont
 
     @Override
     public void onSeekChange(int seek) {
-        if (!isUserTouchProgressBar) {
-            seekBar.setProgress(seek);
-        }
+        // android 里，有两个控件是可以用子线程去更新
+        // progressBar 和 surfaceView
+        // if (!isUserTouchProgressBar) {
+        //     seekBar.setProgress(seek);
+        // }
+
+        runOnUiThread(() -> {
+            if (!isUserTouchProgressBar) {
+                seekBar.setProgress(seek);
+            }
+        });
     }
 }
