@@ -50,6 +50,7 @@ public class PlayerActivity extends AppCompatActivity implements IPlayerViewCont
 
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
+            Log.d("pumu", "onServiceConnected。。。");
             playerControl = (IPlayerControl) service;
             playerControl.registerViewController(PlayerActivity.this);
         }

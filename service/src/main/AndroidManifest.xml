@@ -48,6 +48,8 @@
             </intent-filter>
         </service>
         <service android:name=".services.SecondService" />
+
+        <service android:name=".services.PlayerService" />
     </application>
 
 </manifest>
